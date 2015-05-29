@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MedMe_Trial</string>
+    <string name="title_activity_med_me_start">MedMeStart</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_med_me_navigation_drawer">MedMeNavigationDrawer</string>
+    <string name="title_activity_med_me_home">MedMeHome</string>
+    <string name="startGridSymptoms">Symptoms</string>
+    <string name="startGridDiseases">Diseases</string>
+    <string name="startGridSearch">Search</string>
+    <string name="startGridDiagnose">Diagnose</string>
+    <string name="startGridTerminology">Terminology</string>
+</resources>
