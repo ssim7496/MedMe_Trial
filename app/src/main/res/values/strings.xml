@@ -1,13 +1,23 @@
 <resources>
-    <string name="app_name">MedMe_Trial</string>
+    <string name="app_name">MedMe</string>
     <string name="title_activity_med_me_start">MedMeStart</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_med_me_navigation_drawer">MedMeNavigationDrawer</string>
-    <string name="title_activity_med_me_home">MedMeHome</string>
-    <string name="startGridSymptoms">Symptoms</string>
-    <string name="startGridDiseases">Diseases</string>
-    <string name="startGridSearch">Search</string>
-    <string name="startGridDiagnose">Diagnose</string>
-    <string name="startGridTerminology">Terminology</string>
+    <string name="Symptoms">Symptoms</string>
+    <string name="Diseases">Diseases</string>
+    <string name="Search">Search</string>
+    <string name="Diagnose">Diagnose</string>
+    <string name="Terminology">Terminology</string>
+    <string name="Sign">Signs</string>
+    <string name="Sicknesses">Sicknesses</string>
+    <string name="title_activity_med_me_disease">MedMeDisease</string>
+    <string name="title_activity_start">Start</string>
+
+    <string name="startGuest">Guest</string>
+    <string name="title_activity_guest_home">Home</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sickness">Sickness</string>
+    <string name="sicknessBeginDesc">Sickness: \nThe state of being ill. A particular type of illness or disease.</string>
 </resources>

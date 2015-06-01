@@ -5,4 +5,93 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.Medmetheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarItemBackground">@drawable/selectable_background_medmetheme</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Medmetheme</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Medmetheme</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Medmetheme</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Medmetheme</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Medmetheme</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_medmetheme</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_medmetheme</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Medmetheme</item>
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="actionBarWidgetTheme">@style/Theme.Medmetheme.Widget</item>
+
+    </style>
+
+    <style name="ActionBar.Solid.Medmetheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@drawable/ab_solid_medmetheme</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_medmetheme</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_medmetheme</item>
+        <item name="progressBarStyle">@style/ProgressBar.Medmetheme</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Medmetheme" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/ab_transparent_medmetheme</item>
+        <item name="progressBarStyle">@style/ProgressBar.Medmetheme</item>
+    </style>
+
+    <style name="PopupMenu.Medmetheme" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_medmetheme</item>
+    </style>
+
+    <style name="DropDownListView.Medmetheme" parent="@style/Widget.AppCompat.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_medmetheme</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Medmetheme" parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_medmetheme</item>
+    </style>
+
+    <style name="DropDownNav.Medmetheme" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/spinner_background_ab_medmetheme</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_medmetheme</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_medmetheme</item>
+    </style>
+
+    <style name="ProgressBar.Medmetheme" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_medmetheme</item>
+    </style>
+
+    <style name="ActionButton.CloseMode.Medmetheme" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_medmetheme</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Medmetheme.Widget" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/PopupMenu.Medmetheme</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Medmetheme</item>
+    </style>
+
+    <!-- text to be used with buttons -->
+    <style name="button_text" >
+        <item name="android:layout_width" >fill_parent</item>
+        <item name="android:layout_height" >wrap_content</item>
+        <item name="android:textColor" >#ffffff</item>
+        <item name="android:gravity" >center</item>
+        <item name="android:layout_margin" >3dp</item>
+        <item name="android:textSize" >20dp</item>
+        <item name="android:textStyle" >bold</item>
+        <item name="android:shadowColor" >#000000</item>
+        <item name="android:shadowDx" >1</item>
+        <item name="android:shadowDy" >1</item>
+        <item name="android:shadowRadius" >2</item>
+    </style>
+
+    <style name="paragraph_text" >
+        <item name="android:layout_width" >fill_parent</item>
+        <item name="android:layout_height" >wrap_content</item>
+        <item name="android:textColor" >#ffffff</item>
+        <item name="android:gravity" >center</item>
+        <item name="android:layout_margin" >3dp</item>
+        <item name="android:textSize" >15dp</item>
+        <item name="android:textStyle" >bold</item>
+        <item name="android:shadowColor" >#000000</item>
+        <item name="android:shadowDx" >1</item>
+        <item name="android:shadowDy" >1</item>
+        <item name="android:shadowRadius" >2</item>
+    </style>
+
 </resources>
