@@ -2,17 +2,19 @@ package com.example.siyo_pc.medme_trial.classes;
 
 public class MM_Sickness {
 
-    public int sID;
-    public String sGreekName;
-    public String sSicknessName;
-    public String sSicknessDesc;
+    private int sID;
+    private String sGreekName;
+    private String sSicknessName;
+    private String sSicknessDesc;
+    private boolean sSicknessMode;
 
-    public MM_Sickness (int ID, String greekName, String sicknessName, String sicknessDesc) {
+    public MM_Sickness (int ID, String greekName, String sicknessName, String sicknessDesc, boolean sicknessMode) {
         super();
         this.sID = ID;
         this.sGreekName = greekName;
         this.sSicknessName = sicknessName;
         this.sSicknessDesc = sicknessDesc;
+        this.sSicknessMode = sicknessMode;
     }
 
     public MM_Sickness (String sicknessName) {
@@ -20,13 +22,9 @@ public class MM_Sickness {
         this.sSicknessName = sicknessName;
     }
 
-    public int getID() {
-        return sID;
-    }
+    public int getID() { return sID; }
 
-    public void setID(int ID) {
-        sID = ID;
-    }
+    public void setID(int ID) { sID = ID; }
 
     public String getGreekName() {
         return sGreekName;
@@ -50,5 +48,13 @@ public class MM_Sickness {
 
     public void setSicknessDesc(String sicknessDesc) {
         sSicknessDesc = sicknessDesc;
+    }
+
+    public boolean getSicknessMode() {
+        return sSicknessMode;
+    }
+
+    public void setSicknessMode(boolean sicknessMode) {
+        sSicknessMode = sicknessMode;
     }
 }
