@@ -2,7 +2,7 @@ package com.example.siyo_pc.medme_trial.classes;
 
 public class MM_Symptom {
 
-    private int sID;
+    private int sSymptomID;
     private String sGreekName;
     private String sSymptomName;
     private String sSymptomDesc;
@@ -10,16 +10,16 @@ public class MM_Symptom {
 
     public MM_Symptom (int ID, String greekName, String symptomName, String symptomDesc, boolean symptomMode) {
         super();
-        this.sID = ID;
+        this.sSymptomID = ID;
         this.sGreekName = greekName;
         this.sSymptomName = symptomName;
         this.sSymptomDesc = symptomDesc;
         this.sSymptomMode = symptomMode;
     }
 
-    public int getID() { return sID; }
+    public int getID() { return sSymptomID; }
 
-    public void setID(int ID) { sID = ID; }
+    public void setID(int ID) { sSymptomID = ID; }
 
     public String getGreekName() {
         return sGreekName;

@@ -1,7 +1,7 @@
 package com.example.siyo_pc.medme_trial.classes;
 
 public class MM_Medical_Term {
-    private int mtID;
+    private int mtMedTermID;
     private String mtGreekName;
     private String mtMedTermName;
     private String mtMedTermDesc;
@@ -10,7 +10,7 @@ public class MM_Medical_Term {
 
     public MM_Medical_Term (int ID, String greekName, String medTermName, String medTermDesc, String medTermType, boolean medTermMode) {
         super();
-        this.mtID = ID;
+        this.mtMedTermID = ID;
         this.mtGreekName = greekName;
         this.mtMedTermName = medTermName;
         this.mtMedTermDesc = medTermDesc;
@@ -18,9 +18,9 @@ public class MM_Medical_Term {
         this.mtMedTermMode = medTermMode;
     }
 
-    public int getID() { return mtID; }
+    public int getID() { return mtMedTermID; }
 
-    public void setID(int ID) { mtID = ID; }
+    public void setID(int ID) { mtMedTermID = ID; }
 
     public String getGreekName() {
         return mtGreekName;
