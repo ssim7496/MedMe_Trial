@@ -6,48 +6,48 @@ public class MM_Symptom {
     private String sGreekName;
     private String sSymptomName;
     private String sSymptomDesc;
-    private boolean sSymptomMode;
+    private boolean sMode;
 
-    public MM_Symptom (int ID, String greekName, String symptomName, String symptomDesc, boolean symptomMode) {
+    public MM_Symptom (int ID, String greekName, String symptomName, String symptomDesc, boolean mode) {
         super();
         this.sSymptomID = ID;
         this.sGreekName = greekName;
         this.sSymptomName = symptomName;
         this.sSymptomDesc = symptomDesc;
-        this.sSymptomMode = symptomMode;
+        this.sMode = mode;
     }
 
-    public int getID() { return sSymptomID; }
+    public int GetID() { return sSymptomID; }
 
-    public void setID(int ID) { sSymptomID = ID; }
+    public void SetID(int ID) { sSymptomID = ID; }
 
-    public String getGreekName() {
+    public String GetGreekName() {
         return sGreekName;
     }
 
-    public void setGreekName(String greekName) {
+    public void SetGreekName(String greekName) {
         sGreekName = greekName;
     }
 
-    public String getSymptomName() {
+    public String GetSymptomName() {
         return sSymptomName;
     }
 
-    public void setSymptomName(String symptomName) { sSymptomName = symptomName; }
+    public void SetSymptomName(String symptomName) { sSymptomName = symptomName; }
 
-    public String getSymptomDesc() {
+    public String GetSymptomDesc() {
         return sSymptomDesc;
     }
 
-    public void setSymptomDesc(String symptomDesc) {
+    public void SetSymptomDesc(String symptomDesc) {
         sSymptomDesc = symptomDesc;
     }
 
-    public boolean getSymptomMode() {
-        return sSymptomMode;
+    public boolean GetMode() {
+        return sMode;
     }
 
-    public void setSymptomMode(boolean symptomMode) {
-        sSymptomMode = symptomMode;
+    public void SetMode(boolean mode) {
+        sMode = mode;
     }
 }

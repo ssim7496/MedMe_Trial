@@ -6,15 +6,15 @@ public class MM_Sickness {
     private String sGreekName;
     private String sSicknessName;
     private String sSicknessDesc;
-    private boolean sSicknessMode;
+    private boolean sMode;
 
-    public MM_Sickness (int ID, String greekName, String sicknessName, String sicknessDesc, boolean sicknessMode) {
+    public MM_Sickness (int ID, String greekName, String sicknessName, String sicknessDesc, boolean mode) {
         super();
         this.sSicknessID = ID;
         this.sGreekName = greekName;
         this.sSicknessName = sicknessName;
         this.sSicknessDesc = sicknessDesc;
-        this.sSicknessMode = sicknessMode;
+        this.sMode = mode;
     }
 
     public MM_Sickness (String sicknessName) {
@@ -22,39 +22,39 @@ public class MM_Sickness {
         this.sSicknessName = sicknessName;
     }
 
-    public int getID() { return sSicknessID; }
+    public int GetID() { return sSicknessID; }
 
-    public void setID(int ID) { sSicknessID = ID; }
+    public void SetID(int ID) { sSicknessID = ID; }
 
-    public String getGreekName() {
+    public String GetGreekName() {
         return sGreekName;
     }
 
-    public void setGreekName(String greekName) {
+    public void SetGreekName(String greekName) {
         sGreekName = greekName;
     }
 
-    public String getSicknessName() {
+    public String GetSicknessName() {
         return sSicknessName;
     }
 
-    public void setSicknessName(String sicknessName) {
+    public void SetSicknessName(String sicknessName) {
         sSicknessName = sicknessName;
     }
 
-    public String getSicknessDesc() {
+    public String GetSicknessDesc() {
         return sSicknessDesc;
     }
 
-    public void setSicknessDesc(String sicknessDesc) {
+    public void SetSicknessDesc(String sicknessDesc) {
         sSicknessDesc = sicknessDesc;
     }
 
-    public boolean getSicknessMode() {
-        return sSicknessMode;
+    public boolean GetMode() {
+        return sMode;
     }
 
-    public void setSicknessMode(boolean sicknessMode) {
-        sSicknessMode = sicknessMode;
+    public void SetMode(boolean mode) {
+        sMode = mode;
     }
 }

@@ -7,10 +7,10 @@ public class MM_Disease {
     private String dGreekName;
     private String dDiseaseName;
     private String dDiseaseDesc;
-    private boolean dDiseaseMode;
+    private boolean dMode;
 
     public MM_Disease (int diseaseID, int sicknessID, int symptomID, String greekName, String diseaseName, String diseaseDesc,
-                       boolean diseaseMode) {
+                       boolean mode) {
         super();
         this.dDiseaseID = diseaseID;
         this.dSicknessID = sicknessID;
@@ -18,50 +18,50 @@ public class MM_Disease {
         this.dGreekName = greekName;
         this.dDiseaseName = diseaseName;
         this.dDiseaseDesc = diseaseDesc;
-        this.dDiseaseMode = diseaseMode;
+        this.dMode = mode;
     }
 
-    public int getDiseaseID() { return dDiseaseID; }
+    public int GetDiseaseID() { return dDiseaseID; }
 
-    public void setDiseaseID(int diseaseID) { dDiseaseID = diseaseID; }
+    public void SetDiseaseID(int diseaseID) { dDiseaseID = diseaseID; }
 
-    public int getSicknessID() { return dSicknessID; }
+    public int GetSicknessID() { return dSicknessID; }
 
-    public void setSicknessID(int sicknessID ) { dSicknessID = sicknessID; }
+    public void SetSicknessID(int sicknessID ) { dSicknessID = sicknessID; }
 
-    public int getSymptomID() { return dSymptomID; }
+    public int GetSymptomID() { return dSymptomID; }
 
-    public void setSymptomID(int symptomID) { dSymptomID = symptomID; }
+    public void SetSymptomID(int symptomID) { dSymptomID = symptomID; }
 
-    public String getGreekName() {
+    public String GetGreekName() {
         return dGreekName;
     }
 
-    public void setGreekName(String greekName) {
+    public void SetGreekName(String greekName) {
         dGreekName = greekName;
     }
 
-    public String getDiseaseName() {
+    public String GetDiseaseName() {
         return dDiseaseName;
     }
 
-    public void setDiseaseName(String diseaseName) {
+    public void SetDiseaseName(String diseaseName) {
         dDiseaseName = diseaseName;
     }
 
-    public String getDiseaseDesc() {
+    public String GetDiseaseDesc() {
         return dDiseaseDesc;
     }
 
-    public void setDiseaseDesc(String diseaseDesc) {
+    public void SetDiseaseDesc(String diseaseDesc) {
         dDiseaseDesc = diseaseDesc;
     }
 
-    public boolean getDiseaseMode() {
-        return dDiseaseMode;
+    public boolean GetMode() {
+        return dMode;
     }
 
-    public void setDiseaseMode(boolean diseaseMode) {
-        dDiseaseMode = diseaseMode;
+    public void SetMode(boolean mode) {
+        dMode = mode;
     }
 }

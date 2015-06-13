@@ -18,45 +18,45 @@ public class MM_Medical_Term {
         this.mtMedTermMode = medTermMode;
     }
 
-    public int getID() { return mtMedTermID; }
+    public int GetID() { return mtMedTermID; }
 
-    public void setID(int ID) { mtMedTermID = ID; }
+    public void SetID(int ID) { mtMedTermID = ID; }
 
-    public String getGreekName() {
+    public String GetGreekName() {
         return mtGreekName;
     }
 
-    public void setGreekName(String greekName) {
+    public void SetGreekName(String greekName) {
         mtGreekName = greekName;
     }
 
-    public String getMedicalTermName() {
+    public String GetMedicalTermName() {
         return mtMedTermName;
     }
 
-    public void setMedicalTermName(String medTermName) { mtMedTermName = medTermName; }
+    public void SetMedicalTermName(String medTermName) { mtMedTermName = medTermName; }
 
-    public String getMedicalTermDesc() {
+    public String GetMedicalTermDesc() {
         return mtMedTermDesc;
     }
 
-    public void setMedicalTermDesc(String medTermDesc) {
+    public void SetMedicalTermDesc(String medTermDesc) {
         mtMedTermDesc = medTermDesc;
     }
 
-    public String getMedicalTermType() {
+    public String GetMedicalTermType() {
         return mtMedTermType;
     }
 
-    public void setMedicalTermType(String medTermType) {
+    public void SetMedicalTermType(String medTermType) {
         mtMedTermType = medTermType;
     }
 
-    public boolean getMedicalTermMode() {
+    public boolean GetMedicalTermMode() {
         return mtMedTermMode;
     }
 
-    public void setMedicalTermMode(boolean medTermMode) {
+    public void SetMedicalTermMode(boolean medTermMode) {
         mtMedTermMode = medTermMode;
     }
 }

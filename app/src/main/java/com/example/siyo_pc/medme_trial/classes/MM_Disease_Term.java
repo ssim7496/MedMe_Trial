@@ -10,11 +10,11 @@ public class MM_Disease_Term {
         this.dtMedTermID = medTermID;
     }
 
-    public int getDiseaseID() { return dtDiseaseID; }
+    public int GetDiseaseID() { return dtDiseaseID; }
 
-    public void setDiseaseID(int ID) { dtDiseaseID = ID; }
+    public void SetDiseaseID(int ID) { dtDiseaseID = ID; }
 
-    public int getMedTermID() { return dtMedTermID; }
+    public int GetMedTermID() { return dtMedTermID; }
 
-    public void setMedTermID(int ID) { dtMedTermID = ID; }
+    public void SetMedTermID(int ID) { dtMedTermID = ID; }
 }

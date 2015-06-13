@@ -47,15 +47,15 @@ public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
             holder = (SicknessHolder)row.getTag();
         }
 
-        MM_Sickness sickness = data[position];
-        holder.txtTitle.setText(sickness.getSicknessName());
+        final MM_Sickness sickness = data[position];
+        holder.txtTitle.setText(sickness.GetSicknessName());
 
-        /*holder.txtTitle.setOnClickListener(new View.OnClickListener() {
+        holder.txtTitle.setOnClickListener(new TextView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), sickness.getSicknessName(), Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), sickness.GetSicknessName(), Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
         //holder.imgIcon.setImageResource(weather.icon);
 
         return row;
