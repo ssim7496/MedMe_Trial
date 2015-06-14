@@ -11,20 +11,28 @@
         android:id="@+id/row1"
         android:layout_height="0dip"
         android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:padding="8dp">
 
         <Button
             android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_weight="0.45"
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"
             android:id="@+id/btnDiagnose"
-            android:text="@string/Diagnose"/>
+            android:text="@string/Diagnose"
+            />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="0.1" />
 
         <Button
             android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_weight="0.45"
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"
@@ -38,11 +46,12 @@
         android:layout_height="0dip"
         android:orientation="horizontal"
         android:layout_weight="1"
-        android:id="@+id/row2">
+        android:id="@+id/row2"
+        android:padding="8dp">
 
         <Button
             android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_weight="0.45"
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"
@@ -50,9 +59,15 @@
             android:text="@string/Diseases"
             />
 
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="0.1" />
+
         <Button
             android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_weight="0.45"
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"
@@ -65,20 +80,27 @@
         android:layout_height="0dip"
         android:orientation="horizontal"
         android:layout_weight="1"
-        android:id="@+id/row3">
+        android:id="@+id/row3"
+        android:padding="8dp">
 
         <Button
             android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_weight="0.45"
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"
             android:id="@+id/btnSicknesses"
             android:text="@string/Sicknesses"/>
 
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="0.1" />
+
         <Button
             android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_weight="0.45"
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"
@@ -91,20 +113,27 @@
         android:layout_height="0dip"
         android:orientation="horizontal"
         android:layout_weight="1"
-        android:id="@+id/row4">
+        android:id="@+id/row4"
+        android:padding="8dp">
 
         <Button
             android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_weight="0.45"
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"
             android:id="@+id/btnTerminology"
             android:text="@string/Terminology"/>
 
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="0.1" />
+
         <Button
             android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_weight="0.45"
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"

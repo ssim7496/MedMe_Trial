@@ -9,18 +9,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
+import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class GuestHome extends ActionBarActivity {
 
+    MedMe_Helper medMeDB = null;
     Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnTerminology, btnSicknesses, btnSigns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_home);
+
+        medMeDB = new MedMe_Helper(this);
 
         btnSearch = (Button)findViewById(R.id.btnSearch);
         btnDiagnose = (Button)findViewById(R.id.btnDiagnose);
@@ -31,6 +37,18 @@ public class GuestHome extends ActionBarActivity {
         btnSigns = (Button)findViewById(R.id.btnSigns);
 
         addOnClickListener(btnSicknesses, Sickness.class);
+
+        btnSigns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String greekName = "Thesarus";
+                String name = "Dictionary";
+                String desc = "Boring words";
+                //medMeDB.AddSickness(new MM_Sickness(greekName, name, desc));
+                MM_Sickness sick = medMeDB.GetSicknessByID(1);
+                String s = "ss";
+            }
+        });
     }
 
     public void addOnClickListener(View view, final Class nextClass) {

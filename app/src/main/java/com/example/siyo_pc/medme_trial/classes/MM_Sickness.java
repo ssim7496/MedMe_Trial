@@ -17,6 +17,13 @@ public class MM_Sickness {
         this.sMode = mode;
     }
 
+    public MM_Sickness (String greekName, String sicknessName, String sicknessDesc) {
+        super();
+        this.sGreekName = greekName;
+        this.sSicknessName = sicknessName;
+        this.sSicknessDesc = sicknessDesc;
+    }
+
     public MM_Sickness (String sicknessName) {
         super();
         this.sSicknessName = sicknessName;
