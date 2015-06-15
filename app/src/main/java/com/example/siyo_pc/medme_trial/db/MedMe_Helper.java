@@ -87,6 +87,13 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void closeDB() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null && db.isOpen()) {
+            db.close();
+        }
+    }
+
     public Cursor getCursor(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cur = db.rawQuery("SELECT SicknessID _id, * FROM " + TABLE_SICKNESS, null);
