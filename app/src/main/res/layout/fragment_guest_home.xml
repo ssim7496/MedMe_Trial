@@ -18,7 +18,7 @@
             android:layout_width="0dip"
             android:layout_weight="0.45"
             android:layout_height="match_parent"
-            android:background="@drawable/grid_button"
+            android:background="@drawable/grid_button_disabled"
             style="@style/button_text"
             android:id="@+id/btnDiagnose"
             android:text="@string/Diagnose"
@@ -34,7 +34,7 @@
             android:layout_width="0dip"
             android:layout_weight="0.45"
             android:layout_height="match_parent"
-            android:background="@drawable/grid_button"
+            android:background="@drawable/grid_button_disabled"
             style="@style/button_text"
             android:id="@+id/btnSearch"
             android:text="@string/Search"/>
@@ -71,8 +71,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"
-            android:id="@+id/btnSigns"
-            android:text="@string/Sign"/>
+            android:id="@+id/btnSicknesses"
+            android:text="@string/Sicknesses"/>
     </LinearLayout>
 
     <LinearLayout
@@ -89,8 +89,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/grid_button"
             style="@style/button_text"
-            android:id="@+id/btnSicknesses"
-            android:text="@string/Sicknesses"/>
+            android:id="@+id/btnSymptoms"
+            android:text="@string/Symptoms"/>
 
         <LinearLayout
             android:layout_width="0dip"
@@ -102,10 +102,10 @@
             android:layout_width="0dip"
             android:layout_weight="0.45"
             android:layout_height="match_parent"
-            android:background="@drawable/grid_button"
+            android:background="@drawable/grid_button_disabled"
             style="@style/button_text"
-            android:id="@+id/btnSymptoms"
-            android:text="@string/Symptoms"/>
+            android:id="@+id/btnTerminology"
+            android:text="@string/Terminology"/>
     </LinearLayout>
 
     <LinearLayout
@@ -120,25 +120,12 @@
             android:layout_width="0dip"
             android:layout_weight="0.45"
             android:layout_height="match_parent"
-            android:background="@drawable/grid_button"
+            android:background="@drawable/grid_button_disabled"
             style="@style/button_text"
-            android:id="@+id/btnTerminology"
-            android:text="@string/Terminology"/>
+            android:id="@+id/btnHelp"
+            android:text="@string/Help"/>
 
-        <LinearLayout
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="0.1" />
 
-        <Button
-            android:layout_width="0dip"
-            android:layout_weight="0.45"
-            android:layout_height="match_parent"
-            android:background="@drawable/grid_button"
-            style="@style/button_text"
-            android:id="@+id/btnNext"
-            android:text="More..."/>
     </LinearLayout>
 
 </LinearLayout>

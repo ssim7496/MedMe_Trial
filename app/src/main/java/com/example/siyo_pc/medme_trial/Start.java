@@ -1,5 +1,6 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,11 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class Start extends ActionBarActivity {
 
-    Button btnGuest;
+    Button btnAdmin, btnGuest, btnNurse, btnDoctor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +24,32 @@ public class Start extends ActionBarActivity {
     }
 
     public void addOnClickListener(){
+        btnAdmin = (Button)findViewById(R.id.btnAdmin);
         btnGuest = (Button)findViewById(R.id.btnGuest);
-        btnGuest.setOnClickListener(new View.OnClickListener() {
+        btnNurse = (Button)findViewById(R.id.btnNurse);
+        btnDoctor = (Button)findViewById(R.id.btnDoctor);
+
+        addNextActivityOnClickListener(btnGuest, GuestHome.class);
+        underConstruction(btnAdmin);
+        underConstruction(btnNurse);
+        underConstruction(btnDoctor);
+    }
+
+    public void addNextActivityOnClickListener(View view, final Class nextClass) {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), GuestHome.class);
+                Intent intent = new Intent(getApplicationContext(), nextClass);
                 startActivity(intent);
+            }
+        });
+    }
+
+    public void underConstruction(View view) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Currently under construction ... ", Toast.LENGTH_LONG).show();
             }
         });
     }

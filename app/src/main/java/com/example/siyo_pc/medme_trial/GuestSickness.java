@@ -1,5 +1,6 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -31,40 +32,13 @@ public class GuestSickness extends ActionBarActivity {
     }
 
     public void fillSicknessList(){
-        /*MM_Sickness[] sicknessList = {
-                new MM_Sickness("A.I.D.S"),
-                new MM_Sickness("Breast Cancer"),
-                new MM_Sickness("Cervical Cancer"),
-                new MM_Sickness("Cholera"),
-                new MM_Sickness("Ebola"),
-                new MM_Sickness("Hepatitis"),
-                new MM_Sickness("Herpes"),
-                new MM_Sickness("Testicular Cancer"),
-        };*/
 
         ArrayList<MM_Sickness> sicknessList2 = medMeDB.GetAllSicknesses();
         SicknessAdapter adapter = new SicknessAdapter(this, sicknessList2);
         listSickness = (ListView)findViewById(R.id.listView1);
-        //View header = (View)getLayoutInflater().inflate(R.layout.listview_header_row, null);
         View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
         listSickness.addHeaderView(header);
         listSickness.setAdapter(adapter);
-
-        /*List<MM_Sickness> sicknessList2 = medMeDB.GetAllSicknesses();
-
-        SicknessAdapter adapter = new SicknessAdapter(this, R.layout.listview_item_row, sicknessList);
-        listSickness = (ListView)findViewById(R.id.listView1);
-
-        View header = (View)getLayoutInflater().inflate(R.layout.listview_header_row, null);
-        listSickness.addHeaderView(header);
-        listSickness.setAdapter(adapter);*/
-
-        //SicknessAdapter adapter = new SicknessAdapter(this, android.R.simple_list_item_1, sicknessList);
-
-        /* Works but is very simple
-        listSickness = (ListView)findViewById(R.id.listView1);
-        ArrayAdapter<MM_Sickness> adapter = new ArrayAdapter<MM_Sickness>(this, android.R.layout.simple_list_item_1, sicknessList);
-        listSickness.setAdapter(adapter);*/
     }
 
     @Override

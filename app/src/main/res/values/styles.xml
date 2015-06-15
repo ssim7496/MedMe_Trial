@@ -3,9 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowActionBar">true</item>
     </style>
 
-    <style name="Theme.Medmetheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.Medmetheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarItemBackground">@drawable/selectable_background_medmetheme</item>
         <item name="popupMenuStyle">@style/PopupMenu.Medmetheme</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Medmetheme</item>
@@ -15,52 +16,53 @@
         <item name="actionModeBackground">@drawable/cab_background_top_medmetheme</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_medmetheme</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Medmetheme</item>
-
         <!-- Light.DarkActionBar specific -->
         <item name="actionBarWidgetTheme">@style/Theme.Medmetheme.Widget</item>
 
     </style>
 
-    <style name="ActionBar.Solid.Medmetheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="ActionBar.Solid.Medmetheme" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@drawable/ab_solid_medmetheme</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_medmetheme</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_medmetheme</item>
         <item name="progressBarStyle">@style/ProgressBar.Medmetheme</item>
+        <item name="android:icon">@mipmap/ic_launcher</item>
     </style>
 
-    <style name="ActionBar.Transparent.Medmetheme" parent="@style/Widget.AppCompat.ActionBar">
+    <style name="ActionBar.Transparent.Medmetheme" parent="Widget.AppCompat.ActionBar">
         <item name="background">@drawable/ab_transparent_medmetheme</item>
         <item name="progressBarStyle">@style/ProgressBar.Medmetheme</item>
+        <item name="android:icon">@mipmap/ic_launcher</item>
     </style>
 
-    <style name="PopupMenu.Medmetheme" parent="@style/Widget.AppCompat.PopupMenu">
+    <style name="PopupMenu.Medmetheme" parent="Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_medmetheme</item>
     </style>
 
-    <style name="DropDownListView.Medmetheme" parent="@style/Widget.AppCompat.ListView.DropDown">
+    <style name="DropDownListView.Medmetheme" parent="Widget.AppCompat.ListView.DropDown">
         <item name="android:listSelector">@drawable/selectable_background_medmetheme</item>
     </style>
 
-    <style name="ActionBarTabStyle.Medmetheme" parent="@style/Widget.AppCompat.ActionBar.TabView">
+    <style name="ActionBarTabStyle.Medmetheme" parent="Widget.AppCompat.ActionBar.TabView">
         <item name="android:background">@drawable/tab_indicator_ab_medmetheme</item>
     </style>
 
-    <style name="DropDownNav.Medmetheme" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+    <style name="DropDownNav.Medmetheme" parent="Widget.AppCompat.Spinner.DropDown.ActionBar">
         <item name="android:background">@drawable/spinner_background_ab_medmetheme</item>
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_medmetheme</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_medmetheme</item>
     </style>
 
-    <style name="ProgressBar.Medmetheme" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+    <style name="ProgressBar.Medmetheme" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_medmetheme</item>
     </style>
 
-    <style name="ActionButton.CloseMode.Medmetheme" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
+    <style name="ActionButton.CloseMode.Medmetheme" parent="Widget.AppCompat.ActionButton.CloseMode">
         <item name="android:background">@drawable/btn_cab_done_medmetheme</item>
     </style>
 
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="Theme.Medmetheme.Widget" parent="@style/Theme.AppCompat">
+    <style name="Theme.Medmetheme.Widget" parent="Theme.AppCompat">
         <item name="popupMenuStyle">@style/PopupMenu.Medmetheme</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Medmetheme</item>
     </style>

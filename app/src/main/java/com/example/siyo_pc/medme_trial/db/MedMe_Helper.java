@@ -7,11 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.siyo_pc.medme_trial.GuestSickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MedMe_Helper extends SQLiteOpenHelper {
     private static final String TAG = MedMe_Helper.class.getName();
@@ -71,7 +69,6 @@ public class MedMe_Helper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //creating needed tables
         db.execSQL(CREATE_SICKNESS);
         db.execSQL(CREATE_SYMPTOM);
         db.execSQL(CREATE_DISEASE);
@@ -94,11 +91,11 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getCursor(){
+    /*public Cursor getCursor(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cur = db.rawQuery("SELECT SicknessID _id, * FROM " + TABLE_SICKNESS, null);
         return cur;
-    }
+    }*/
 
     public MM_Sickness GetSicknessByID(int sicknessID){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -111,7 +108,8 @@ public class MedMe_Helper extends SQLiteOpenHelper {
             String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_GREEK_NAME));
             String sicknessName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_NAME));
             String sicknessDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DESC));
-            boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+            //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+            boolean sicknessMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE))) != 0;
 
             MM_Sickness sickness = new MM_Sickness(sickID, greekName, sicknessName, sicknessDesc, sicknessMode);
             return sickness;
@@ -133,8 +131,8 @@ public class MedMe_Helper extends SQLiteOpenHelper {
                 String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_GREEK_NAME));
                 String sicknessName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_NAME));
                 String sicknessDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DESC));
-                boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-
+                //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+                boolean sicknessMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE))) != 0;
                 MM_Sickness sickness = new MM_Sickness(sickID, greekName, sicknessName, sicknessDesc, sicknessMode);
                 listSickness.add(sickness);
             }while (cur.moveToNext());
@@ -143,35 +141,11 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         return listSickness;
     }
 
-    /*public MM_Sickness[] GetAllSicknesses2(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        MM_Sickness[] listSickness = null;
-
-        String query = "SELECT * FROM " + TABLE_SICKNESS;
-        Cursor cur = db.rawQuery(query, null);
-
-        if (cur.moveToFirst()) {
-            do {
-                int sickID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_ID)));
-                String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_GREEK_NAME));
-                String sicknessName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_NAME));
-                String sicknessDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DESC));
-                boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-
-                MM_Sickness sickness = new MM_Sickness(sickID, greekName, sicknessName, sicknessDesc, sicknessMode);
-                listSickness.
-            }while (cur.moveToNext());
-        }
-
-        return listSickness;
-    }*/
-
     public void AddSickness(MM_Sickness sickness){
         Log.d(TAG, "Adding sickness to " + TABLE_SICKNESS);
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        //values.put(KEY_ID, theperson.id);
         values.put(SICKNESS_GREEK_NAME, sickness.GetGreekName());
         values.put(SICKNESS_NAME, sickness.GetSicknessName());
         values.put(SICKNESS_DESC, sickness.GetSicknessDesc());
@@ -182,11 +156,9 @@ public class MedMe_Helper extends SQLiteOpenHelper {
     }
 
     public void UpdateSickness(MM_Sickness sickness){
-        //Log.d(TAG, "Updating sickness to " + TABLE_SICKNESS);
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        //values.put(KEY_ID, theperson.id);
         values.put(SICKNESS_GREEK_NAME, sickness.GetGreekName());
         values.put(SICKNESS_NAME, sickness.GetSicknessName());
         values.put(SICKNESS_DESC, sickness.GetSicknessDesc());
@@ -194,7 +166,6 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         db.update(TABLE_SICKNESS, values, SICKNESS_ID + " = ?", new String[]{
                 String.valueOf(sickness.GetID())
         });
-        //db.insertWithOnConflict(TABLE_SICKNESS, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         db.close();
     }
 

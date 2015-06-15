@@ -24,58 +24,13 @@ import java.util.ArrayList;
 public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
 
     Context context;
-    int layoutResourceId;
-    //MM_Sickness[] data = null;
     ArrayList<MM_Sickness> data = null;
 
-    //public SicknessAdapter(Context context, int layoutResourceId, MM_Sickness[] data) {
     public SicknessAdapter(Context context, ArrayList<MM_Sickness> data) {
-        //super(context, layoutResourceId, data);
         super(context, 0, data);
         this.context = context;
-        //this.layoutResourceId = layoutResourceId;
         this.data = data;
-        //this.data = data;
     }
-
-    /*@Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        SicknessHolder holder = null;
-
-        if(row == null)
-        {
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
-
-            holder = new SicknessHolder();
-            //holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
-            holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
-
-            row.setTag(holder);
-        }
-        else
-        {
-            holder = (SicknessHolder)row.getTag();
-        }
-
-        final MM_Sickness sickness = data[position];
-        holder.txtTitle.setText(sickness.GetSicknessName());
-
-        holder.txtTitle.setOnClickListener(new TextView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), sickness.GetSicknessName(), Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(context, GuestSicknessView.class);
-
-                context.startActivity(intent);
-            }
-        });
-        //holder.imgIcon.setImageResource(weather.icon);
-
-        return row;
-    }*/
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -96,24 +51,10 @@ public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
                 Intent intent = new Intent(context, GuestSicknessView.class);
                 Bundle bundle = intent.getExtras();
                 intent.putExtra("sickness", Integer.toString(sickness.GetID()));
-                //intent.putExtra("sickness", );
                 context.startActivity(intent);
             }
         });
 
         return convertView;
     }
-
-    static class SicknessHolder{
-        //ImageView imgIcon;
-        TextView txtTitle;
-    }
-
-    /*put after the intent
-    Bundle bundle = intent.getExtras();
-                MedMe_Helper db = new MedMe_Helper(context);
-                MM_Sickness sickness2 = db.GetSicknessByID(2);
-
-                intent.putExtra("sickness", Integer.toString(sickness2.GetID()));*/
-    //intent.putExtra("sickness", );
 }

@@ -1,5 +1,6 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import java.util.List;
 public class GuestHome extends ActionBarActivity {
 
     MedMe_Helper medMeDB = null;
-    Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnTerminology, btnSicknesses, btnSigns;
+    Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnTerminology, btnSicknesses, btnHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,33 +35,30 @@ public class GuestHome extends ActionBarActivity {
         btnSymptoms = (Button)findViewById(R.id.btnSymptoms);
         btnTerminology = (Button)findViewById(R.id.btnTerminology);
         btnSicknesses = (Button)findViewById(R.id.btnSicknesses);
-        btnSigns = (Button)findViewById(R.id.btnSigns);
+        btnHelp = (Button)findViewById(R.id.btnHelp);
 
-        addOnClickListener(btnSicknesses, GuestSickness.class);
-
-        btnSigns.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String greekName = "Expecto patropnus";
-                String name = "Chrisss";
-                String desc = "The main reason why wizards float";
-                MM_Sickness sick = new MM_Sickness(greekName, name, desc);
-                medMeDB.AddSickness(new MM_Sickness(greekName, name, desc));
-                //MM_Sickness sick = medMeDB.GetSicknessByID(3);
-                //sick.SetSicknessName(name);
-                //medMeDB.UpdateSickness(sick);
-                Toast.makeText(getApplicationContext(), sick.GetSicknessName() , Toast.LENGTH_LONG).show();
-                //medMeDB.DeleteSickness(1);
-            }
-        });
+        addNextActivityOnClickListener(btnSicknesses, GuestSickness.class);
+        underConstruction(btnSearch);
+        underConstruction(btnDiagnose);
+        underConstruction(btnTerminology);
+        underConstruction(btnHelp);
     }
 
-    public void addOnClickListener(View view, final Class nextClass) {
+    public void addNextActivityOnClickListener(View view, final Class nextClass) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), nextClass);
                 startActivity(intent);
+            }
+        });
+    }
+
+    public void underConstruction(View view) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Currently under construction ... ", Toast.LENGTH_LONG).show();
             }
         });
     }
