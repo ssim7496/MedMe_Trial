@@ -8,6 +8,10 @@ public class MM_Sickness {
     private String sSicknessDesc;
     private boolean sMode;
 
+    public MM_Sickness(){
+        super();
+    }
+
     public MM_Sickness (int ID, String greekName, String sicknessName, String sicknessDesc, boolean mode) {
         super();
         this.sSicknessID = ID;
@@ -15,6 +19,14 @@ public class MM_Sickness {
         this.sSicknessName = sicknessName;
         this.sSicknessDesc = sicknessDesc;
         this.sMode = mode;
+    }
+
+    public MM_Sickness (int ID, String greekName, String sicknessName, String sicknessDesc) {
+        super();
+        this.sSicknessID = ID;
+        this.sGreekName = greekName;
+        this.sSicknessName = sicknessName;
+        this.sSicknessDesc = sicknessDesc;
     }
 
     public MM_Sickness (String greekName, String sicknessName, String sicknessDesc) {

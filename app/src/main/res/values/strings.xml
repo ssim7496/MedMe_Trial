@@ -17,7 +17,8 @@
     <string name="title_activity_guest_home">Home</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_sickness">Sickness</string>
-    <string name="sicknessBeginDesc">The state of being ill. A particular type of illness or disease.</string>
+    <string name="sicknessBeginDesc">1. The state of being ill. \n2.A particular type of illness or disease.</string>
+    <string name="title_activity_guest_sickness">Sickness</string>
+    <string name="title_activity_guest_sickness_view">View Sickness</string>
+    <string name="relatedSymptoms">Related Symptoms</string>
 </resources>

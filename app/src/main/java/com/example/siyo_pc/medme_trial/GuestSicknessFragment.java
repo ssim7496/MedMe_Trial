@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SicknessFragment extends Fragment {
+public class GuestSicknessFragment extends Fragment {
 
-    public SicknessFragment() {
+    public GuestSicknessFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sickness, container, false);
+        return inflater.inflate(R.layout.fragment_guest_sickness, container, false);
     }
 }

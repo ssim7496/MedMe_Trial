@@ -36,17 +36,21 @@ public class GuestHome extends ActionBarActivity {
         btnSicknesses = (Button)findViewById(R.id.btnSicknesses);
         btnSigns = (Button)findViewById(R.id.btnSigns);
 
-        addOnClickListener(btnSicknesses, Sickness.class);
+        addOnClickListener(btnSicknesses, GuestSickness.class);
 
         btnSigns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String greekName = "Thesarus";
-                String name = "Dictionary";
-                String desc = "Boring words";
-                //medMeDB.AddSickness(new MM_Sickness(greekName, name, desc));
-                MM_Sickness sick = medMeDB.GetSicknessByID(1);
-                String s = "ss";
+                String greekName = "Expecto patropnus";
+                String name = "Chrisss";
+                String desc = "The main reason why wizards float";
+                MM_Sickness sick = new MM_Sickness(greekName, name, desc);
+                medMeDB.AddSickness(new MM_Sickness(greekName, name, desc));
+                //MM_Sickness sick = medMeDB.GetSicknessByID(3);
+                //sick.SetSicknessName(name);
+                //medMeDB.UpdateSickness(sick);
+                Toast.makeText(getApplicationContext(), sick.GetSicknessName() , Toast.LENGTH_LONG).show();
+                //medMeDB.DeleteSickness(1);
             }
         });
     }
