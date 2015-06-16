@@ -1,6 +1,5 @@
 package com.example.siyo_pc.medme_trial;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,41 +7,42 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
+import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 
-public class GuestSicknessView extends ActionBarActivity {
+public class GuestSymptomView extends ActionBarActivity {
 
     MedMe_Helper medMeDB = null;
-    TextView sicknessTitle, sicknessDesc;
+    TextView symptomTitle, symptomDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest_sickness_view);
+        setContentView(R.layout.activity_guest_symptom_view);
 
         medMeDB = new MedMe_Helper(this);
-        getSicknessInformation();
+        getSymptomInformation();
     }
 
-    public void getSicknessInformation() {
-        sicknessTitle = (TextView)findViewById(R.id.tvSicknessTitle);
-        sicknessDesc = (TextView)findViewById(R.id.tvSicknessDescription);
+    public void getSymptomInformation() {
+        symptomTitle = (TextView)findViewById(R.id.tvSymptomTitle);
+        symptomDesc = (TextView)findViewById(R.id.tvSymptomDescription);
 
-        Intent intent = getIntent();
-        String sick = intent.getStringExtra("sickness");
+        /*Intent intent = getIntent();
+        String diss = intent.getStringExtra("symptom");
 
-        /*MM_Sickness sickness = medMeDB.GetSicknessByID(Integer.parseInt(sick));
+        MM_Symptom symptom = medMeDB.GetSymptomByID(Integer.parseInt(diss));
 
-        sicknessTitle.setText(sickness.GetSicknessName());
-        sicknessDesc.setText(sickness.GetSicknessDesc());*/
+        symptomTitle.setText(symptom.GetSymptomName());
+        symptomDesc.setText(symptom.GetSymptomDesc());*/
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_guest_sickness_view, menu);
+        getMenuInflater().inflate(R.menu.menu_guest_symptom_view, menu);
         return true;
     }
 

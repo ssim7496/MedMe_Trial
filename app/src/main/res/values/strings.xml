@@ -17,8 +17,17 @@
     <string name="title_activity_guest_home">Home</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="sicknessBeginDesc">1. The state of being ill. \n2.A particular type of illness or disease.</string>
     <string name="title_activity_guest_sickness">Sickness</string>
+    <string name="sicknessBeginDesc">1. The state of being ill. \n\n2.A particular type of illness or disease.</string>
     <string name="title_activity_guest_sickness_view">View Sickness</string>
-    <string name="relatedSymptoms">Related Symptoms</string>
+    <string name="title_activity_guest_disease">Disease</string>
+    <string name="diseaseBeginDesc">1. A disorder of structure or function in a human, animal, or plant, especially one that produces specific signs
+        or symptoms or that affects a specific location and is not simply a direct result of physical injury. \n\n2. A particular quality, habit, or
+        disposition regarded as adversely affecting a person or group of people.
+        disease.</string>
+    <string name="title_activity_guest_disease_view">View Disease</string>
+    <string name="title_activity_guest_symptom">Symptom</string>
+    <string name="symptomBeginDesc">1. A physical or mental feature that is regarded as indicating a condition of disease, particularly such a feature
+        that is apparent to the patient. \n\n2.A particular type of illness or disease.</string>
+    <string name="title_activity_guest_symptom_view">View Symptom</string>
 </resources>

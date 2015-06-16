@@ -1,53 +1,63 @@
 package com.example.siyo_pc.medme_trial;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.siyo_pc.medme_trial.adapters.SicknessAdapter;
-import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
+import com.example.siyo_pc.medme_trial.adapters.DiseaseAdapter;
+import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 import java.util.ArrayList;
-import java.util.List;
 
+public class GuestDisease extends ActionBarActivity {
 
-public class GuestSickness extends ActionBarActivity {
-
-    private ListView listSickness;
+    private ListView listDiseases;
+    private Button btnViewDisease;
     private MedMe_Helper medMeDB = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest_sickness);
+        setContentView(R.layout.activity_guest_disease);
 
         medMeDB = new MedMe_Helper(this);
-        fillSicknessList();
+        fillDiseaseList();
+
+        btnViewDisease = (Button)findViewById(R.id.btnViewDisease);
+
+        btnViewDisease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), GuestDiseaseView.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    public void fillSicknessList(){
+    public void fillDiseaseList(){
 
-        /*ArrayList<MM_Sickness> sicknessList2 = medMeDB.GetAllSicknesses();
+        ArrayList<MM_Disease> diseaseList = medMeDB.GetAllDiseases();
 
-        if (sicknessList2 != null) {
-            SicknessAdapter adapter = new SicknessAdapter(this, sicknessList2);
-            listSickness = (ListView) findViewById(R.id.listView1);
+        if (diseaseList != null) {
+            DiseaseAdapter adapter = new DiseaseAdapter(this, diseaseList);
+            listDiseases = (ListView) findViewById(R.id.listView1);
             View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
-            listSickness.addHeaderView(header);
-            listSickness.setAdapter(adapter);
-        }*/
+            listDiseases.addHeaderView(header);
+            listDiseases.setAdapter(adapter);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_guest_sickness, menu);
+        getMenuInflater().inflate(R.menu.menu_guest_disease, menu);
         return true;
     }
 

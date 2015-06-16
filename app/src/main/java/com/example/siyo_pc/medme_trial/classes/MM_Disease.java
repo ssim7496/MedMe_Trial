@@ -2,36 +2,48 @@ package com.example.siyo_pc.medme_trial.classes;
 
 public class MM_Disease {
     private int dDiseaseID;
-    private int dSicknessID;
-    private int dSymptomID;
     private String dGreekName;
     private String dDiseaseName;
     private String dDiseaseDesc;
     private boolean dMode;
 
-    public MM_Disease (int diseaseID, int sicknessID, int symptomID, String greekName, String diseaseName, String diseaseDesc,
+    public MM_Disease () {
+        super();
+    }
+
+    public MM_Disease (int diseaseID, String greekName, String diseaseName, String diseaseDesc,
                        boolean mode) {
         super();
         this.dDiseaseID = diseaseID;
-        this.dSicknessID = sicknessID;
-        this.dSymptomID = symptomID;
         this.dGreekName = greekName;
         this.dDiseaseName = diseaseName;
         this.dDiseaseDesc = diseaseDesc;
         this.dMode = mode;
     }
 
+    public MM_Disease (int diseaseID, String greekName, String diseaseName, String diseaseDesc) {
+        super();
+        this.dDiseaseID = diseaseID;
+        this.dGreekName = greekName;
+        this.dDiseaseName = diseaseName;
+        this.dDiseaseDesc = diseaseDesc;
+    }
+
+    public MM_Disease (String greekName, String diseaseName, String diseaseDesc) {
+        super();
+        this.dGreekName = greekName;
+        this.dDiseaseName = diseaseName;
+        this.dDiseaseDesc = diseaseDesc;
+    }
+
+    public MM_Disease (String diseaseName) {
+        super();
+        this.dDiseaseName = diseaseName;
+    }
+
     public int GetDiseaseID() { return dDiseaseID; }
 
     public void SetDiseaseID(int diseaseID) { dDiseaseID = diseaseID; }
-
-    public int GetSicknessID() { return dSicknessID; }
-
-    public void SetSicknessID(int sicknessID ) { dSicknessID = sicknessID; }
-
-    public int GetSymptomID() { return dSymptomID; }
-
-    public void SetSymptomID(int symptomID) { dSymptomID = symptomID; }
 
     public String GetGreekName() {
         return dGreekName;

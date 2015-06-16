@@ -1,6 +1,5 @@
 package com.example.siyo_pc.medme_trial;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,41 +7,41 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
+import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 
-public class GuestSicknessView extends ActionBarActivity {
+public class GuestDiseaseView extends ActionBarActivity {
 
     MedMe_Helper medMeDB = null;
-    TextView sicknessTitle, sicknessDesc;
+    TextView diseaseTitle, diseaseDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest_sickness_view);
+        setContentView(R.layout.activity_guest_disease_view);
 
         medMeDB = new MedMe_Helper(this);
-        getSicknessInformation();
+        getDiseaseInformation();
     }
 
-    public void getSicknessInformation() {
-        sicknessTitle = (TextView)findViewById(R.id.tvSicknessTitle);
-        sicknessDesc = (TextView)findViewById(R.id.tvSicknessDescription);
+    public void getDiseaseInformation() {
+        diseaseTitle = (TextView)findViewById(R.id.tvDiseaseTitle);
+        diseaseDesc = (TextView)findViewById(R.id.tvDiseaseDescription);
 
         Intent intent = getIntent();
-        String sick = intent.getStringExtra("sickness");
+        String diss = intent.getStringExtra("disease");
 
-        /*MM_Sickness sickness = medMeDB.GetSicknessByID(Integer.parseInt(sick));
+        /*MM_Disease disease = medMeDB.GetDiseaseByID(Integer.parseInt(diss));
 
-        sicknessTitle.setText(sickness.GetSicknessName());
-        sicknessDesc.setText(sickness.GetSicknessDesc());*/
+        diseaseTitle.setText(disease.GetDiseaseName());
+        diseaseDesc.setText(disease.GetDiseaseDesc());*/
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_guest_sickness_view, menu);
+        getMenuInflater().inflate(R.menu.menu_guest_disease_view, menu);
         return true;
     }
 

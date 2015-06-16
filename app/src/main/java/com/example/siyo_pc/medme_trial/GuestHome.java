@@ -37,11 +37,23 @@ public class GuestHome extends ActionBarActivity {
         btnSicknesses = (Button)findViewById(R.id.btnSicknesses);
         btnHelp = (Button)findViewById(R.id.btnHelp);
 
-        addNextActivityOnClickListener(btnSicknesses, GuestSickness.class);
+        addNextActivityOnClickListener(btnDiseases, GuestDisease.class);
+        //addNextActivityOnClickListener(btnSearch, GuestSearch.class);
+        //addNextActivityOnClickListener(btnDiagnose, GuestDiagnose.class);
+        addNextActivityOnClickListener(btnSymptoms, GuestSymptom.class);
+        //addNextActivityOnClickListener(btnTerminology, GuestTerminology.class);
+        //addNextActivityOnClickListener(btnSicknesses, GuestSickness.class);
+        //addNextActivityOnClickListener(btnHelp, GuestHelp.class);
+
+        //underConstruction(btnDiseases);
         underConstruction(btnSearch);
         underConstruction(btnDiagnose);
+        //underConstruction(btnSymptoms);
         underConstruction(btnTerminology);
+        underConstruction(btnSicknesses);
         underConstruction(btnHelp);
+
+
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {

@@ -14,19 +14,21 @@ import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.GuestSicknessView;
 import com.example.siyo_pc.medme_trial.R;
+import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
+import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
+public class SymptomAdapter extends ArrayAdapter<MM_Symptom>{
 
     Context context;
-    ArrayList<MM_Sickness> data = null;
+    ArrayList<MM_Symptom> data = null;
 
-    public SicknessAdapter(Context context, ArrayList<MM_Sickness> data) {
+    public SymptomAdapter(Context context, ArrayList<MM_Symptom> data) {
         super(context, 0, data);
         this.context = context;
         this.data = data;
@@ -34,23 +36,23 @@ public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final MM_Sickness sickness = getItem(position);
+        final MM_Symptom symptom = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_item_row, parent, false);
         }
 
         TextView tvName = (TextView)convertView.findViewById(R.id.txtTitle);
-        tvName.setText(sickness.GetSicknessName());
+        tvName.setText(symptom.GetSymptomName());
 
         tvName.setOnClickListener(new TextView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), sickness.GetSicknessName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), symptom.GetSymptomName(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(context, GuestSicknessView.class);
                 Bundle bundle = intent.getExtras();
-                intent.putExtra("sickness", Integer.toString(sickness.GetSicknessID()));
+                intent.putExtra("symptom", Integer.toString(symptom.GetSymptomID()));
                 context.startActivity(intent);
             }
         });

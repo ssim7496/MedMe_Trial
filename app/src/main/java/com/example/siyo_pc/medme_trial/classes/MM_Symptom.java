@@ -17,9 +17,9 @@ public class MM_Symptom {
         this.sMode = mode;
     }
 
-    public int GetID() { return sSymptomID; }
+    public int GetSymptomID() { return sSymptomID; }
 
-    public void SetID(int ID) { sSymptomID = ID; }
+    public void SetSymptomID(int ID) { sSymptomID = ID; }
 
     public String GetGreekName() {
         return sGreekName;
