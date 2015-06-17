@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_background"
+    tools:context="com.example.siyo_pc.medme_trial.AdminSymptomsHomeFragment">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/row1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.45"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button_admin"
+                    style="@style/button_text"
+                    android:id="@+id/btnAdminAddSymptom"
+                    android:text="@string/Add"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/row3"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.45"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button_admin"
+                    style="@style/button_text"
+                    android:id="@+id/btnAdminUpdateSymptom"
+                    android:text="@string/Update"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/row4"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.45"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button_admin"
+                    style="@style/button_text"
+                    android:id="@+id/btnAdminViewAllSymptom"
+                    android:text="@string/ViewAll"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

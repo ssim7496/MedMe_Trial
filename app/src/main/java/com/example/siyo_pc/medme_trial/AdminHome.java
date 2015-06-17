@@ -1,6 +1,5 @@
 package com.example.siyo_pc.medme_trial;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,33 +9,42 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
-public class Start extends ActionBarActivity {
 
-    Button btnAdmin, btnGuest, btnNurse, btnDoctor;
+public class AdminHome extends ActionBarActivity {
+
+    MedMe_Helper medMeDB = null;
+    Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnTerminology, btnSicknesses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
-        getSupportActionBar().hide();
-        addOnClickListener();
-    }
+        setContentView(R.layout.activity_admin_home);
 
-    public void addOnClickListener(){
-        btnAdmin = (Button)findViewById(R.id.btnAdmin);
-        btnGuest = (Button)findViewById(R.id.btnGuest);
-        btnNurse = (Button)findViewById(R.id.btnNurse);
-        btnDoctor = (Button)findViewById(R.id.btnDoctor);
+        medMeDB = new MedMe_Helper(this);
 
-        addNextActivityOnClickListener(btnAdmin, AdminHome.class);
-        addNextActivityOnClickListener(btnGuest, GuestHome.class);
-        //addNextActivityOnClickListener(btnNurse, GuestHome.class);
-        //addNextActivityOnClickListener(btnDoctor, GuestHome.class);
-        //underConstruction(btnAdmin);
-        //underConstruction(btnGuest);
-        underConstruction(btnNurse);
-        underConstruction(btnDoctor);
+        btnSearch = (Button)findViewById(R.id.btnAdminSearch);
+        btnDiagnose = (Button)findViewById(R.id.btnAdminDiagnose);
+        btnDiseases = (Button)findViewById(R.id.btnAdminDiseases);
+        btnSymptoms = (Button)findViewById(R.id.btnAdminSymptoms);
+        btnTerminology = (Button)findViewById(R.id.btnAdminTerminology);
+        btnSicknesses = (Button)findViewById(R.id.btnAdminSicknesses);
+
+        addNextActivityOnClickListener(btnDiseases, AdminDiseasesHome.class);
+        //addNextActivityOnClickListener(btnSearch, GuestSearch.class);
+        //addNextActivityOnClickListener(btnDiagnose, GuestDiagnose.class);
+        addNextActivityOnClickListener(btnSymptoms, AdminSymptomsHome.class);
+        //addNextActivityOnClickListener(btnTerminology, GuestTerminology.class);
+        //addNextActivityOnClickListener(btnSicknesses, GuestSickness.class);
+        //addNextActivityOnClickListener(btnHelp, GuestHelp.class);
+
+        //underConstruction(btnDiseases);
+        underConstruction(btnSearch);
+        underConstruction(btnDiagnose);
+        //underConstruction(btnSymptoms);
+        underConstruction(btnTerminology);
+        underConstruction(btnSicknesses);
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {
@@ -61,7 +69,7 @@ public class Start extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_start, menu);
+        getMenuInflater().inflate(R.menu.menu_admin_home, menu);
         return true;
     }
 

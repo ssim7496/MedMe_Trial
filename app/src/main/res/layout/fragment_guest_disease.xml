@@ -26,16 +26,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="horizontal" >
-        <Button
-            android:id="@+id/btnViewDisease"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View Disease"
-            android:gravity="center"
-            android:background="@drawable/default_button"
-            style="@style/button_text"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="35dp"/>
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

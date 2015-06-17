@@ -23,11 +23,38 @@
     <string name="title_activity_guest_disease">Disease</string>
     <string name="diseaseBeginDesc">1. A disorder of structure or function in a human, animal, or plant, especially one that produces specific signs
         or symptoms or that affects a specific location and is not simply a direct result of physical injury. \n\n2. A particular quality, habit, or
-        disposition regarded as adversely affecting a person or group of people.
-        disease.</string>
+        disposition regarded as adversely affecting a person or group of people.</string>
     <string name="title_activity_guest_disease_view">View Disease</string>
     <string name="title_activity_guest_symptom">Symptom</string>
     <string name="symptomBeginDesc">1. A physical or mental feature that is regarded as indicating a condition of disease, particularly such a feature
-        that is apparent to the patient. \n\n2.A particular type of illness or disease.</string>
+        that is apparent to the patient.</string>
     <string name="title_activity_guest_symptom_view">View Symptom</string>
+
+    <string name="lblDiseaseName">Disease Name:</string>
+    <string name="lblDiseaseDesc">Disease Description:</string>
+    <string name="lblDiseaseGreekName">Disease Greek Name:</string>
+    <string name="lblSymptomName">Symptom Name:</string>
+    <string name="lblSymptomDesc">Symptom Description:</string>
+    <string name="lblSymptomGreekName">Symptom Greek Name:</string>
+    <string name="lblSicknessName">Sickness Name:</string>
+    <string name="lblSicknessDesc">Sickness Description:</string>
+    <string name="lblSicknessGreekName">Sickness Greek Name:</string>
+
+    <string name="title_activity_admin_home">Home</string>
+    <string name="title_activity_admin_diseases_home">Diseases</string>
+    <string name="Add">Add</string>
+    <string name="Update">Update</string>
+    <string name="ViewAll">View All</string>
+    <string name="Cancel">Cancel</string>
+    <string name="SelectDisease">Select a Disease:</string>
+    <string name="SelectSymptom">Select a Symptom:</string>
+    <string name="SelectSickness">Select a Sickness:</string>
+    <string name="title_activity_admin_diseases_view_all">View All Diseases</string>
+    <string name="title_activity_admin_diseases_add">Add Disease</string>
+    <string name="title_activity_admin_diseases_update">Update Disease</string>
+    <string name="title_activity_admin_symptoms_add">Add Symptom</string>
+    <string name="title_activity_admin_symptoms_home">Symptoms</string>
+    <string name="title_activity_admin_symptoms_update">Update Symptom</string>
+    <string name="title_activity_admin_symptoms_view_all">View All Symptoms</string>
+
 </resources>

@@ -1,14 +1,13 @@
 package com.example.siyo_pc.medme_trial;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.siyo_pc.medme_trial.adapters.DiseaseAdapter;
 import com.example.siyo_pc.medme_trial.adapters.SymptomAdapter;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
@@ -16,16 +15,15 @@ import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 import java.util.ArrayList;
 
 
-public class GuestSymptom extends ActionBarActivity {
+public class AdminSymptomsViewAll extends ActionBarActivity {
 
     private ListView listSymptoms;
-    private Button btnViewSymptom;
     private MedMe_Helper medMeDB = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest_symptom);
+        setContentView(R.layout.activity_admin_symptoms_view_all);
 
         medMeDB = new MedMe_Helper(this);
         fillSymptomList();
@@ -37,7 +35,7 @@ public class GuestSymptom extends ActionBarActivity {
 
         if (symptomList != null) {
             SymptomAdapter adapter = new SymptomAdapter(this, symptomList);
-            listSymptoms = (ListView) findViewById(R.id.listView1);
+            listSymptoms = (ListView) findViewById(R.id.listViewAdmin1);
             View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
             listSymptoms.addHeaderView(header);
             listSymptoms.setAdapter(adapter);
@@ -47,7 +45,7 @@ public class GuestSymptom extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_guest_symptom, menu);
+        getMenuInflater().inflate(R.menu.menu_admin_symptoms_view_all, menu);
         return true;
     }
 

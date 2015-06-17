@@ -1,6 +1,5 @@
 package com.example.siyo_pc.medme_trial;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,35 +7,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 
-public class Start extends ActionBarActivity {
+public class AdminDiseasesHome extends ActionBarActivity {
 
-    Button btnAdmin, btnGuest, btnNurse, btnDoctor;
+    Button btnAdd, btnUpdate, btnViewAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
-        getSupportActionBar().hide();
-        addOnClickListener();
-    }
+        setContentView(R.layout.activity_admin_diseases_home);
 
-    public void addOnClickListener(){
-        btnAdmin = (Button)findViewById(R.id.btnAdmin);
-        btnGuest = (Button)findViewById(R.id.btnGuest);
-        btnNurse = (Button)findViewById(R.id.btnNurse);
-        btnDoctor = (Button)findViewById(R.id.btnDoctor);
+        btnAdd = (Button)findViewById(R.id.btnAdminAdd);
+        btnUpdate = (Button)findViewById(R.id.btnAdminUpdate);
+        btnViewAll = (Button)findViewById(R.id.btnAdminViewAll);
 
-        addNextActivityOnClickListener(btnAdmin, AdminHome.class);
-        addNextActivityOnClickListener(btnGuest, GuestHome.class);
-        //addNextActivityOnClickListener(btnNurse, GuestHome.class);
-        //addNextActivityOnClickListener(btnDoctor, GuestHome.class);
-        //underConstruction(btnAdmin);
-        //underConstruction(btnGuest);
-        underConstruction(btnNurse);
-        underConstruction(btnDoctor);
+        addNextActivityOnClickListener(btnAdd, AdminDiseasesAdd.class);
+        addNextActivityOnClickListener(btnUpdate, AdminDiseasesUpdate.class);
+        addNextActivityOnClickListener(btnViewAll, AdminDiseasesViewAll.class);
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {
@@ -49,19 +37,10 @@ public class Start extends ActionBarActivity {
         });
     }
 
-    public void underConstruction(View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Currently under construction ... ", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_start, menu);
+        getMenuInflater().inflate(R.menu.menu_admin_diseases_home, menu);
         return true;
     }
 

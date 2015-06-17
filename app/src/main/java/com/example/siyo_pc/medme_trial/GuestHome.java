@@ -52,8 +52,6 @@ public class GuestHome extends ActionBarActivity {
         underConstruction(btnTerminology);
         underConstruction(btnSicknesses);
         underConstruction(btnHelp);
-
-
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {

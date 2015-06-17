@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.GuestDiseaseView;
 import com.example.siyo_pc.medme_trial.GuestSicknessView;
 import com.example.siyo_pc.medme_trial.R;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 
 public class DiseaseAdapter extends ArrayAdapter<MM_Disease>{
 
-    Context context;
+    private Context context;
     ArrayList<MM_Disease> data = null;
 
     public DiseaseAdapter(Context context, ArrayList<MM_Disease> data) {
@@ -47,9 +48,7 @@ public class DiseaseAdapter extends ArrayAdapter<MM_Disease>{
         tvName.setOnClickListener(new TextView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), disease.GetDiseaseName(), Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(context, GuestSicknessView.class);
+                Intent intent = new Intent(context, GuestDiseaseView.class);
                 Bundle bundle = intent.getExtras();
                 intent.putExtra("disease", Integer.toString(disease.GetDiseaseID()));
                 context.startActivity(intent);

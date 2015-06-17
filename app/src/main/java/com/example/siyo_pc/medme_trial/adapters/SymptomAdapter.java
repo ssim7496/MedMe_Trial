@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.GuestSicknessView;
+import com.example.siyo_pc.medme_trial.GuestSymptomView;
 import com.example.siyo_pc.medme_trial.R;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 
 public class SymptomAdapter extends ArrayAdapter<MM_Symptom>{
 
-    Context context;
+    private Context context;
     ArrayList<MM_Symptom> data = null;
 
     public SymptomAdapter(Context context, ArrayList<MM_Symptom> data) {
@@ -48,9 +49,7 @@ public class SymptomAdapter extends ArrayAdapter<MM_Symptom>{
         tvName.setOnClickListener(new TextView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), symptom.GetSymptomName(), Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(context, GuestSicknessView.class);
+                Intent intent = new Intent(context, GuestSymptomView.class);
                 Bundle bundle = intent.getExtras();
                 intent.putExtra("symptom", Integer.toString(symptom.GetSymptomID()));
                 context.startActivity(intent);

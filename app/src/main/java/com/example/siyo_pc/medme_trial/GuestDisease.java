@@ -29,16 +29,6 @@ public class GuestDisease extends ActionBarActivity {
 
         medMeDB = new MedMe_Helper(this);
         fillDiseaseList();
-
-        btnViewDisease = (Button)findViewById(R.id.btnViewDisease);
-
-        btnViewDisease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), GuestDiseaseView.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public void fillDiseaseList(){

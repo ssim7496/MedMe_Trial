@@ -14,7 +14,7 @@ import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 public class GuestSymptomView extends ActionBarActivity {
 
     MedMe_Helper medMeDB = null;
-    TextView symptomTitle, symptomDesc;
+    TextView symptomTitle, symptomDesc, symptomGreekName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +28,16 @@ public class GuestSymptomView extends ActionBarActivity {
     public void getSymptomInformation() {
         symptomTitle = (TextView)findViewById(R.id.tvSymptomTitle);
         symptomDesc = (TextView)findViewById(R.id.tvSymptomDescription);
+        symptomGreekName = (TextView)findViewById(R.id.tvSymptomGreekName);
 
-        /*Intent intent = getIntent();
+        Intent intent = getIntent();
         String diss = intent.getStringExtra("symptom");
 
         MM_Symptom symptom = medMeDB.GetSymptomByID(Integer.parseInt(diss));
 
         symptomTitle.setText(symptom.GetSymptomName());
-        symptomDesc.setText(symptom.GetSymptomDesc());*/
+        symptomDesc.setText(symptom.GetSymptomDesc());
+        symptomGreekName.setText(symptom.GetGreekName());
     }
 
 

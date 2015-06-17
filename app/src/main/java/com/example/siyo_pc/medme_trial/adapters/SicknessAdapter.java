@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
 
-    Context context;
+    private Context context;
     ArrayList<MM_Sickness> data = null;
 
     public SicknessAdapter(Context context, ArrayList<MM_Sickness> data) {
@@ -46,8 +46,6 @@ public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
         tvName.setOnClickListener(new TextView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), sickness.GetSicknessName(), Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(context, GuestSicknessView.class);
                 Bundle bundle = intent.getExtras();
                 intent.putExtra("sickness", Integer.toString(sickness.GetSicknessID()));

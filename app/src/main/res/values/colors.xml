@@ -2,4 +2,8 @@
 <resources>
     <color name="default_background">#017fb5</color>
     <color name="default_text_colour">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="yellow">#ffff00</color>
+    <color name="green">#00ff00</color>
+    <color name="white">#FFFFFF</color>
 </resources>

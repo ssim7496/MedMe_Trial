@@ -8,6 +8,10 @@ public class MM_Symptom {
     private String sSymptomDesc;
     private boolean sMode;
 
+    public MM_Symptom () {
+        super();
+    }
+
     public MM_Symptom (int ID, String greekName, String symptomName, String symptomDesc, boolean mode) {
         super();
         this.sSymptomID = ID;
@@ -15,6 +19,26 @@ public class MM_Symptom {
         this.sSymptomName = symptomName;
         this.sSymptomDesc = symptomDesc;
         this.sMode = mode;
+    }
+
+    public MM_Symptom (int ID, String greekName, String symptomName, String symptomDesc) {
+        super();
+        this.sSymptomID = ID;
+        this.sGreekName = greekName;
+        this.sSymptomName = symptomName;
+        this.sSymptomDesc = symptomDesc;
+    }
+
+    public MM_Symptom (String greekName, String symptomName, String symptomDesc) {
+        super();
+        this.sGreekName = greekName;
+        this.sSymptomName = symptomName;
+        this.sSymptomDesc = symptomDesc;
+    }
+
+    public MM_Symptom (String symptomName) {
+        super();
+        this.sSymptomName = symptomName;
     }
 
     public int GetSymptomID() { return sSymptomID; }

@@ -65,6 +65,42 @@
             android:name=".GuestSymptomView"
             android:label="@string/title_activity_guest_symptom_view" >
         </activity>
+        <activity
+            android:name=".AdminHome"
+            android:label="@string/title_activity_admin_home" >
+        </activity>
+        <activity
+            android:name=".AdminDiseasesHome"
+            android:label="@string/title_activity_admin_diseases_home" >
+        </activity>
+        <activity
+            android:name=".AdminDiseasesViewAll"
+            android:label="@string/title_activity_admin_diseases_view_all" >
+        </activity>
+        <activity
+            android:name=".AdminDiseasesAdd"
+            android:label="@string/title_activity_admin_diseases_add" >
+        </activity>
+        <activity
+            android:name=".AdminDiseasesUpdate"
+            android:label="@string/title_activity_admin_diseases_update" >
+        </activity>
+        <activity
+            android:name=".AdminSymptomsAdd"
+            android:label="@string/title_activity_admin_symptoms_add" >
+        </activity>
+        <activity
+            android:name=".AdminSymptomsHome"
+            android:label="@string/title_activity_admin_symptoms_home" >
+        </activity>
+        <activity
+            android:name=".AdminSymptomsUpdate"
+            android:label="@string/title_activity_admin_symptoms_update" >
+        </activity>
+        <activity
+            android:name=".AdminSymptomsViewAll"
+            android:label="@string/title_activity_admin_symptoms_view_all" >
+        </activity>
     </application>
 
 </manifest>

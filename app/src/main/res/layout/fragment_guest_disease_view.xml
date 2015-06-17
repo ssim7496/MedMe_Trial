@@ -34,6 +34,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
         <TextView
+            android:id="@+id/tvDiseaseGreekName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Disease greek name goes inside here :)"
+            android:textColor="@color/default_text_colour"
+            android:textStyle="italic"
+            android:textSize="18sp"
+            android:padding="14sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <TextView
             android:id="@+id/tvDiseaseDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
