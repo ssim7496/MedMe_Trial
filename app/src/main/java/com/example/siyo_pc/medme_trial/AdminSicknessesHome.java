@@ -7,46 +7,40 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-
-import com.example.siyo_pc.medme_trial.adapters.SymptomAdapter;
-import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
-import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
-
-import java.util.ArrayList;
 
 
-public class GuestSymptom extends ActionBarActivity {
+public class AdminSicknessesHome extends ActionBarActivity {
 
-    private ListView listSymptoms;
-    private MedMe_Helper medMeDB = null;
+    Button btnAdd, btnUpdate, btnViewAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest_symptom);
+        setContentView(R.layout.activity_admin_sicknesses_home);
 
-        medMeDB = new MedMe_Helper(this);
-        fillSymptomList();
+        btnAdd = (Button)findViewById(R.id.btnAdminAddSickness);
+        btnUpdate = (Button)findViewById(R.id.btnAdminUpdateSickness);
+        btnViewAll = (Button)findViewById(R.id.btnAdminViewAllSickness);
+
+        addNextActivityOnClickListener(btnAdd, AdminSicknessesAdd.class);
+        addNextActivityOnClickListener(btnUpdate, AdminSicknessesUpdate.class);
+        addNextActivityOnClickListener(btnViewAll, AdminSicknessesViewAll.class);
     }
 
-    public void fillSymptomList(){
-
-        ArrayList<MM_Symptom> symptomList = medMeDB.GetAllSymptoms();
-
-        if (symptomList != null) {
-            SymptomAdapter adapter = new SymptomAdapter(this, symptomList);
-            listSymptoms = (ListView) findViewById(R.id.listView1);
-            View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
-            listSymptoms.addHeaderView(header);
-            listSymptoms.setAdapter(adapter);
-        }
+    public void addNextActivityOnClickListener(View view, final Class nextClass) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), nextClass);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_guest_symptom, menu);
+        getMenuInflater().inflate(R.menu.menu_admin_sicknesses_home, menu);
         return true;
     }
 

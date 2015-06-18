@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.example.siyo_pc.medme_trial.adapters.DiseaseAdapter;
 import com.example.siyo_pc.medme_trial.adapters.SymptomAdapter;
+import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 

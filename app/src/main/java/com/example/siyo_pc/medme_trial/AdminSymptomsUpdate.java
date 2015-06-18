@@ -1,6 +1,9 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.adapters.NothingSelectedSpinnerAdapter;
 import com.example.siyo_pc.medme_trial.adapters.SymptomSpinnerAdapter;
+import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
@@ -27,6 +31,7 @@ public class AdminSymptomsUpdate extends ActionBarActivity {
     Button btnUpdate, btnCancel;
     EditText edtSymptomName, edtSymptomGreekName, edtSymptomDesc;
     Spinner spnSymptomList;
+    Integer symptomChosen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +42,26 @@ public class AdminSymptomsUpdate extends ActionBarActivity {
         spnSymptomList = (Spinner)findViewById(R.id.spinnerUpdateSymptom);
         btnUpdate = (Button)findViewById(R.id.btnAdminConfirmUpdateSymptom);
         btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelSymptom);
-        edtSymptomName = (EditText)findViewById(R.id.edtAdminSymptomName);
-        edtSymptomGreekName = (EditText)findViewById(R.id.edtAdminSymptomGreekName);
-        edtSymptomDesc = (EditText)findViewById(R.id.edtAdminSymptomDesc);
+        edtSymptomName = (EditText)findViewById(R.id.edtAdminSymptomNameUpdate);
+        edtSymptomGreekName = (EditText)findViewById(R.id.edtAdminSymptomGreekNameUpdate);
+        edtSymptomDesc = (EditText)findViewById(R.id.edtAdminSymptomDescUpdate);
 
         addNextActivityOnClickListener(btnCancel, AdminSymptomsHome.class);
+
+        IntentFilter intentFilter = new IntentFilter("com.example.siyo_pc.medme_trial.adapters");
+        BroadcastReceiver mReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String msg1 = intent.getStringExtra("symptomItem2");
+                MM_Symptom symptom = medMeDB.GetSymptomByID(Integer.parseInt(msg1));
+                symptomChosen = Integer.parseInt(msg1);
+                edtSymptomName.setText(symptom.GetSymptomName());
+                edtSymptomGreekName.setText(symptom.GetGreekName());
+                edtSymptomDesc.setText(symptom.GetSymptomDesc());
+            }
+        };
+
+        this.registerReceiver(mReceiver, intentFilter);
 
         ArrayList<MM_Symptom> symptomList = medMeDB.GetAllSymptoms();
         final ArrayAdapter<MM_Symptom> adapter = new SymptomSpinnerAdapter(this, android.R.layout.simple_spinner_item,symptomList);
@@ -51,19 +71,9 @@ public class AdminSymptomsUpdate extends ActionBarActivity {
                 adapter, R.layout.spinner_row_default_symptom, this
         ));
         spnSymptomList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            //int count = 0;
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                /*if (count >= 1) {
-                    int item = spnDiseaseList.getSelectedItemPosition();
-                    MM_Disease disease = adapter.getItem(item);
-                    Toast.makeText(getApplicationContext(), Integer.toString(disease.GetDiseaseID()), Toast.LENGTH_LONG).show();
-                }
-                else {
-                    count++;
-                }*/
-                //count++;
+
             }
 
             @Override
@@ -72,34 +82,10 @@ public class AdminSymptomsUpdate extends ActionBarActivity {
             }
         });
 
-        Intent intent = getIntent();
-        boolean tried = tryParseInt(intent.getStringExtra("symptom"));
-        if (tried == true) {
-            String diss = intent.getStringExtra("symptom");
-
-            final MM_Symptom symptom = medMeDB.GetSymptomByID(Integer.parseInt(diss));
-
-            edtSymptomName.setText(symptom.GetSymptomName());
-            edtSymptomGreekName.setText(symptom.GetGreekName());
-            edtSymptomDesc.setText(symptom.GetSymptomDesc());
-
-            btnUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    updateSymptom(symptom, edtSymptomName, edtSymptomGreekName, edtSymptomDesc);
-                }
-            });
-        }
-
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edtSymptomName == null && edtSymptomGreekName == null && edtSymptomDesc == null){
-                    Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_LONG).show();
-                }
-                else if (edtSymptomName.length() <= 1 && edtSymptomGreekName.length() <= 1 && edtSymptomDesc.length() <= 1) {
-                    Toast.makeText(getApplicationContext(), "All fields must be at least 2 characters in length.", Toast.LENGTH_LONG).show();
-                }
+                updateSymptom(edtSymptomName, edtSymptomGreekName, edtSymptomDesc);
             }
         });
     }
@@ -114,15 +100,14 @@ public class AdminSymptomsUpdate extends ActionBarActivity {
         });
     }
 
-    public void updateSymptom(MM_Symptom currentSymptom, EditText symptomName, EditText greekName, EditText symptomDesc) {
+    public void updateSymptom(EditText symptomName, EditText greekName, EditText symptomDesc) {
 
-        if (symptomName != null && greekName != null && symptomDesc != null){
-            if (symptomName.length() > 1 && greekName.length() > 1 && symptomDesc.length() > 1) {
-                Integer dID = currentSymptom.GetSymptomID();
+        if (symptomChosen != null && symptomName != null && greekName != null && symptomDesc != null){
+            if (symptomChosen > 0 && symptomName.length() > 1 && greekName.length() > 1 && symptomDesc.length() > 1) {
                 String gName = greekName.getText().toString();
                 String dName = symptomName.getText().toString();
                 String dDesc = symptomDesc.getText().toString();
-                MM_Symptom symptom = new MM_Symptom(dID, gName, dName, dDesc);
+                MM_Symptom symptom = new MM_Symptom(symptomChosen, gName, dName, dDesc);
                 medMeDB.UpdateSymptom(symptom);
 
                 Toast.makeText(getApplicationContext(), "Successfully updated.", Toast.LENGTH_LONG).show();
@@ -135,18 +120,6 @@ public class AdminSymptomsUpdate extends ActionBarActivity {
         }
         else {
             Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    boolean tryParseInt(String value)
-    {
-        try
-        {
-            Integer.parseInt(value);
-            return true;
-        } catch(NumberFormatException nfe)
-        {
-            return false;
         }
     }
 

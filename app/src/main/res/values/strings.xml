@@ -49,6 +49,8 @@
     <string name="SelectDisease">Select a Disease:</string>
     <string name="SelectSymptom">Select a Symptom:</string>
     <string name="SelectSickness">Select a Sickness:</string>
+    <string name="SelectSicknessSymptom">Select a Related Symptom:</string>
+    <string name="SelectSicknessDisease">Select a Related Disease:</string>
     <string name="title_activity_admin_diseases_view_all">View All Diseases</string>
     <string name="title_activity_admin_diseases_add">Add Disease</string>
     <string name="title_activity_admin_diseases_update">Update Disease</string>
@@ -56,5 +58,12 @@
     <string name="title_activity_admin_symptoms_home">Symptoms</string>
     <string name="title_activity_admin_symptoms_update">Update Symptom</string>
     <string name="title_activity_admin_symptoms_view_all">View All Symptoms</string>
+    <string name="title_activity_admin_sicknesses_add">Add Sickness</string>
+    <string name="title_activity_admin_sickness_home">Sicknesses</string>
+    <string name="title_activity_admin_sicknesses_update">Update Sickness</string>
+    <string name="title_activity_admin_sicknesses_view_all">View All Sicknesses</string>
+    <string name="title_activity_admin_sicknesses_home">Sicknesses</string>
+    <string name="title_activity_admin_sickness_disease_select">Select a Related Disease</string>
+    <string name="title_activity_admin_sickness_symptom_select">Select A Symptom</string>
 
 </resources>

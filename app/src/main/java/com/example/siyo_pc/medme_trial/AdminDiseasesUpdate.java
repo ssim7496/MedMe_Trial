@@ -1,6 +1,9 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.example.siyo_pc.medme_trial.adapters.DiseaseSpinnerAdapter;
 import com.example.siyo_pc.medme_trial.adapters.NothingSelectedSpinnerAdapter;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
+import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ public class AdminDiseasesUpdate extends ActionBarActivity {
     Button btnUpdate, btnCancel;
     EditText edtDiseaseName, edtDiseaseGreekName, edtDiseaseDesc;
     Spinner spnDiseaseList;
+    Integer diseaseChosen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +43,26 @@ public class AdminDiseasesUpdate extends ActionBarActivity {
         spnDiseaseList = (Spinner)findViewById(R.id.spinnerUpdateDisease);
         btnUpdate = (Button)findViewById(R.id.btnAdminConfirmUpdate);
         btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancel);
-        edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseName);
-        edtDiseaseGreekName = (EditText)findViewById(R.id.edtAdminDiseaseGreekName);
-        edtDiseaseDesc = (EditText)findViewById(R.id.edtAdminDiseaseDesc);
+        edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseNameUpdate);
+        edtDiseaseGreekName = (EditText)findViewById(R.id.edtAdminDiseaseGreekNameUpdate);
+        edtDiseaseDesc = (EditText)findViewById(R.id.edtAdminDiseaseDescUpdate);
 
         addNextActivityOnClickListener(btnCancel, AdminDiseasesHome.class);
+
+        IntentFilter intentFilter = new IntentFilter("com.example.siyo_pc.medme_trial.adapters");
+        BroadcastReceiver mReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String msg1 = intent.getStringExtra("diseaseItem2");
+                MM_Disease disease = medMeDB.GetDiseaseByID(Integer.parseInt(msg1));
+                diseaseChosen = Integer.parseInt(msg1);
+                edtDiseaseName.setText(disease.GetDiseaseName());
+                edtDiseaseGreekName.setText(disease.GetGreekName());
+                edtDiseaseDesc.setText(disease.GetDiseaseDesc());
+            }
+        };
+
+        this.registerReceiver(mReceiver, intentFilter);
 
         ArrayList<MM_Disease> diseaseList = medMeDB.GetAllDiseases();
         final ArrayAdapter<MM_Disease> adapter = new DiseaseSpinnerAdapter(this, android.R.layout.simple_spinner_item,diseaseList);
@@ -52,19 +72,9 @@ public class AdminDiseasesUpdate extends ActionBarActivity {
                 adapter, R.layout.spinner_row_default_disease, this
         ));
         spnDiseaseList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            //int count = 0;
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                /*if (count >= 1) {
-                    int item = spnDiseaseList.getSelectedItemPosition();
-                    MM_Disease disease = adapter.getItem(item);
-                    Toast.makeText(getApplicationContext(), Integer.toString(disease.GetDiseaseID()), Toast.LENGTH_LONG).show();
-                }
-                else {
-                    count++;
-                }*/
-                //count++;
+
             }
 
             @Override
@@ -73,34 +83,10 @@ public class AdminDiseasesUpdate extends ActionBarActivity {
             }
         });
 
-        Intent intent = getIntent();
-        boolean tried = tryParseInt(intent.getStringExtra("disease"));
-        if (tried == true) {
-            String diss = intent.getStringExtra("disease");
-
-            final MM_Disease disease = medMeDB.GetDiseaseByID(Integer.parseInt(diss));
-
-            edtDiseaseName.setText(disease.GetDiseaseName());
-            edtDiseaseGreekName.setText(disease.GetGreekName());
-            edtDiseaseDesc.setText(disease.GetDiseaseDesc());
-
-            btnUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    updateDisease(disease, edtDiseaseName, edtDiseaseGreekName, edtDiseaseDesc);
-                }
-            });
-        }
-
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edtDiseaseName == null && edtDiseaseGreekName == null && edtDiseaseDesc == null){
-                    Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_LONG).show();
-                }
-                else if (edtDiseaseName.length() <= 1 && edtDiseaseGreekName.length() <= 1 && edtDiseaseDesc.length() <= 1) {
-                    Toast.makeText(getApplicationContext(), "All fields must be at least 2 characters in length.", Toast.LENGTH_LONG).show();
-                }
+                updateDisease(edtDiseaseName, edtDiseaseGreekName, edtDiseaseDesc);
             }
         });
     }
@@ -115,15 +101,14 @@ public class AdminDiseasesUpdate extends ActionBarActivity {
         });
     }
 
-    public void updateDisease(MM_Disease currentDisease, EditText diseaseName, EditText greekName, EditText diseaseDesc) {
+    public void updateDisease(EditText diseaseName, EditText greekName, EditText diseaseDesc) {
 
-        if (diseaseName != null && greekName != null && diseaseDesc != null){
-            if (diseaseName.length() > 1 && greekName.length() > 1 && diseaseDesc.length() > 1) {
-                Integer dID = currentDisease.GetDiseaseID();
+        if (diseaseChosen != null && diseaseName != null && greekName != null && diseaseDesc != null){
+            if (diseaseChosen > 0 && diseaseName.length() > 1 && greekName.length() > 1 && diseaseDesc.length() > 1) {
                 String gName = greekName.getText().toString();
                 String dName = diseaseName.getText().toString();
                 String dDesc = diseaseDesc.getText().toString();
-                MM_Disease disease = new MM_Disease(dID, gName, dName, dDesc);
+                MM_Disease disease = new MM_Disease(diseaseChosen, gName, dName, dDesc);
                 medMeDB.UpdateDisease(disease);
 
                 Toast.makeText(getApplicationContext(), "Successfully updated.", Toast.LENGTH_LONG).show();
@@ -136,18 +121,6 @@ public class AdminDiseasesUpdate extends ActionBarActivity {
         }
         else {
             Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    boolean tryParseInt(String value)
-    {
-        try
-        {
-            Integer.parseInt(value);
-            return true;
-        } catch(NumberFormatException nfe)
-        {
-            return false;
         }
     }
 

@@ -36,7 +36,7 @@ public class AdminHome extends ActionBarActivity {
         //addNextActivityOnClickListener(btnDiagnose, GuestDiagnose.class);
         addNextActivityOnClickListener(btnSymptoms, AdminSymptomsHome.class);
         //addNextActivityOnClickListener(btnTerminology, GuestTerminology.class);
-        //addNextActivityOnClickListener(btnSicknesses, GuestSickness.class);
+        addNextActivityOnClickListener(btnSicknesses, AdminSicknessesHome.class);
         //addNextActivityOnClickListener(btnHelp, GuestHelp.class);
 
         //underConstruction(btnDiseases);
@@ -44,7 +44,7 @@ public class AdminHome extends ActionBarActivity {
         underConstruction(btnDiagnose);
         //underConstruction(btnSymptoms);
         underConstruction(btnTerminology);
-        underConstruction(btnSicknesses);
+        //underConstruction(btnSicknesses);
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {

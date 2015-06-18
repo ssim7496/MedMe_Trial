@@ -6,12 +6,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.adapters.DiseaseSpinnerAdapter;
+import com.example.siyo_pc.medme_trial.adapters.NothingSelectedSpinnerAdapter;
+import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
+
+import java.util.ArrayList;
 
 public class AdminSymptomsAdd extends ActionBarActivity {
 
@@ -25,11 +32,11 @@ public class AdminSymptomsAdd extends ActionBarActivity {
         setContentView(R.layout.activity_admin_symptoms_add);
 
         medMeDB = new MedMe_Helper(this);
-        btnAdd = (Button)findViewById(R.id.btnAdminConfirmAdd);
-        btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancel);
-        edtSymptomName = (EditText)findViewById(R.id.edtAdminSymptomName);
-        edtSymptomGreekName = (EditText)findViewById(R.id.edtAdminSymptomGreekName);
-        edtSymptomDesc = (EditText)findViewById(R.id.edtAdminSymptomDesc);
+        btnAdd = (Button)findViewById(R.id.btnAdminConfirmAddSymptom);
+        btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelSymptom);
+        edtSymptomName = (EditText)findViewById(R.id.edtAdminSymptomNameAdd);
+        edtSymptomGreekName = (EditText)findViewById(R.id.edtAdminSymptomGreekNameAdd);
+        edtSymptomDesc = (EditText)findViewById(R.id.edtAdminSymptomDescAdd);
 
         addNextActivityOnClickListener(btnCancel, AdminSymptomsHome.class);
 

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class GuestDisease extends ActionBarActivity {
 
     private ListView listDiseases;
-    private Button btnViewDisease;
     private MedMe_Helper medMeDB = null;
 
     @Override

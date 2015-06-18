@@ -17,7 +17,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
     private static final String TAG = MedMe_Helper.class.getName();
 
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "MedMe_Trial";
+    private static final String DATABASE_NAME = "MedMe_Trials";
     private static final String TABLE_SICKNESS = "Sickness";
     private static final String TABLE_SYMPTOM = "Symptom";
     private static final String TABLE_DISEASE = "Disease";
@@ -42,7 +42,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
     private static final String SICKNESS_DESC = "SicknessDesc";
     private static final String SICKNESS_MODE = "Mode";
 
-    private static final String CREATE_DISEASE = "CREATE TABLE " + TABLE_SICKNESS + " ( " +
+    private static final String CREATE_DISEASE = "CREATE TABLE " + TABLE_DISEASE + " ( " +
             DISEASE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
             DISEASE_GREEK_NAME + " VARCHAR(255) NOT NULL, " +
             DISEASE_NAME + " VARCHAR(255) NOT NULL, " +
@@ -56,7 +56,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
             SYMPTOM_DESC + " VARCHAR(255) NOT NULL, " +
             SYMPTOM_MODE + " NUMERIC NOT NULL DEFAULT 1)";
 
-    private static final String CREATE_SICKNESS = "CREATE TABLE " + TABLE_DISEASE + " ( " +
+    private static final String CREATE_SICKNESS = "CREATE TABLE " + TABLE_SICKNESS + " ( " +
             SICKNESS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
             SICKNESS_DISEASE_ID + " INTEGER , " +
             SICKNESS_SYMPTOM_ID + " INTEGER , " +
@@ -121,11 +121,59 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         }
     }
 
+    public MM_Disease GetDiseaseByName(String diseaseNamed){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_DISEASE + " WHERE " + DISEASE_NAME + " = " + diseaseNamed;
+        Cursor cur = db.rawQuery(query, null);
+
+        if(cur != null){
+            cur.moveToFirst();
+            int disID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_ID)));
+            String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_GREEK_NAME));
+            String diseaseName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_NAME));
+            String diseaseDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_DESC));
+            //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+            boolean diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE))) != 0;
+
+            MM_Disease disease = new MM_Disease(disID, greekName, diseaseName, diseaseDesc, diseaseMode);
+            return disease;
+        }else{
+            return null;
+        }
+    }
+
     public ArrayList<MM_Disease> GetAllDiseases(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<MM_Disease> listDiseases = new ArrayList<MM_Disease>();
 
-        String query = "SELECT * FROM " + TABLE_DISEASE;
+        String query = "SELECT * FROM " + TABLE_DISEASE + " ORDER BY " + DISEASE_NAME + " ASC ";
+        Cursor cur = db.rawQuery(query, null);
+
+        if (cur.moveToFirst()) {
+            do {
+                int disID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_ID)));
+                String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_GREEK_NAME));
+                String diseaseName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_NAME));
+                String diseaseDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_DESC));
+                //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+                boolean diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE))) != 0;
+
+                MM_Disease disease = new MM_Disease(disID, greekName, diseaseName, diseaseDesc, diseaseMode);
+                listDiseases.add(disease);
+            }while (cur.moveToNext());
+        }
+
+        return listDiseases;
+    }
+
+    public ArrayList<MM_Disease> GetAllDiseasesForSymptom(int symptomID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<MM_Disease> listDiseases = new ArrayList<MM_Disease>();
+
+        String query = "SELECT DISTINCT ( D." + DISEASE_ID + " ) , D." + DISEASE_GREEK_NAME + " , D." + DISEASE_NAME + " , D." + DISEASE_DESC + " , D." + DISEASE_MODE +
+                " FROM " + TABLE_DISEASE + " D , " + TABLE_SYMPTOM + " S , " + TABLE_SICKNESS + " SI " +
+                " WHERE D." + DISEASE_ID  + " = SI." + SICKNESS_DISEASE_ID + " AND SI." + SICKNESS_SYMPTOM_ID + " = " + symptomID +
+                " ORDER BY " + DISEASE_NAME + " ASC ";
         Cursor cur = db.rawQuery(query, null);
 
         if (cur.moveToFirst()) {
@@ -205,11 +253,59 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         }
     }
 
+    public MM_Symptom GetSymptomByName(String symptomNamed){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_SYMPTOM + " WHERE " + SYMPTOM_NAME + " = " + symptomNamed;
+        Cursor cur = db.rawQuery(query, null);
+
+        if(cur != null){
+            cur.moveToFirst();
+            int sympID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_ID)));
+            String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_GREEK_NAME));
+            String symptomName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_NAME));
+            String symptomDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_DESC));
+            //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+            boolean symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE))) != 0;
+
+            MM_Symptom symptom = new MM_Symptom(sympID, greekName, symptomName, symptomDesc, symptomMode);
+            return symptom;
+        }else{
+            return null;
+        }
+    }
+
     public ArrayList<MM_Symptom> GetAllSymptoms(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<MM_Symptom> listSymptoms = new ArrayList<MM_Symptom>();
 
-        String query = "SELECT * FROM " + TABLE_SYMPTOM;
+        String query = "SELECT * FROM " + TABLE_SYMPTOM + " ORDER BY " + SYMPTOM_NAME + " ASC ";
+        Cursor cur = db.rawQuery(query, null);
+
+        if (cur.moveToFirst()) {
+            do {
+                int sympID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_ID)));
+                String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_GREEK_NAME));
+                String symptomName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_NAME));
+                String symptomDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_DESC));
+                //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+                boolean symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE))) != 0;
+
+                MM_Symptom symptom = new MM_Symptom(sympID, greekName, symptomName, symptomDesc, symptomMode);
+                listSymptoms.add(symptom);
+            }while (cur.moveToNext());
+        }
+
+        return listSymptoms;
+    }
+
+    public ArrayList<MM_Symptom> GetAllSymptomsForDisease(int diseaseID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<MM_Symptom> listSymptoms = new ArrayList<MM_Symptom>();
+
+        String query = "SELECT DISTINCT ( S." + SYMPTOM_ID + " ) , S." + SYMPTOM_GREEK_NAME + " , S." + SYMPTOM_NAME + " , S." + SYMPTOM_DESC + " , S." + SYMPTOM_MODE +
+                " FROM " + TABLE_DISEASE + " D , " + TABLE_SYMPTOM + " S , " + TABLE_SICKNESS + " SI " +
+                " WHERE S." + SYMPTOM_ID  + " = SI." + SICKNESS_SYMPTOM_ID + " AND SI." + SICKNESS_DISEASE_ID + " = " + diseaseID +
+                " ORDER BY " + DISEASE_NAME + " ASC ";
         Cursor cur = db.rawQuery(query, null);
 
         if (cur.moveToFirst()) {
@@ -291,11 +387,34 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         }
     }
 
+    public MM_Sickness GetSicknessByName(String sicknessNamed){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_SICKNESS + " WHERE " + SICKNESS_NAME + " = " + sicknessNamed;
+        Cursor cur = db.rawQuery(query, null);
+
+        if(cur != null){
+            cur.moveToFirst();
+            int sickID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_ID)));
+            int dissID = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DISEASE_ID)));
+            int sympID = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_SYMPTOM_ID)));
+            String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_GREEK_NAME));
+            String sicknessName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_NAME));
+            String sicknessDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DESC));
+            //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+            boolean sicknessMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE))) != 0;
+
+            MM_Sickness sickness = new MM_Sickness(sickID, dissID, sympID, greekName, sicknessName, sicknessDesc, sicknessMode);
+            return sickness;
+        }else{
+            return null;
+        }
+    }
+
     public ArrayList<MM_Sickness> GetAllSicknesses(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<MM_Sickness> listSicknesses = new ArrayList<MM_Sickness>();
 
-        String query = "SELECT * FROM " + TABLE_SICKNESS;
+        String query = "SELECT * FROM " + TABLE_SICKNESS + " ORDER BY " + SICKNESS_NAME + " ASC ";
         Cursor cur = db.rawQuery(query, null);
 
         if (cur.moveToFirst()) {
@@ -315,6 +434,60 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         }
 
         return listSicknesses;
+    }
+
+    public ArrayList<MM_Disease> GetAllDiseasesForSickness(int sicknessID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<MM_Disease> listDiseases = new ArrayList<MM_Disease>();
+
+        String query = "SELECT DISTINCT ( D." + DISEASE_ID + " ) , D." + DISEASE_GREEK_NAME + " , D." + DISEASE_NAME + " , D." + DISEASE_DESC + " , D." + DISEASE_MODE +
+                " FROM " + TABLE_DISEASE + " D , " + TABLE_SYMPTOM + " S , " + TABLE_SICKNESS + " SI " +
+                " WHERE D." + DISEASE_ID  + " = SI." + SICKNESS_DISEASE_ID + " AND SI." + SICKNESS_ID + " = " + sicknessID +
+                " ORDER BY " + DISEASE_NAME + " ASC ";
+        Cursor cur = db.rawQuery(query, null);
+
+        if (cur.moveToFirst()) {
+            do {
+                int disID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_ID)));
+                String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_GREEK_NAME));
+                String diseaseName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_NAME));
+                String diseaseDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_DESC));
+                //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+                boolean diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE))) != 0;
+
+                MM_Disease disease = new MM_Disease(disID, greekName, diseaseName, diseaseDesc, diseaseMode);
+                listDiseases.add(disease);
+            }while (cur.moveToNext());
+        }
+
+        return listDiseases;
+    }
+
+    public ArrayList<MM_Symptom> GetAllSymptomsForSickness(int sicknessID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<MM_Symptom> listSymptoms = new ArrayList<MM_Symptom>();
+
+        String query = "SELECT DISTINCT ( S." + SYMPTOM_ID + " ) , S." + SYMPTOM_GREEK_NAME + " , S." + SYMPTOM_NAME + " , S." + SYMPTOM_DESC + " , S." + SYMPTOM_MODE +
+                " FROM " + TABLE_DISEASE + " D , " + TABLE_SYMPTOM + " S , " + TABLE_SICKNESS + " SI " +
+                " WHERE S." + SYMPTOM_ID  + " = SI." + SICKNESS_SYMPTOM_ID + " AND SI." + SICKNESS_ID + " = " + sicknessID +
+                " ORDER BY " + DISEASE_NAME + " ASC ";
+        Cursor cur = db.rawQuery(query, null);
+
+        if (cur.moveToFirst()) {
+            do {
+                int sympID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_ID)));
+                String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_GREEK_NAME));
+                String symptomName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_NAME));
+                String symptomDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_DESC));
+                //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
+                boolean symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE))) != 0;
+
+                MM_Symptom symptom = new MM_Symptom(sympID, greekName, symptomName, symptomDesc, symptomMode);
+                listSymptoms.add(symptom);
+            }while (cur.moveToNext());
+        }
+
+        return listSymptoms;
     }
 
     public void AddSickness(MM_Sickness sickness){

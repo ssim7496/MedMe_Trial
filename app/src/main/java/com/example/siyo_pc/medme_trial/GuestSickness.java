@@ -33,15 +33,15 @@ public class GuestSickness extends ActionBarActivity {
 
     public void fillSicknessList(){
 
-        /*ArrayList<MM_Sickness> sicknessList2 = medMeDB.GetAllSicknesses();
+        ArrayList<MM_Sickness> sicknessList2 = medMeDB.GetAllSicknesses();
 
         if (sicknessList2 != null) {
             SicknessAdapter adapter = new SicknessAdapter(this, sicknessList2);
-            listSickness = (ListView) findViewById(R.id.listView1);
+            listSickness = (ListView) findViewById(R.id.listViewGuestSicknessList);
             View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
             listSickness.addHeaderView(header);
             listSickness.setAdapter(adapter);
-        }*/
+        }
     }
 
     @Override

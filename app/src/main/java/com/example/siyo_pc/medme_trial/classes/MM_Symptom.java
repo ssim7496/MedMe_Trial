@@ -41,6 +41,11 @@ public class MM_Symptom {
         this.sSymptomName = symptomName;
     }
 
+    public MM_Symptom (int ID) {
+        super();
+        this.sSymptomID = ID;
+    }
+
     public int GetSymptomID() { return sSymptomID; }
 
     public void SetSymptomID(int ID) { sSymptomID = ID; }

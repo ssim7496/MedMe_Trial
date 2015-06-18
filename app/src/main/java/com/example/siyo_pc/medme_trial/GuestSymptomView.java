@@ -5,15 +5,22 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.siyo_pc.medme_trial.adapters.DiseaseAdapter;
+import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
+
+import java.util.ArrayList;
 
 
 public class GuestSymptomView extends ActionBarActivity {
 
     MedMe_Helper medMeDB = null;
+    ListView listDiseases;
     TextView symptomTitle, symptomDesc, symptomGreekName;
 
     @Override
@@ -26,9 +33,9 @@ public class GuestSymptomView extends ActionBarActivity {
     }
 
     public void getSymptomInformation() {
-        symptomTitle = (TextView)findViewById(R.id.tvSymptomTitle);
-        symptomDesc = (TextView)findViewById(R.id.tvSymptomDescription);
-        symptomGreekName = (TextView)findViewById(R.id.tvSymptomGreekName);
+        symptomTitle = (TextView) findViewById(R.id.tvSymptomTitle);
+        symptomDesc = (TextView) findViewById(R.id.tvSymptomDescription);
+        symptomGreekName = (TextView) findViewById(R.id.tvSymptomGreekName);
 
         Intent intent = getIntent();
         String diss = intent.getStringExtra("symptom");
@@ -38,6 +45,16 @@ public class GuestSymptomView extends ActionBarActivity {
         symptomTitle.setText(symptom.GetSymptomName());
         symptomDesc.setText(symptom.GetSymptomDesc());
         symptomGreekName.setText(symptom.GetGreekName());
+
+        ArrayList<MM_Disease> diseaseList = medMeDB.GetAllDiseasesForSymptom(symptom.GetSymptomID());
+
+        if (diseaseList != null) {
+            DiseaseAdapter adapter = new DiseaseAdapter(this, diseaseList);
+            listDiseases = (ListView) findViewById(R.id.listViewGuestDiseaeSymptomLink);
+            View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
+            listDiseases.addHeaderView(header);
+            listDiseases.setAdapter(adapter);
+        }
     }
 
 

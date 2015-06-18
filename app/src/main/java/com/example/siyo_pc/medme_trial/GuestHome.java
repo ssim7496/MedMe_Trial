@@ -42,7 +42,7 @@ public class GuestHome extends ActionBarActivity {
         //addNextActivityOnClickListener(btnDiagnose, GuestDiagnose.class);
         addNextActivityOnClickListener(btnSymptoms, GuestSymptom.class);
         //addNextActivityOnClickListener(btnTerminology, GuestTerminology.class);
-        //addNextActivityOnClickListener(btnSicknesses, GuestSickness.class);
+        addNextActivityOnClickListener(btnSicknesses, GuestSickness.class);
         //addNextActivityOnClickListener(btnHelp, GuestHelp.class);
 
         //underConstruction(btnDiseases);
@@ -50,7 +50,7 @@ public class GuestHome extends ActionBarActivity {
         underConstruction(btnDiagnose);
         //underConstruction(btnSymptoms);
         underConstruction(btnTerminology);
-        underConstruction(btnSicknesses);
+        //underConstruction(btnSicknesses);
         underConstruction(btnHelp);
     }
 

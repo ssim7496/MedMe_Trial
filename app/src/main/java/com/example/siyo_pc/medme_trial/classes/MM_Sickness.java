@@ -25,9 +25,20 @@ public class MM_Sickness {
         this.sMode = mode;
     }
 
-    public MM_Sickness (int ID, String greekName, String sicknessName, String sicknessDesc) {
+    public MM_Sickness (int ID, int diseaseID, int symptomID, String greekName, String sicknessName, String sicknessDesc) {
         super();
         this.sSicknessID = ID;
+        this.sDiseaseID = diseaseID;
+        this.sSymptomID = symptomID;
+        this.sGreekName = greekName;
+        this.sSicknessName = sicknessName;
+        this.sSicknessDesc = sicknessDesc;
+    }
+
+    public MM_Sickness (int diseaseID, int symptomID, String greekName, String sicknessName, String sicknessDesc) {
+        super();
+        this.sDiseaseID = diseaseID;
+        this.sSymptomID = symptomID;
         this.sGreekName = greekName;
         this.sSicknessName = sicknessName;
         this.sSicknessDesc = sicknessDesc;

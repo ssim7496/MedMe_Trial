@@ -101,6 +101,26 @@
             android:name=".AdminSymptomsViewAll"
             android:label="@string/title_activity_admin_symptoms_view_all" >
         </activity>
+        <activity
+            android:name=".AdminSicknessesAdd"
+            android:label="@string/title_activity_admin_sicknesses_add" >
+        </activity>
+        <activity
+            android:name=".AdminSicknessesUpdate"
+            android:label="@string/title_activity_admin_sicknesses_update" >
+        </activity>
+        <activity
+            android:name=".AdminSicknessesViewAll"
+            android:label="@string/title_activity_admin_sicknesses_view_all" >
+        </activity>
+        <activity
+            android:name=".AdminSicknessesHome"
+            android:label="@string/title_activity_admin_sicknesses_home" >
+        </activity>
+        <activity
+            android:name=".AdminSicknessSymptomSelect"
+            android:label="@string/title_activity_admin_sickness_symptom_select" >
+        </activity>
     </application>
 
 </manifest>

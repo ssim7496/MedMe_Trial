@@ -26,11 +26,11 @@ public class AdminDiseasesAdd extends ActionBarActivity {
         setContentView(R.layout.activity_admin_diseases_add);
 
         medMeDB = new MedMe_Helper(this);
-        btnAdd = (Button)findViewById(R.id.btnAdminConfirmAdd);
-        btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancel);
-        edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseName);
-        edtDiseaseGreekName = (EditText)findViewById(R.id.edtAdminDiseaseGreekName);
-        edtDiseaseDesc = (EditText)findViewById(R.id.edtAdminDiseaseDesc);
+        btnAdd = (Button)findViewById(R.id.btnAdminConfirmAddDisease);
+        btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelDisease);
+        edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseNameAdd);
+        edtDiseaseGreekName = (EditText)findViewById(R.id.edtAdminDiseaseGreekNameAdd);
+        edtDiseaseDesc = (EditText)findViewById(R.id.edtAdminDiseaseDescAdd);
 
         addNextActivityOnClickListener(btnCancel, AdminDiseasesHome.class);
 

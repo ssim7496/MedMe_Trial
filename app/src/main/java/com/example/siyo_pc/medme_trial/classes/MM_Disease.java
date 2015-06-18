@@ -21,6 +21,15 @@ public class MM_Disease {
         this.dMode = mode;
     }
 
+    public MM_Disease (String greekName, String diseaseName, String diseaseDesc,
+                       boolean mode) {
+        super();
+        this.dGreekName = greekName;
+        this.dDiseaseName = diseaseName;
+        this.dDiseaseDesc = diseaseDesc;
+        this.dMode = mode;
+    }
+
     public MM_Disease (int diseaseID, String greekName, String diseaseName, String diseaseDesc) {
         super();
         this.dDiseaseID = diseaseID;
@@ -39,6 +48,11 @@ public class MM_Disease {
     public MM_Disease (String diseaseName) {
         super();
         this.dDiseaseName = diseaseName;
+    }
+
+    public MM_Disease (int diseaseID) {
+        super();
+        this.dDiseaseID = diseaseID;
     }
 
     public int GetDiseaseID() { return dDiseaseID; }

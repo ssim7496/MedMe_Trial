@@ -87,7 +87,7 @@
                     android:text="Related Diseases"
                     android:textColor="@color/default_text_colour"
                     android:textStyle="bold"
-                    android:textSize="30sp"
+                    android:textSize="26sp"
                     android:padding="10sp" />
             </LinearLayout>
 
@@ -131,7 +131,7 @@
                     android:text="Related Symptoms"
                     android:textColor="@color/default_text_colour"
                     android:textStyle="bold"
-                    android:textSize="30sp"
+                    android:textSize="26sp"
                     android:padding="10sp" />
             </LinearLayout>
 

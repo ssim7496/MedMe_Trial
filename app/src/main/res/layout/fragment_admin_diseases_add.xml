@@ -34,7 +34,7 @@
                     <EditText
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/edtAdminDiseaseName"
+                        android:id="@+id/edtAdminDiseaseNameAdd"
                         android:text=""
                         style="@style/edit_text"/>
                 </LinearLayout>
@@ -55,7 +55,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:id="@+id/edtAdminDiseaseGreekName"
+                        android:id="@+id/edtAdminDiseaseGreekNameAdd"
                         android:textStyle="italic"
                         android:text=""
                         style="@style/edit_text"/>
@@ -79,7 +79,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:id="@+id/edtAdminDiseaseDesc"
+                        android:id="@+id/edtAdminDiseaseDescAdd"
                         android:text=""
                         style="@style/edit_text"/>
                 </LinearLayout>
@@ -95,7 +95,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/grid_button"
                     style="@style/button_text"
-                    android:id="@+id/btnAdminConfirmCancel"
+                    android:id="@+id/btnAdminConfirmCancelDisease"
                     android:text="@string/Cancel"
                     />
                 <Button
@@ -104,7 +104,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/grid_button"
                     style="@style/button_text"
-                    android:id="@+id/btnAdminConfirmAdd"
+                    android:id="@+id/btnAdminConfirmAddDisease"
                     android:text="@string/Add"
                     />
             </LinearLayout>
