@@ -124,7 +124,7 @@ public class BusinessLogic {
 
     }
 
-    class DataAccessLayerRetrieval extends AsyncTask<String, Void, List<JSONObject>> {
+    class DataAccessLayerRetrieval extends AsyncTask<String, Void, String> {
 
         private ProgressDialog progressDialog = new ProgressDialog((context));
 
@@ -140,7 +140,7 @@ public class BusinessLogic {
         }
 
         @Override
-        protected List<JSONObject> doInBackground(String... param) {
+        protected String doInBackground(String... param) {
             try {
                 String result = jsonHandler.getJSONFromUrl(url);
 
@@ -160,10 +160,11 @@ public class BusinessLogic {
             } catch (Exception e) {
                 Log.e("log_tag", "Error in parsing data ");
             }
-            return objectList;
+            return null;
         }
-
+        @Override
         protected void onPostExecute(String file_url) {
+            Toast.makeText(context.getApplicationContext(), Integer.toString(objectList.size()), Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
         }
 

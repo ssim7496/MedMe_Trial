@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.db.BusinessLogic;
+
 
 public class Start extends ActionBarActivity {
 
@@ -35,8 +37,20 @@ public class Start extends ActionBarActivity {
         //addNextActivityOnClickListener(btnDoctor, GuestHome.class);
         //underConstruction(btnAdmin);
         //underConstruction(btnGuest);
-        underConstruction(btnNurse);
+        //underConstruction(btnNurse);
         underConstruction(btnDoctor);
+
+        btnNurse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPeople();
+            }
+        });
+    }
+
+    private void getPeople() {
+        BusinessLogic bll = new BusinessLogic(this);
+        bll.getPeopleList();
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {

@@ -24,7 +24,6 @@ import java.util.List;
 public class JSON_Handler {
 
     static InputStream is = null;
-    static JSONObject jsonObject = null;
     static String result = "";
 
     public JSON_Handler() {
