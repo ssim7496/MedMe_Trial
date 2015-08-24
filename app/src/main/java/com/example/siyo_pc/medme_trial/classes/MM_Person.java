@@ -12,6 +12,10 @@ public class MM_Person {
     private String pPersonRoleID;
     private boolean pMode;
 
+    public MM_Person() {
+        super();
+    }
+
     public MM_Person (int personID, String name, String surname, String emailAddress, String cellNumber, String password, String passwordRecoveryQuestion,
                    String passwordRecoveryAnswer, String personRoleID, boolean mode){
         super();

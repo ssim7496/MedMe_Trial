@@ -15,42 +15,24 @@ import com.example.siyo_pc.medme_trial.db.BusinessLogic;
 
 public class Start extends ActionBarActivity {
 
-    Button btnAdmin, btnGuest, btnNurse, btnDoctor;
+    Button btnRegister, btnLogIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         getSupportActionBar().hide();
-        addOnClickListener();
+        addButtonEvents();
     }
 
-    public void addOnClickListener(){
-        btnAdmin = (Button)findViewById(R.id.btnAdmin);
-        btnGuest = (Button)findViewById(R.id.btnGuest);
-        btnNurse = (Button)findViewById(R.id.btnNurse);
-        btnDoctor = (Button)findViewById(R.id.btnDoctor);
+    public void addButtonEvents(){
+        btnRegister = (Button)findViewById(R.id.btnRegister);
+        btnLogIn = (Button)findViewById(R.id.btnLogIn);
 
-        addNextActivityOnClickListener(btnAdmin, AdminHome.class);
-        addNextActivityOnClickListener(btnGuest, GuestHome.class);
-        //addNextActivityOnClickListener(btnNurse, GuestHome.class);
-        //addNextActivityOnClickListener(btnDoctor, GuestHome.class);
-        //underConstruction(btnAdmin);
-        //underConstruction(btnGuest);
-        //underConstruction(btnNurse);
-        underConstruction(btnDoctor);
-
-        btnNurse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getPeople();
-            }
-        });
-    }
-
-    private void getPeople() {
-        BusinessLogic bll = new BusinessLogic(this);
-        bll.getPeopleList();
+        addNextActivityOnClickListener(btnRegister, RegisterUser.class);
+        //addNextActivityOnClickListener(btnLgoin, GuestHome.class);
+        //underConstruction(btnRegister);
+        underConstruction(btnLogIn);
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {

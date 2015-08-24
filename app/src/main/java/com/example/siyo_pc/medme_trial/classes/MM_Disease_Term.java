@@ -4,6 +4,10 @@ public class MM_Disease_Term {
     private int dtDiseaseID;
     private int dtMedTermID;
 
+    public MM_Disease_Term() {
+        super();
+    }
+
     public MM_Disease_Term(int diseaseID, int medTermID) {
         super();
         this.dtDiseaseID = diseaseID;

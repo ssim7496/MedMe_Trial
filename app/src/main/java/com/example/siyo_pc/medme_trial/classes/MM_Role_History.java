@@ -10,6 +10,10 @@ public class MM_Role_History {
     private Date rhDateChanged;
     private String rhLogDescription;
 
+    public MM_Role_History() {
+        super();
+    }
+
     public MM_Role_History (int changerID, String changerRole, int changeeID, String changeeRole, Date date, String logDesc){
         super();
         this.rhChangerPersonID = changerID;

@@ -8,6 +8,10 @@ public class MM_Guest_History {
     private String ghDescription;
     private Date ghDate;
 
+    public MM_Guest_History() {
+        super();
+    }
+
     public MM_Guest_History(int logID, int personID, String descr, Date date){
         super();
         this.ghLogID = logID;

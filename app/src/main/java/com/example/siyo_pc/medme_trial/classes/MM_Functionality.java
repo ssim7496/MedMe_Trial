@@ -7,6 +7,10 @@ public class MM_Functionality {
     //private String fFunctionQuery;
     private  boolean fMode;
 
+    public MM_Functionality() {
+        super();
+    }
+
     public MM_Functionality(int functionID, String name, String desc, boolean mode) {
         super();
         this.fFunctionID = functionID;

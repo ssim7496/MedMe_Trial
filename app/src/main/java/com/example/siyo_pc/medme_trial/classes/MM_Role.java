@@ -6,6 +6,10 @@ public class MM_Role {
     private String rRoleDescription;
     private boolean rMode;
 
+    public MM_Role() {
+        super();
+    }
+
     public MM_Role (String roleID, String name, String desc, boolean mode){
         super();
         this.rRoleID = roleID;

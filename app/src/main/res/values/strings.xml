@@ -17,6 +17,18 @@
     <string name="title_activity_guest_home">Home</string>
 
 <!-- TODO: Remove or change this placeholder text -->
+    <string name="register">Register</string>
+    <string name="logIn">Log In</string>
+
+    <string name="name">Name:</string>
+    <string name="surname">Surname:</string>
+    <string name="email">E-mail:</string>
+    <string name="cellNumber">Cellphone Number:</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="recovQues">Recovery Question</string>
+    <string name="recovAns">Recovery Answer</string>
+
     <string name="title_activity_guest_sickness">Sickness</string>
     <string name="sicknessBeginDesc">1. The state of being ill. \n\n2.A particular type of illness or disease.</string>
     <string name="title_activity_guest_sickness_view">View Sickness</string>
@@ -65,5 +77,6 @@
     <string name="title_activity_admin_sicknesses_home">Sicknesses</string>
     <string name="title_activity_admin_sickness_disease_select">Select a Related Disease</string>
     <string name="title_activity_admin_sickness_symptom_select">Select A Symptom</string>
+    <string name="title_activity_register_user">Registration</string>
 
 </resources>

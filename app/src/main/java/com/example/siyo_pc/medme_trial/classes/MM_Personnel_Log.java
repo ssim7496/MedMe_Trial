@@ -8,6 +8,10 @@ public class MM_Personnel_Log {
     private String plDescription;
     private Date plDate;
 
+    public MM_Personnel_Log() {
+        super();
+    }
+
     public MM_Personnel_Log(int logID, int personID, String descr, Date date){
         super();
         this.plLogID = logID;

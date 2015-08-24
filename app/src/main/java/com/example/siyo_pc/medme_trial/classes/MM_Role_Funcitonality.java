@@ -5,6 +5,10 @@ public class MM_Role_Funcitonality {
     private String rfRoleID;
     private  boolean rfMode;
 
+    public MM_Role_Funcitonality() {
+        super();
+    }
+
     public MM_Role_Funcitonality(int functionID, String roleID, boolean mode) {
         super();
         this.rfFunctionID = functionID;

@@ -10,6 +10,10 @@ public class MM_Symptom_Change_Log {
     private String icInformationNew;
     private Date icDateChnaged;
 
+    public MM_Symptom_Change_Log() {
+        super();
+    }
+
     public MM_Symptom_Change_Log(int infoID, int personID, int symptomID, String infoOriginal, String infoNew, Date date){
         super();
         this.icInfoChangeID = infoID;

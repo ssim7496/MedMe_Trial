@@ -4,6 +4,10 @@ public class MM_Symptom_Term {
     private int stSymptomID;
     private int stMedTermID;
 
+    public MM_Symptom_Term() {
+        super();
+    }
+
     public MM_Symptom_Term(int symptomID, int medTermID) {
         super();
         this.stSymptomID = symptomID;

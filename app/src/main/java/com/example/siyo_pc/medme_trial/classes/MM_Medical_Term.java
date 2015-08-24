@@ -8,6 +8,10 @@ public class MM_Medical_Term {
     private String mtMedTermType;
     private boolean mtMedTermMode;
 
+    public MM_Medical_Term() {
+        super();
+    }
+
     public MM_Medical_Term (int ID, String greekName, String medTermName, String medTermDesc, String medTermType, boolean medTermMode) {
         super();
         this.mtMedTermID = ID;
