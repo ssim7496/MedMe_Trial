@@ -32,7 +32,7 @@
                         android:textColor="@color/default_text_colour"
                         android:textStyle="bold"
                         android:textSize="50sp"
-                        android:paddingTop="25sp"
+                        android:paddingTop="60sp"
                         android:paddingBottom="25sp"
                         android:gravity="center" />
                 </LinearLayout>

@@ -30,9 +30,9 @@ public class Start extends ActionBarActivity {
         btnLogIn = (Button)findViewById(R.id.btnLogIn);
 
         addNextActivityOnClickListener(btnRegister, RegisterUser.class);
-        //addNextActivityOnClickListener(btnLgoin, GuestHome.class);
+        addNextActivityOnClickListener(btnLogIn, LogIn.class);
         //underConstruction(btnRegister);
-        underConstruction(btnLogIn);
+        //underConstruction(btnLogIn);
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {

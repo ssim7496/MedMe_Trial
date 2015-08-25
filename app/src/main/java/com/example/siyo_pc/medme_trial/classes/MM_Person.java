@@ -16,6 +16,12 @@ public class MM_Person {
         super();
     }
 
+    public MM_Person(String emailAddress, String password) {
+        super();
+        this.pPersonEmailAddress = emailAddress;
+        this.pPersonPassword = password;
+    }
+
     public MM_Person (int personID, String name, String surname, String emailAddress, String cellNumber, String password, String passwordRecoveryQuestion,
                    String passwordRecoveryAnswer, String personRoleID, boolean mode){
         super();

@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_background"
+
+    tools:context="com.example.siyo_pc.medme_trial.LogInFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="50sp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+                    <ImageView
+                        android:src="@drawable/ic_launcher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row7"
+                android:layout_margin="10dp">
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtLogInEmail"
+                    android:text=""
+                    style="@style/edit_text"
+                    android:hint="@string/email"
+                    android:textColor="#ffffff"
+                    android:inputType="textEmailAddress" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row8"
+                android:layout_margin="10dp">
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtLogInPassword"
+                    android:text=""
+                    style="@style/edit_text"
+                    android:hint="@string/password"
+                    android:textColor="#ffffff"
+                    android:inputType="textPassword" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/row9"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button"
+                    style="@style/button_text"
+                    android:id="@+id/btnLogInBack"
+                    android:text="@string/back"
+                    />
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button"
+                    style="@style/button_text"
+                    android:id="@+id/btnLogIn"
+                    android:text="@string/logIn"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

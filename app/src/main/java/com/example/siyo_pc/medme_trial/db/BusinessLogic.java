@@ -23,6 +23,7 @@ public class BusinessLogic {
     private List<JSONObject> objectList = new ArrayList<JSONObject> ();
     private String urlGetAllPeople = "http://ssimayi-medme.co.za/test.php";
     private String urlAddPerson = "http://www.ssimayi-medme.co.za/insertPerson.php";
+    private String urlLogin = "http://www.ssimayi-medme.co.za/loginPerson.php";
     private String urlTestFetch = "http://ssimayi-medme.co.za/testFetch.php";
 
     public BusinessLogic(Context context) {
@@ -70,6 +71,15 @@ public class BusinessLogic {
         nameValuePairs.add(new BasicNameValuePair("personRecoveryAnswer", person.GetPersonRecoveryAnswer()));
 
         DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddPerson, nameValuePairs);
+        dataAccess.execute();
+    }
+
+    public void logInPerson(MM_Person person) {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+        nameValuePairs.add(new BasicNameValuePair("personEmailAddress", person.GetPersonEmailAddress()));
+        nameValuePairs.add(new BasicNameValuePair("personPassword", person.GetPersonPassword()));
+
+        DataAccessLayerMessageRetrieval dataAccess = new DataAccessLayerMessageRetrieval(urlLogin, nameValuePairs);
         dataAccess.execute();
     }
 
@@ -127,25 +137,32 @@ public class BusinessLogic {
     class DataAccessLayerRetrieval extends AsyncTask<String, Void, String> {
 
         private ProgressDialog progressDialog = new ProgressDialog((context));
-
         private String url;
+        private List<NameValuePair> params = new ArrayList<NameValuePair>();
+        private String message;
+
+        public DataAccessLayerRetrieval(String url, List<NameValuePair> params) {
+            this.url = url;
+            this.params = params;
+        }
 
         public DataAccessLayerRetrieval(String url) {
             this.url = url;
         }
 
         protected void onPreExecute() {
-            progressDialog.setMessage("Fetching information ...");
+            progressDialog.setMessage("Doing something ...");
             progressDialog.show();
         }
 
         @Override
         protected String doInBackground(String... param) {
             try {
-                String result = jsonHandler.getJSONFromUrl(url);
+                String result = jsonHandler.getJSONFromUrl(url, params);
 
                 JSONObject jsonResponse = new JSONObject((result));
                 JSONArray jArray = jsonResponse.getJSONArray("finalFetch");
+                JSONArray jArrayMessage = jsonResponse.getJSONArray("result");
 
                 for (int i = 0; i < jArray.length(); i++) {
                     /*JSONObject jObject = null;
@@ -165,6 +182,56 @@ public class BusinessLogic {
         @Override
         protected void onPostExecute(String file_url) {
             Toast.makeText(context.getApplicationContext(), Integer.toString(objectList.size()), Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+
+        }
+
+    }
+
+    class DataAccessLayerMessageRetrieval extends AsyncTask<String, Void, String> {
+
+        private ProgressDialog progressDialog = new ProgressDialog((context));
+        private String url;
+        private List<NameValuePair> params = new ArrayList<NameValuePair>();
+        private String message;
+
+        public DataAccessLayerMessageRetrieval(String url, List<NameValuePair> params) {
+            this.url = url;
+            this.params = params;
+        }
+
+        public DataAccessLayerMessageRetrieval(String url) {
+            this.url = url;
+        }
+
+        protected void onPreExecute() {
+            progressDialog.setMessage("Doing something ...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... param) {
+            try {
+                String result = jsonHandler.getJSONFromUrl(url, params);
+
+                JSONObject jsonResponse = new JSONObject((result));
+                JSONArray jArray = jsonResponse.getJSONArray("result");
+
+                JSONObject jsonObject = jArray.getJSONObject(0);
+                message = jsonObject.getString("message");
+
+            } catch (Exception e) {
+                Log.e("log_tag", "Error in parsing data ");
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String file_url) {
+            Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
         }
 
