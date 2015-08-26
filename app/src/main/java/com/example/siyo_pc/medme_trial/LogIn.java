@@ -35,7 +35,7 @@ public class LogIn extends AppCompatActivity {
 
     Button btnBack, btnLogIn;
     EditText edtEmail, edtPassword;
-    List<Object> objectList;
+    List<JSONObject> objectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,39 +95,6 @@ public class LogIn extends AppCompatActivity {
         return;
     }
 
-    private void logInPerson() {
-        edtEmail = (EditText)findViewById(R.id.edtLogInEmail);
-        edtPassword = (EditText)findViewById(R.id.edtLogInPassword);
-
-        try {
-            boolean checkData = checkFields(edtEmail, edtPassword);
-
-            if (checkData) {
-                edtEmail = (EditText)findViewById(R.id.edtLogInEmail);
-                edtPassword = (EditText)findViewById(R.id.edtLogInPassword);
-
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-                nameValuePairs.add(new BasicNameValuePair("personEmailAddress", edtEmail.getText().toString()));
-                nameValuePairs.add(new BasicNameValuePair("personPassword", edtPassword.getText().toString()));
-
-                DataAccessLogIn taskLogIn = new DataAccessLogIn(this, this, "http://www.ssimayi-medme.co.za/login.php", nameValuePairs);
-                taskLogIn.execute();
-
-                if (objectList.size() > 0) {
-                    Intent intent = new Intent(this, GuestHome.class);
-                    startActivity(intent);
-                }
-            }
-        } catch (Exception e) {
-            //Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void updateList(List<Object> objects) {
-        objectList = new ArrayList<>();
-        objectList = objects;
-    }
-
     private boolean checkFields(EditText edtEmail, EditText edtPassword) {
         boolean result = false;
 
@@ -156,6 +123,60 @@ public class LogIn extends AppCompatActivity {
         return result;
     }
 
+    private void logInPerson() {
+        edtEmail = (EditText)findViewById(R.id.edtLogInEmail);
+        edtPassword = (EditText)findViewById(R.id.edtLogInPassword);
+
+        try {
+            boolean checkData = checkFields(edtEmail, edtPassword);
+
+            if (checkData) {
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                nameValuePairs.add(new BasicNameValuePair("personEmailAddress", edtEmail.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("personPassword", edtPassword.getText().toString()));
+
+                DataAccessLogIn taskLogIn = new DataAccessLogIn(this, this, "http://www.ssimayi-medme.co.za/login.php", nameValuePairs);
+                taskLogIn.execute();
+
+                if (objectList.size() > 0) {
+                    JSONObject jObject = objectList.get(0);
+                    String personEmail = jObject.getString("PersonEmailAddress");
+                    Integer personRole = Integer.parseInt(jObject.getString("PersonRoleID"));
+
+                    userHome(personRole);
+                }
+            }
+        } catch (Exception e) {
+            //Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void updateList(List<JSONObject> objects) {
+        objectList = new ArrayList<>();
+        objectList = objects;
+    }
+
+    private void userHome(Integer roleID) {
+        switch (roleID){
+            case 1 : {
+                //Admin activity
+            }
+
+            case 2 : {
+                //Doctor activity
+            }
+
+            case 3 : {
+                //Nurse activity
+            }
+
+            case 4 : {
+                Intent intent = new Intent(this, GuestHome.class);
+                startActivity(intent);
+            }
+        }
+    }
+
     public class DataAccessLogIn extends AsyncTask<Void, Void, Void> {
 
         private ProgressDialog progressDialog;
@@ -166,7 +187,7 @@ public class LogIn extends AppCompatActivity {
         private JSON_Handler jsonHandler = new JSON_Handler();
         private LogIn logInActivity;
 
-        public List<Object> jsonObjectList = new ArrayList<Object>();
+        public List<JSONObject> jsonObjectList = new ArrayList<>();
 
         public DataAccessLogIn(LogIn logInActivity, Context context, String url, List<NameValuePair> params) {
             this.context = context;
@@ -220,79 +241,6 @@ public class LogIn extends AppCompatActivity {
 
         }
     }
-
-    /*public class DataAccessLogIn extends AsyncTask<Void, Void, List<Object>> {
-
-        private ProgressDialog progressDialog;
-        private String url;
-        private List<NameValuePair> params = new ArrayList<NameValuePair>();
-        private String message;
-        public List<Object> jsonObjectList = new ArrayList<Object>();
-        private JSON_Handler jsonHandler = new JSON_Handler();
-        private Context context;
-
-        public DataAccessLogIn(Context context, String url, List<NameValuePair> params) {
-            this.context = context;
-            this.url = url;
-            this.params = params;
-        }
-
-        public DataAccessLogIn(String url, List<NameValuePair> params) {
-            this.url = url;
-            this.params = params;
-        }
-
-        public DataAccessLogIn(String url) {
-            this.url = url;
-        }
-
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("We're working on it ...");
-            progressDialog.show();
-        }
-
-        @Override
-        protected List<Object> doInBackground(Void... param) {
-            try {
-                String result = jsonHandler.getJSONFromUrl(url, params);
-                StringTokenizer tokens = new StringTokenizer(result, "###");
-                String sObjects = tokens.nextToken();
-                String sMessage = tokens.nextToken();
-
-                JSONObject jsonResponse = new JSONObject((sObjects));
-                JSONArray jArray = jsonResponse.getJSONArray("finalFetch");
-                JSONObject jsonResponseMessage = new JSONObject((sMessage));
-                JSONArray jArrayMessage = jsonResponseMessage.getJSONArray("message");
-
-                for (int i = 0; i < jArray.length(); i++) {
-                    JSONObject jsonObject = jArray.getJSONObject(i);
-                    jsonObjectList.add(jsonObject);
-                }
-
-                message = jArrayMessage.getJSONObject(0).getString("message");
-            } catch (Exception e) {
-                Log.e("log_tag", "Error in parsing data ");
-            }
-            return jsonObjectList;
-        }
-
-        @Override
-        protected void onPostExecute(List<Object> objects) {
-            //objectList = objects;
-            //bllClass.objectLists = objects;
-
-            //objectLists = objects;
-            Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            progressDialog.dismiss();
-            super.onPostExecute(objects);
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-
-        }
-    }*/
 
     //default methods
     @Override

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
-public class BusinessLogic implements CallBackTaskCompleted{
+public class BusinessLogic{
     Context context;
     private List<NameValuePair> params = new ArrayList<NameValuePair>();
     public JSON_Handler jsonHandler = new JSON_Handler();
@@ -32,38 +32,8 @@ public class BusinessLogic implements CallBackTaskCompleted{
     private String urlTestFetch = "http://ssimayi-medme.co.za/testFetch.php";
 
     public BusinessLogic(Context context) {
-        objectLists = new ArrayList<Object>();
+        objectLists = new ArrayList<>();
         this.context = context;
-    }
-
-    /*public ArrayList<MM_Person> getPeopleList() {
-        ArrayList<MM_Person> peopleList = new ArrayList<MM_Person>();
-
-        params.add(new BasicNameValuePair("", ""));
-
-
-        try {
-            //String hi = dataAccess.execute(new String[]{urlGetAllPeople}).get();
-            //new DataAccessLayer(urlGetAllPeople, params).execute("");
-            String x = "Hi";
-        } catch (Exception e) {
-
-        }
-        return  peopleList;
-    }*/
-    public void getPeopleList() {
-        DataAccessLayerRetrieval dataRetrieval = new DataAccessLayerRetrieval(urlTestFetch);
-        dataRetrieval.execute();
-
-        List<MM_Person> personList = new ArrayList<MM_Person>();
-        /*for (JSONObject json : objectList) {
-            MM_Person person = new MM_Person();
-            String id = json.getString("A");
-        }*/
-
-       /* for (int i = 0; i < objectList.size(); i++) {
-            //JSON conversion
-        }*/
     }
 
     public void addPerson(MM_Person person) {
@@ -78,34 +48,6 @@ public class BusinessLogic implements CallBackTaskCompleted{
 
         DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddPerson, nameValuePairs);
         dataAccess.execute();
-    }
-
-    public void logInPerson(MM_Person person) {
-        int result = 0;
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("personEmailAddress", person.GetPersonEmailAddress()));
-        nameValuePairs.add(new BasicNameValuePair("personPassword", person.GetPersonPassword()));
-
-        /*DataAccessLayerMessageRetrieval dataAccess = new DataAccessLayerMessageRetrieval(urlLoginPerson, nameValuePairs);
-        dataAccess.execute();*/
-        DataAccessLayerRetrieval dataAccessObj = new DataAccessLayerRetrieval(urlLogin, nameValuePairs, this, this);
-        dataAccessObj.execute();
-
-        /*List<Object> objects = new ArrayList<Object>();
-        objects = dataAccessObj.jsonObjectList;*/
-        //result = dataAccessObj.jsonObjectList.size();
-        //result = objects.size();
-
-        int x = objectLists.size();
-        /*if (result > 0) {
-            Intent intent = new Intent(context, GuestHome.class);
-            context.startActivity(intent);
-        }*/
-    }
-
-    @Override
-    public void onTaskCompleted(List<Object> objectList) {
-
     }
 
     public class DataAccessLayerOperational extends AsyncTask<String, Void, String> {
@@ -161,13 +103,11 @@ public class BusinessLogic implements CallBackTaskCompleted{
         private String message;
         public List<Object> jsonObjectList = new ArrayList<Object>();
         private BusinessLogic bllClass;
-        private CallBackTaskCompleted callBack;
 
-        public DataAccessLayerRetrieval(String url, List<NameValuePair> params, BusinessLogic bllClass, CallBackTaskCompleted callBack) {
+        public DataAccessLayerRetrieval(String url, List<NameValuePair> params, BusinessLogic bllClass) {
             this.url = url;
             this.params = params;
             this.bllClass = bllClass;
-            this.callBack = callBack;
         }
 
         public DataAccessLayerRetrieval(String url) {
@@ -206,12 +146,9 @@ public class BusinessLogic implements CallBackTaskCompleted{
 
         @Override
         protected void onPostExecute(List<Object> objects) {
-            //objectList = objects;
-            //bllClass.objectLists = objects;
-            callBack.onTaskCompleted(objects);
-            //objectLists = objects;
             Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
+
             super.onPostExecute(objects);
         }
 
