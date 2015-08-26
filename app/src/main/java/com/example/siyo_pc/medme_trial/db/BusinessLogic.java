@@ -2,10 +2,12 @@ package com.example.siyo_pc.medme_trial.db;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.GuestHome;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 
 import org.apache.http.NameValuePair;
@@ -15,18 +17,22 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
-public class BusinessLogic {
+public class BusinessLogic implements CallBackTaskCompleted{
     Context context;
     private List<NameValuePair> params = new ArrayList<NameValuePair>();
     public JSON_Handler jsonHandler = new JSON_Handler();
-    private List<JSONObject> objectList = new ArrayList<JSONObject> ();
+    //public List<Object> objectLists = new ArrayList<Object> ();
+    public List<Object> objectLists;
     private String urlGetAllPeople = "http://ssimayi-medme.co.za/test.php";
     private String urlAddPerson = "http://www.ssimayi-medme.co.za/insertPerson.php";
-    private String urlLogin = "http://www.ssimayi-medme.co.za/loginPerson.php";
+    private String urlLogin = "http://www.ssimayi-medme.co.za/login.php";
     private String urlTestFetch = "http://ssimayi-medme.co.za/testFetch.php";
 
     public BusinessLogic(Context context) {
+        objectLists = new ArrayList<Object>();
         this.context = context;
     }
 
@@ -75,21 +81,34 @@ public class BusinessLogic {
     }
 
     public void logInPerson(MM_Person person) {
+        int result = 0;
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
         nameValuePairs.add(new BasicNameValuePair("personEmailAddress", person.GetPersonEmailAddress()));
         nameValuePairs.add(new BasicNameValuePair("personPassword", person.GetPersonPassword()));
 
-        DataAccessLayerMessageRetrieval dataAccess = new DataAccessLayerMessageRetrieval(urlLogin, nameValuePairs);
-        dataAccess.execute();
+        /*DataAccessLayerMessageRetrieval dataAccess = new DataAccessLayerMessageRetrieval(urlLoginPerson, nameValuePairs);
+        dataAccess.execute();*/
+        DataAccessLayerRetrieval dataAccessObj = new DataAccessLayerRetrieval(urlLogin, nameValuePairs, this, this);
+        dataAccessObj.execute();
+
+        /*List<Object> objects = new ArrayList<Object>();
+        objects = dataAccessObj.jsonObjectList;*/
+        //result = dataAccessObj.jsonObjectList.size();
+        //result = objects.size();
+
+        int x = objectLists.size();
+        /*if (result > 0) {
+            Intent intent = new Intent(context, GuestHome.class);
+            context.startActivity(intent);
+        }*/
     }
 
-    /*public MM_Person getPerson() {
-        MM_Person person = new MM_Person();
+    @Override
+    public void onTaskCompleted(List<Object> objectList) {
 
-        return  person;
-    }*/
+    }
 
-    class DataAccessLayerOperational extends AsyncTask<String, Void, String> {
+    public class DataAccessLayerOperational extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog = new ProgressDialog(context);
         private List<NameValuePair> params = new ArrayList<NameValuePair>();
         private String url;
@@ -134,16 +153,21 @@ public class BusinessLogic {
 
     }
 
-    class DataAccessLayerRetrieval extends AsyncTask<String, Void, String> {
+    public class DataAccessLayerRetrieval extends AsyncTask<Void, Void, List<Object>>{
 
         private ProgressDialog progressDialog = new ProgressDialog((context));
         private String url;
         private List<NameValuePair> params = new ArrayList<NameValuePair>();
         private String message;
+        public List<Object> jsonObjectList = new ArrayList<Object>();
+        private BusinessLogic bllClass;
+        private CallBackTaskCompleted callBack;
 
-        public DataAccessLayerRetrieval(String url, List<NameValuePair> params) {
+        public DataAccessLayerRetrieval(String url, List<NameValuePair> params, BusinessLogic bllClass, CallBackTaskCompleted callBack) {
             this.url = url;
             this.params = params;
+            this.bllClass = bllClass;
+            this.callBack = callBack;
         }
 
         public DataAccessLayerRetrieval(String url) {
@@ -151,48 +175,53 @@ public class BusinessLogic {
         }
 
         protected void onPreExecute() {
-            progressDialog.setMessage("Doing something ...");
+            progressDialog.setMessage("We're working on it ...");
             progressDialog.show();
         }
 
         @Override
-        protected String doInBackground(String... param) {
+        protected List<Object> doInBackground(Void... param) {
             try {
                 String result = jsonHandler.getJSONFromUrl(url, params);
+                StringTokenizer tokens = new StringTokenizer(result, "###");
+                String sObjects = tokens.nextToken();
+                String sMessage = tokens.nextToken();
 
-                JSONObject jsonResponse = new JSONObject((result));
+                JSONObject jsonResponse = new JSONObject((sObjects));
                 JSONArray jArray = jsonResponse.getJSONArray("finalFetch");
-                JSONArray jArrayMessage = jsonResponse.getJSONArray("result");
+                JSONObject jsonResponseMessage = new JSONObject((sMessage));
+                JSONArray jArrayMessage = jsonResponseMessage.getJSONArray("message");
 
                 for (int i = 0; i < jArray.length(); i++) {
-                    /*JSONObject jObject = null;
-                    jObject = jArray.getJSONObject(i);
-
-                    String id = jObject.getString("PersonID");
-                    String name = jObject.getString("PersonName");
-                    String desc = jObject.getString("PersonSurname");*/
                     JSONObject jsonObject = jArray.getJSONObject(i);
-                    objectList.add(jsonObject);
+                    jsonObjectList.add(jsonObject);
                 }
+
+                message = jArrayMessage.getJSONObject(0).getString("message");
             } catch (Exception e) {
                 Log.e("log_tag", "Error in parsing data ");
             }
-            return null;
+            return jsonObjectList;
         }
+
         @Override
-        protected void onPostExecute(String file_url) {
-            Toast.makeText(context.getApplicationContext(), Integer.toString(objectList.size()), Toast.LENGTH_LONG).show();
+        protected void onPostExecute(List<Object> objects) {
+            //objectList = objects;
+            //bllClass.objectLists = objects;
+            callBack.onTaskCompleted(objects);
+            //objectLists = objects;
+            Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
+            super.onPostExecute(objects);
         }
 
         @Override
         protected void onProgressUpdate(Void... values) {
 
         }
-
     }
 
-    class DataAccessLayerMessageRetrieval extends AsyncTask<String, Void, String> {
+    /*class DataAccessLayerMessageRetrieval extends AsyncTask<Void, Void, String> {
 
         private ProgressDialog progressDialog = new ProgressDialog((context));
         private String url;
@@ -214,7 +243,7 @@ public class BusinessLogic {
         }
 
         @Override
-        protected String doInBackground(String... param) {
+        protected String doInBackground(Void... param) {
             try {
                 String result = jsonHandler.getJSONFromUrl(url, params);
 
@@ -227,11 +256,11 @@ public class BusinessLogic {
             } catch (Exception e) {
                 Log.e("log_tag", "Error in parsing data ");
             }
-            return null;
+            return message;
         }
         @Override
-        protected void onPostExecute(String file_url) {
-            Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(String returned) {
+            Toast.makeText(context.getApplicationContext(), returned, Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
         }
 
@@ -240,5 +269,5 @@ public class BusinessLogic {
 
         }
 
-    }
+    }*/
 }
