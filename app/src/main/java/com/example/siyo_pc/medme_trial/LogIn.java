@@ -15,23 +15,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
-import com.example.siyo_pc.medme_trial.db.BusinessLogic;
-import com.example.siyo_pc.medme_trial.db.CallBackTaskCompleted;
 import com.example.siyo_pc.medme_trial.db.JSON_Handler;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
 
