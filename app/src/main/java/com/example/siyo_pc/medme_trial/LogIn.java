@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
 import com.example.siyo_pc.medme_trial.db.JSON_Handler;
 
@@ -44,7 +46,6 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
         btnBack = (Button)findViewById(R.id.btnLogInBack);
         btnLogIn = (Button)findViewById(R.id.btnLogIn);
 
-        //addNextActivityOnClickListener(btnRegister, RegisterUser.class);
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,9 +138,11 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
                 if (currentObjectList.size() > 0) {
                     JSONObject jObject = currentObjectList.get(0);
                     String personEmail = jObject.getString("PersonEmailAddress");
-                    Integer personRole = Integer.parseInt(jObject.getString("PersonRoleID"));
+                    String personRole = jObject.getString("PersonRoleID");
 
-                    userHome(personRole);
+                    MM_Person user = new MM_Person(personEmail, personRole);
+
+                    userHome(user);
                 }
             }
         } catch (Exception e) {
@@ -147,22 +150,23 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
         }
     }
 
-    private void userHome(Integer roleID) {
-        switch (roleID) {
-            case 1: {
+    private void userHome(MM_Person user) {
+        switch (user.GetPersonRoleID()) {
+            case "1": {
                 //Admin activity
             }
 
-            case 2: {
+            case "2": {
                 //Doctor activity
             }
 
-            case 3: {
+            case "3": {
                 //Nurse activity
             }
 
-            case 4: {
+            case "4": {
                 Intent intent = new Intent(this, GuestHome.class);
+                intent.putExtra("userCred", user);
                 startActivity(intent);
             }
         }
@@ -175,8 +179,6 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
         }
-
-        //
     }
 
     public class DataAccessLogIn extends AsyncTask<Void, Void, List<JSONObject>> {
@@ -200,7 +202,7 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
 
         protected void onPreExecute() {
             progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("We're working on it ...");
+            progressDialog.setMessage("Trying to get you inside ...");
             progressDialog.show();
         }
 
@@ -214,15 +216,15 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
 
                 JSONObject jsonResponse = new JSONObject((sObjects));
                 JSONArray jArray = jsonResponse.getJSONArray("finalFetch");
-                JSONObject jsonResponseMessage = new JSONObject((sMessage));
-                JSONArray jArrayMessage = jsonResponseMessage.getJSONArray("message");
+                /*JSONObject jsonResponseMessage = new JSONObject((sMessage));
+                JSONArray jArrayMessage = jsonResponseMessage.getJSONArray("message");*/
 
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject jsonObject = jArray.getJSONObject(i);
                     jsonObjectList.add(jsonObject);
                 }
 
-                message = jArrayMessage.getJSONObject(0).getString("message");
+                //message = jArrayMessage.getJSONObject(0).getString("message");
             } catch (Exception e) {
                 Log.e("log_tag", "Error in parsing data ");
             }
@@ -231,7 +233,6 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
 
         @Override
         protected void onPostExecute(List<JSONObject> result) {
-            //logInActivity.updateList(jsonObjectList);
             delegate.onTaskCompleted(result);
             //Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             progressDialog.dismiss();

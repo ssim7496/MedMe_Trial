@@ -1,6 +1,9 @@
 package com.example.siyo_pc.medme_trial.classes;
 
-public class MM_Person {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MM_Person implements Parcelable{
     private int pPersonID;
     private String pPersonName;
     private String pPersonSurname;
@@ -16,10 +19,10 @@ public class MM_Person {
         super();
     }
 
-    public MM_Person(String emailAddress, String password) {
+    public MM_Person(String emailAddress, String personRole) {
         super();
         this.pPersonEmailAddress = emailAddress;
-        this.pPersonPassword = password;
+        this.pPersonRoleID = personRole;
     }
 
     public MM_Person (int personID, String name, String surname, String emailAddress, String cellNumber, String password, String passwordRecoveryQuestion,
@@ -79,5 +82,32 @@ public class MM_Person {
 
     public void SetMode(boolean mode) {
         pMode = mode;
+    }
+
+    //parcel methods
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(pPersonEmailAddress);
+        dest.writeString(pPersonRoleID);
+    }
+
+    public static final Parcelable.Creator<MM_Person> CREATOR = new Parcelable.Creator<MM_Person>() {
+        public MM_Person createFromParcel(Parcel in) {
+            return new MM_Person(in);
+        }
+
+        public MM_Person[] newArray(int size) {
+            return  new MM_Person[size];
+        }
+    };
+
+    private MM_Person(Parcel in) {
+        this.pPersonEmailAddress = in.readString();
+        this.pPersonRoleID = in.readString();
     }
 }
