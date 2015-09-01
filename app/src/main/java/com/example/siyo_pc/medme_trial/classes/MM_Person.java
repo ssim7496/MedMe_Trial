@@ -13,7 +13,7 @@ public class MM_Person implements Parcelable{
     private String pPasswordRecoveryQuestion;
     private String pPasswordRecoveryAnswer;
     private String pPersonRoleID;
-    private boolean pMode;
+    private int pMode;
 
     public MM_Person() {
         super();
@@ -26,7 +26,7 @@ public class MM_Person implements Parcelable{
     }
 
     public MM_Person (int personID, String name, String surname, String emailAddress, String cellNumber, String password, String passwordRecoveryQuestion,
-                   String passwordRecoveryAnswer, String personRoleID, boolean mode){
+                   String passwordRecoveryAnswer, String personRoleID, int mode){
         super();
         this.pPersonID = personID;
         this.pPersonName = name;
@@ -76,11 +76,11 @@ public class MM_Person implements Parcelable{
 
     public void SetPersonRoleID(String personRoleID ) { pPersonRoleID = personRoleID; }
 
-    public boolean GetMode() {
+    public int GetMode() {
         return pMode;
     }
 
-    public void SetMode(boolean mode) {
+    public void SetMode(int mode) {
         pMode = mode;
     }
 

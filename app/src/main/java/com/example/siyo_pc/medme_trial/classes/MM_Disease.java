@@ -5,14 +5,14 @@ public class MM_Disease {
     private String dGreekName;
     private String dDiseaseName;
     private String dDiseaseDesc;
-    private boolean dMode;
+    private int dMode;
 
     public MM_Disease () {
         super();
     }
 
     public MM_Disease (int diseaseID, String greekName, String diseaseName, String diseaseDesc,
-                       boolean mode) {
+                       int mode) {
         super();
         this.dDiseaseID = diseaseID;
         this.dGreekName = greekName;
@@ -22,7 +22,7 @@ public class MM_Disease {
     }
 
     public MM_Disease (String greekName, String diseaseName, String diseaseDesc,
-                       boolean mode) {
+                       int mode) {
         super();
         this.dGreekName = greekName;
         this.dDiseaseName = diseaseName;
@@ -83,11 +83,11 @@ public class MM_Disease {
         dDiseaseDesc = diseaseDesc;
     }
 
-    public boolean GetMode() {
+    public int GetMode() {
         return dMode;
     }
 
-    public void SetMode(boolean mode) {
+    public void SetMode(int mode) {
         dMode = mode;
     }
 }

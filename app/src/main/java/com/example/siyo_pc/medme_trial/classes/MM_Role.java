@@ -4,13 +4,13 @@ public class MM_Role {
     private String rRoleID;
     private String rRoleName;
     private String rRoleDescription;
-    private boolean rMode;
+    private int rMode;
 
     public MM_Role() {
         super();
     }
 
-    public MM_Role (String roleID, String name, String desc, boolean mode){
+    public MM_Role (String roleID, String name, String desc, int mode){
         super();
         this.rRoleID = roleID;
         this.rRoleName = name;
@@ -42,11 +42,11 @@ public class MM_Role {
         rRoleDescription = desc;
     }
 
-    public boolean GetMode() {
+    public int GetMode() {
         return rMode;
     }
 
-    public void SetMode(boolean mode) {
+    public void SetMode(int mode) {
         rMode = mode;
     }
 }

@@ -6,13 +6,13 @@ public class MM_Medical_Term {
     private String mtMedTermName;
     private String mtMedTermDesc;
     private String mtMedTermType;
-    private boolean mtMedTermMode;
+    private int mtMedTermMode;
 
     public MM_Medical_Term() {
         super();
     }
 
-    public MM_Medical_Term (int ID, String greekName, String medTermName, String medTermDesc, String medTermType, boolean medTermMode) {
+    public MM_Medical_Term (int ID, String greekName, String medTermName, String medTermDesc, String medTermType, int medTermMode) {
         super();
         this.mtMedTermID = ID;
         this.mtGreekName = greekName;
@@ -56,11 +56,11 @@ public class MM_Medical_Term {
         mtMedTermType = medTermType;
     }
 
-    public boolean GetMedicalTermMode() {
+    public int GetMedicalTermMode() {
         return mtMedTermMode;
     }
 
-    public void SetMedicalTermMode(boolean medTermMode) {
+    public void SetMedicalTermMode(int medTermMode) {
         mtMedTermMode = medTermMode;
     }
 }

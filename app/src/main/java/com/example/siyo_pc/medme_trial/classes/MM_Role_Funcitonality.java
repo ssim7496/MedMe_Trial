@@ -3,13 +3,13 @@ package com.example.siyo_pc.medme_trial.classes;
 public class MM_Role_Funcitonality {
     private int rfFunctionID;
     private String rfRoleID;
-    private  boolean rfMode;
+    private  int rfMode;
 
     public MM_Role_Funcitonality() {
         super();
     }
 
-    public MM_Role_Funcitonality(int functionID, String roleID, boolean mode) {
+    public MM_Role_Funcitonality(int functionID, String roleID, int mode) {
         super();
         this.rfFunctionID = functionID;
         this.rfRoleID = roleID;
@@ -32,11 +32,11 @@ public class MM_Role_Funcitonality {
         rfRoleID = roleID;
     }
 
-    public boolean GetMode() {
+    public int GetMode() {
         return rfMode;
     }
 
-    public void SetMode(boolean mode) {
+    public void SetMode(int mode) {
         rfMode = mode;
     }
 }

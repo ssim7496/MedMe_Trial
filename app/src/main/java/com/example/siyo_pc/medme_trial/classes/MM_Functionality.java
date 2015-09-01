@@ -5,13 +5,13 @@ public class MM_Functionality {
     private String fFunctionName;
     private String fFunctionDesc;
     //private String fFunctionQuery;
-    private  boolean fMode;
+    private  int fMode;
 
     public MM_Functionality() {
         super();
     }
 
-    public MM_Functionality(int functionID, String name, String desc, boolean mode) {
+    public MM_Functionality(int functionID, String name, String desc, int mode) {
         super();
         this.fFunctionID = functionID;
         this.fFunctionName = name;
@@ -43,11 +43,11 @@ public class MM_Functionality {
         fFunctionDesc = desc;
     }
 
-    public boolean GetMode() {
+    public int GetMode() {
         return fMode;
     }
 
-    public void SetMode(boolean mode) {
+    public void SetMode(int mode) {
         fMode = mode;
     }
 }

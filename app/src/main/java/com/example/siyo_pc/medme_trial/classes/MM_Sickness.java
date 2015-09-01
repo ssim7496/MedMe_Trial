@@ -3,42 +3,27 @@ package com.example.siyo_pc.medme_trial.classes;
 public class MM_Sickness {
 
     private int sSicknessID;
-    private int sDiseaseID;
-    private int sSymptomID;
     private String sGreekName;
     private String sSicknessName;
     private String sSicknessDesc;
-    private boolean sMode;
+    private int sMode;
 
     public MM_Sickness(){
         super();
     }
 
-    public MM_Sickness (int ID, int diseaseID, int symptomID, String greekName, String sicknessName, String sicknessDesc, boolean mode) {
+    public MM_Sickness (int ID, String greekName, String sicknessName, String sicknessDesc, int mode) {
         super();
         this.sSicknessID = ID;
-        this.sDiseaseID = diseaseID;
-        this.sSymptomID = symptomID;
         this.sGreekName = greekName;
         this.sSicknessName = sicknessName;
         this.sSicknessDesc = sicknessDesc;
         this.sMode = mode;
     }
 
-    public MM_Sickness (int ID, int diseaseID, int symptomID, String greekName, String sicknessName, String sicknessDesc) {
+    public MM_Sickness (int ID, String greekName, String sicknessName, String sicknessDesc) {
         super();
         this.sSicknessID = ID;
-        this.sDiseaseID = diseaseID;
-        this.sSymptomID = symptomID;
-        this.sGreekName = greekName;
-        this.sSicknessName = sicknessName;
-        this.sSicknessDesc = sicknessDesc;
-    }
-
-    public MM_Sickness (int diseaseID, int symptomID, String greekName, String sicknessName, String sicknessDesc) {
-        super();
-        this.sDiseaseID = diseaseID;
-        this.sSymptomID = symptomID;
         this.sGreekName = greekName;
         this.sSicknessName = sicknessName;
         this.sSicknessDesc = sicknessDesc;
@@ -59,14 +44,6 @@ public class MM_Sickness {
     public int GetSicknessID() { return sSicknessID; }
 
     public void SetSicknessID(int sicknessID ) { sSicknessID = sicknessID; }
-
-    public int GetDiseaseID() { return sDiseaseID; }
-
-    public void SetDiseaseID(int diseaseID) { sDiseaseID = diseaseID; }
-
-    public int GetSymptomID() { return sSymptomID; }
-
-    public void SetSymptomID(int symptomID) { sSymptomID = symptomID; }
 
     public String GetGreekName() {
         return sGreekName;
@@ -92,11 +69,11 @@ public class MM_Sickness {
         sSicknessDesc = sicknessDesc;
     }
 
-    public boolean GetMode() {
+    public int GetMode() {
         return sMode;
     }
 
-    public void SetMode(boolean mode) {
+    public void SetMode(int mode) {
         sMode = mode;
     }
 }

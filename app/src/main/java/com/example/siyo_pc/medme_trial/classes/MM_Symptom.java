@@ -6,13 +6,13 @@ public class MM_Symptom {
     private String sGreekName;
     private String sSymptomName;
     private String sSymptomDesc;
-    private boolean sMode;
+    private int sMode;
 
     public MM_Symptom () {
         super();
     }
 
-    public MM_Symptom (int ID, String greekName, String symptomName, String symptomDesc, boolean mode) {
+    public MM_Symptom (int ID, String greekName, String symptomName, String symptomDesc, int mode) {
         super();
         this.sSymptomID = ID;
         this.sGreekName = greekName;
@@ -72,11 +72,11 @@ public class MM_Symptom {
         sSymptomDesc = symptomDesc;
     }
 
-    public boolean GetMode() {
+    public int GetMode() {
         return sMode;
     }
 
-    public void SetMode(boolean mode) {
+    public void SetMode(int mode) {
         sMode = mode;
     }
 }
