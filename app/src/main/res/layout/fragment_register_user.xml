@@ -1,0 +1,222 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_background"
+    tools:context="com.example.siyo_pc.medme_trial.RegisterUserFragment">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row1"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="@string/name"
+                    style="@style/text_view_text"
+                    android:id="@+id/tvRegisName" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtRegisName"
+                    android:text=""
+                    style="@style/edit_text"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row2"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="@string/surname"
+                    style="@style/text_view_text"
+                    android:id="@+id/tvRegisSurn" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtRegisSurname"
+                    android:text=""
+                    style="@style/edit_text"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row3"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="@string/email"
+                    style="@style/text_view_text"
+                    android:id="@+id/tvRegisEmail" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtRegisEmail"
+                    android:text=""
+                    style="@style/edit_text"
+                    android:inputType="textEmailAddress" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row4"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="@string/cellNumber"
+                    style="@style/text_view_text"
+                    android:id="@+id/tvRegisCellNum" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtRegisCellNumber"
+                    android:text=""
+                    style="@style/edit_text"
+                    android:inputType="phone"
+                    android:maxLength="10" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row5"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="@string/password"
+                    style="@style/text_view_text"
+                    android:id="@+id/tvRegisPassword" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtRegisPassword"
+                    android:text=""
+                    style="@style/edit_text"
+                    android:inputType="textPassword" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row6"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="@string/confirmPassword"
+                    style="@style/text_view_text"
+                    android:id="@+id/tvRegisConfirmPassword" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtRegisConfirmPassword"
+                    android:text=""
+                    style="@style/edit_text"
+                    android:inputType="textPassword" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row7"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="@string/recovQues"
+                    style="@style/text_view_text"
+                    android:id="@+id/tvRegisRecovQues" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtRegisRecoveryQuestion"
+                    android:text=""
+                    style="@style/edit_text"
+                    android:inputType="textMultiLine" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/row8"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="@string/recovAns"
+                    style="@style/text_view_text"
+                    android:id="@+id/tvRegisRecovAns" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtRegisRecoveryAnswer"
+                    android:text=""
+                    style="@style/edit_text"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/row9"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button"
+                    style="@style/button_text"
+                    android:id="@+id/btnRegisCancel"
+                    android:text="@string/Cancel"
+                    />
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button"
+                    style="@style/button_text"
+                    android:id="@+id/btnRegisRegister"
+                    android:text="@string/register"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
