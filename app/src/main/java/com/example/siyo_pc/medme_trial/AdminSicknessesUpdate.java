@@ -68,11 +68,11 @@ public class AdminSicknessesUpdate extends ActionBarActivity {
                     edtSicknessName.setText(sickness.GetSicknessName());
                     edtSicknessGreekName.setText(sickness.GetGreekName());
                     edtSicknessDesc.setText(sickness.GetSicknessDesc());
-                    tvSlaveSymptomName.setText(medMeDB.GetSymptomByID(sickness.GetSymptomID()).GetSymptomName());
-                    tvSlaveDiseaseName.setText(medMeDB.GetDiseaseByID(sickness.GetDiseaseID()).GetDiseaseName());
+                    //tvSlaveSymptomName.setText(medMeDB.GetSymptomByID(sickness.GetSymptomID()).GetSymptomName());
+                    //tvSlaveDiseaseName.setText(medMeDB.GetDiseaseByID(sickness.GetDiseaseID()).GetDiseaseName());
                     sicknessChosen = Integer.parseInt(msg);
-                    symptomChosen = sickness.GetSymptomID();
-                    diseaseChosen = sickness.GetDiseaseID();
+                    //symptomChosen = sickness.GetSymptomID();
+                    //diseaseChosen = sickness.GetDiseaseID();
                 }
                 /*if (msg1 != null) {
                     MM_Symptom symptom = medMeDB.GetSymptomByID(Integer.parseInt(msg1));
@@ -176,7 +176,8 @@ public class AdminSicknessesUpdate extends ActionBarActivity {
                 String gName = greekName.getText().toString();
                 String sName = sicknessName.getText().toString();
                 String sDesc = sicknessDesc.getText().toString();
-                MM_Sickness sickness  = new MM_Sickness(sicknessChosen, diseaseChosen, symptomChosen, gName, sName, sDesc);
+                //MM_Sickness sickness  = new MM_Sickness(sicknessChosen, diseaseChosen, symptomChosen, gName, sName, sDesc);
+                MM_Sickness sickness  = new MM_Sickness(sicknessChosen, gName, sName, sDesc);
                 medMeDB.UpdateSickness(sickness);
 
                 Toast.makeText(getApplicationContext(), "Successfully updated.", Toast.LENGTH_LONG).show();

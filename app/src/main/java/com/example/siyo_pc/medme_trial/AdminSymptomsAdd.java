@@ -1,8 +1,11 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,8 +33,8 @@ public class AdminSymptomsAdd extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_symptoms_add);
-
-        medMeDB = new MedMe_Helper(this);
+        addButtonEvents();
+        /*medMeDB = new MedMe_Helper(this);
         btnAdd = (Button)findViewById(R.id.btnAdminConfirmAddSymptom);
         btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelSymptom);
         edtSymptomName = (EditText)findViewById(R.id.edtAdminSymptomNameAdd);
@@ -44,6 +47,35 @@ public class AdminSymptomsAdd extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 addSymptom(edtSymptomName, edtSymptomGreekName, edtSymptomDesc);
+            }
+        });*/
+    }
+
+    public void addButtonEvents(){
+        btnAdd = (Button)findViewById(R.id.btnAdminConfirmAddSymptom);
+        btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelSymptom);
+
+        //addNextActivityOnClickListener(btnRegister, RegisterUser.class);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addSymptom();
+            }
+        });
+        previousActivity(btnCancel);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, AdminSymptomsHome.class);
+        startActivity(intent);
+    }
+
+    public void previousActivity(View view) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
@@ -58,17 +90,19 @@ public class AdminSymptomsAdd extends ActionBarActivity {
         });
     }
 
-    public void addSymptom(EditText symptomName, EditText greekName, EditText symptomDesc) {
+    public void addSymptom() {
+        edtSymptomName = (EditText)findViewById(R.id.edtAdminSymptomNameAdd);
+        edtSymptomGreekName = (EditText)findViewById(R.id.edtAdminSymptomGreekNameAdd);
+        edtSymptomDesc = (EditText)findViewById(R.id.edtAdminSymptomDescAdd);
 
-        if (symptomName != null && greekName != null && symptomDesc != null){
-            if (symptomName.length() > 1 && greekName.length() > 1 && symptomDesc.length() > 1) {
-                String gName = greekName.getText().toString();
-                String dName = symptomName.getText().toString();
-                String dDesc = symptomDesc.getText().toString();
+        if (edtSymptomName != null && edtSymptomGreekName != null && edtSymptomDesc != null){
+            if (edtSymptomName.length() > 1 && edtSymptomGreekName.length() > 1 && edtSymptomDesc.length() > 1) {
+                String gName = edtSymptomGreekName.getText().toString();
+                String dName = edtSymptomName.getText().toString();
+                String dDesc = edtSymptomDesc.getText().toString();
                 MM_Symptom symptom = new MM_Symptom(gName, dName, dDesc);
                 medMeDB.AddSymptom(symptom);
 
-                Toast.makeText(getApplicationContext(), "Successfully added.", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), AdminSymptomsHome.class);
                 startActivity(intent);
             }

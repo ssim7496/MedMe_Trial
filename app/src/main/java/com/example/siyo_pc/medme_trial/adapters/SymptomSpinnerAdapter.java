@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.siyo_pc.medme_trial.AdminSymptomsUpdate;
 import com.example.siyo_pc.medme_trial.R;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
-import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 import org.w3c.dom.Text;
 

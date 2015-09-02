@@ -32,7 +32,7 @@ public class AdminSymptomsViewAll extends ActionBarActivity {
 
     public void fillSymptomList(){
 
-        ArrayList<MM_Symptom> symptomList = medMeDB.GetAllSymptoms();
+        /*ArrayList<MM_Symptom> symptomList = medMeDB.GetAllSymptoms();
 
         if (symptomList != null) {
             SymptomAdapter adapter = new SymptomAdapter(this, symptomList);
@@ -40,7 +40,7 @@ public class AdminSymptomsViewAll extends ActionBarActivity {
             View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
             listSymptoms.addHeaderView(header);
             listSymptoms.setAdapter(adapter);
-        }
+        }*/
     }
 
     @Override

@@ -38,7 +38,7 @@ public class AdminSicknessesViewAll extends ActionBarActivity {
 
     public void fillSicknessList(){
 
-        ArrayList<MM_Sickness> sicknessList2 = medMeDB.GetAllSicknesses();
+        /*ArrayList<MM_Sickness> sicknessList2 = medMeDB.GetAllSicknesses();
 
         if (sicknessList2 != null) {
             SicknessAdapter adapter = new SicknessAdapter(this, sicknessList2);
@@ -46,7 +46,7 @@ public class AdminSicknessesViewAll extends ActionBarActivity {
             View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
             listSickness.addHeaderView(header);
             listSickness.setAdapter(adapter);
-        }
+        }*/
     }
 
     /*public void fillDiseaseList(){

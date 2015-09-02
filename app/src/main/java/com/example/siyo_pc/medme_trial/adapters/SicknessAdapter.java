@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.example.siyo_pc.medme_trial.GuestSicknessView;
 import com.example.siyo_pc.medme_trial.R;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
-import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 import org.w3c.dom.Text;
 

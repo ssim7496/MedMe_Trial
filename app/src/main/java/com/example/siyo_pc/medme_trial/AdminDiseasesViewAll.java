@@ -25,13 +25,13 @@ public class AdminDiseasesViewAll extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_diseases_view_all);
 
-        medMeDB = new MedMe_Helper(this);
+        //medMeDB = new MedMe_Helper(this);
         fillDiseaseList();
     }
 
     public void fillDiseaseList(){
 
-        ArrayList<MM_Disease> diseaseList = medMeDB.GetAllDiseases();
+        /*ArrayList<MM_Disease> diseaseList = medMeDB.GetAllDiseases();
 
         if (diseaseList != null) {
             DiseaseAdapter adapter = new DiseaseAdapter(this, diseaseList);
@@ -39,7 +39,7 @@ public class AdminDiseasesViewAll extends ActionBarActivity {
             View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
             listDiseases.addHeaderView(header);
             listDiseases.setAdapter(adapter);
-        }
+        }*/
     }
 
     @Override

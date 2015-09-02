@@ -15,7 +15,6 @@ import com.example.siyo_pc.medme_trial.AdminDiseasesUpdate;
 import com.example.siyo_pc.medme_trial.AdminSicknessesAdd;
 import com.example.siyo_pc.medme_trial.R;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
-import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 import org.w3c.dom.Text;
 

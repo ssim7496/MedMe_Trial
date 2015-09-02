@@ -3,6 +3,7 @@ package com.example.siyo_pc.medme_trial;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
+import com.example.siyo_pc.medme_trial.db.BusinessLogic;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 
@@ -24,8 +26,8 @@ public class AdminDiseasesAdd extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_diseases_add);
-
-        medMeDB = new MedMe_Helper(this);
+        addButtonEvents();
+        /*medMeDB = new MedMe_Helper(this);
         btnAdd = (Button)findViewById(R.id.btnAdminConfirmAddDisease);
         btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelDisease);
         edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseNameAdd);
@@ -39,7 +41,21 @@ public class AdminDiseasesAdd extends ActionBarActivity {
             public void onClick(View v) {
                 addDisease(edtDiseaseName, edtDiseaseGreekName, edtDiseaseDesc);
             }
+        });*/
+    }
+
+    public void addButtonEvents(){
+        btnAdd = (Button)findViewById(R.id.btnAdminConfirmAddDisease);
+        btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelDisease);
+
+        //addNextActivityOnClickListener(btnRegister, RegisterUser.class);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addDisease();
+            }
         });
+        previousActivity(btnCancel);
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {
@@ -52,17 +68,35 @@ public class AdminDiseasesAdd extends ActionBarActivity {
         });
     }
 
-    public void addDisease(EditText diseaseName, EditText greekName, EditText diseaseDesc) {
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, AdminDiseasesHome.class);
+        startActivity(intent);
+    }
 
-        if (diseaseName != null && greekName != null && diseaseDesc != null){
-            if (diseaseName.length() > 1 && greekName.length() > 1 && diseaseDesc.length() > 1) {
-                String gName = greekName.getText().toString();
-                String dName = diseaseName.getText().toString();
-                String dDesc = diseaseDesc.getText().toString();
+    public void previousActivity(View view) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    public void addDisease() {
+        edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseNameAdd);
+        edtDiseaseGreekName = (EditText)findViewById(R.id.edtAdminDiseaseGreekNameAdd);
+        edtDiseaseDesc = (EditText)findViewById(R.id.edtAdminDiseaseDescAdd);
+
+        if (edtDiseaseName != null && edtDiseaseGreekName != null && edtDiseaseDesc != null){
+            if (edtDiseaseName.length() > 1 && edtDiseaseGreekName.length() > 1 && edtDiseaseDesc.length() > 1) {
+                String gName = edtDiseaseGreekName.getText().toString();
+                String dName = edtDiseaseName.getText().toString();
+                String dDesc = edtDiseaseDesc.getText().toString();
                 MM_Disease disease = new MM_Disease(gName, dName, dDesc);
-                medMeDB.AddDisease(disease);
+                BusinessLogic bll = new BusinessLogic(this);
+                bll.addDisease(disease);
 
-                Toast.makeText(getApplicationContext(), "Successfully added.", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), AdminDiseasesHome.class);
                 startActivity(intent);
             }

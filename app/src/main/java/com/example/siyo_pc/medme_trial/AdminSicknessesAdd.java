@@ -146,7 +146,8 @@ public class AdminSicknessesAdd extends ActionBarActivity {
                 String gName = greekName.getText().toString();
                 String siName = sicknessName.getText().toString();
                 String siDesc = sicknessDesc.getText().toString();
-                MM_Sickness sickness = new MM_Sickness(diseaseChosen, symptomChosen, gName, siName, siDesc);
+                //MM_Sickness sickness = new MM_Sickness(diseaseChosen, symptomChosen, gName, siName, siDesc);
+                MM_Sickness sickness = new MM_Sickness(gName, siName, siDesc);
                 medMeDB.AddSickness(sickness);
 
                 Toast.makeText(getApplicationContext(), "Successfully added.", Toast.LENGTH_LONG).show();

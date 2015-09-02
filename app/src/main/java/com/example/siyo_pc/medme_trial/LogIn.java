@@ -23,6 +23,7 @@ import com.example.siyo_pc.medme_trial.db.JSON_Handler;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -135,7 +136,7 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
                 DataAccessLogIn taskLogIn = new DataAccessLogIn(this, "http://www.ssimayi-medme.co.za/login.php", nameValuePairs, this);
                 taskLogIn.execute();
 
-                if (currentObjectList.size() > 0) {
+                /*if (currentObjectList.size() > 0) {
                     JSONObject jObject = currentObjectList.get(0);
                     String personEmail = jObject.getString("PersonEmailAddress");
                     String personRole = jObject.getString("PersonRoleID");
@@ -143,7 +144,7 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
                     MM_Person user = new MM_Person(personEmail, personRole);
 
                     userHome(user);
-                }
+                }*/
             }
         } catch (Exception e) {
             //Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
@@ -151,24 +152,27 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
     }
 
     private void userHome(MM_Person user) {
-        switch (user.GetPersonRoleID()) {
-            case "1": {
+        switch (Integer.parseInt(user.GetPersonRoleID())) {
+            case 1: {
                 //Admin activity
-            }
+                Intent intent = new Intent(this, AdminHome.class);
+                intent.putExtra("userCred", user);
+                startActivity(intent);
+            } break;
 
-            case "2": {
+            case 2: {
                 //Doctor activity
-            }
+            } break;
 
-            case "3": {
+            case 3: {
                 //Nurse activity
-            }
+            } break;
 
-            case "4": {
+            case 4: {
                 Intent intent = new Intent(this, GuestHome.class);
                 intent.putExtra("userCred", user);
                 startActivity(intent);
-            }
+            } break;
         }
     }
 
@@ -233,10 +237,25 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
 
         @Override
         protected void onPostExecute(List<JSONObject> result) {
+
             delegate.onTaskCompleted(result);
+
             //Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
+            //Toast.makeText(context, Integer.toString(result.size()), Toast.LENGTH_LONG).show();
             super.onPostExecute(result);
+
+            try {
+                JSONObject jObject = result.get(0);
+                String personEmail = jObject.getString("PersonEmailAddress");
+                String personRole = jObject.getString("PersonRoleID");
+
+                MM_Person user = new MM_Person(personEmail, personRole);
+
+                userHome(user);
+            } catch (JSONException e) {
+
+            }
         }
 
         @Override

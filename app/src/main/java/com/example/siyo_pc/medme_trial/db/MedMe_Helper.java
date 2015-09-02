@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
+import com.example.siyo_pc.medme_trial.classes.MM_Sickness_Description;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 
 import java.util.ArrayList;
@@ -112,7 +113,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
             String diseaseName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_NAME));
             String diseaseDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_DESC));
             //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-            boolean diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE))) != 0;
+            int diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE)));
 
             MM_Disease disease = new MM_Disease(disID, greekName, diseaseName, diseaseDesc, diseaseMode);
             return disease;
@@ -133,7 +134,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
             String diseaseName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_NAME));
             String diseaseDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_DESC));
             //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-            boolean diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE))) != 0;
+            int diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE)));
 
             MM_Disease disease = new MM_Disease(disID, greekName, diseaseName, diseaseDesc, diseaseMode);
             return disease;
@@ -156,7 +157,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
                 String diseaseName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_NAME));
                 String diseaseDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_DESC));
                 //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-                boolean diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE))) != 0;
+                int diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE)));
 
                 MM_Disease disease = new MM_Disease(disID, greekName, diseaseName, diseaseDesc, diseaseMode);
                 listDiseases.add(disease);
@@ -183,7 +184,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
                 String diseaseName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_NAME));
                 String diseaseDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_DESC));
                 //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-                boolean diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE))) != 0;
+                int diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE)));
 
                 MM_Disease disease = new MM_Disease(disID, greekName, diseaseName, diseaseDesc, diseaseMode);
                 listDiseases.add(disease);
@@ -244,7 +245,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
             String symptomName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_NAME));
             String symptomDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_DESC));
             //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-            boolean symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE))) != 0;
+            int symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE)));
 
             MM_Symptom symptom = new MM_Symptom(sympID, greekName, symptomName, symptomDesc, symptomMode);
             return symptom;
@@ -265,7 +266,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
             String symptomName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_NAME));
             String symptomDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_DESC));
             //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-            boolean symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE))) != 0;
+            int symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE)));
 
             MM_Symptom symptom = new MM_Symptom(sympID, greekName, symptomName, symptomDesc, symptomMode);
             return symptom;
@@ -288,7 +289,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
                 String symptomName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_NAME));
                 String symptomDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_DESC));
                 //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-                boolean symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE))) != 0;
+                int symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE)));
 
                 MM_Symptom symptom = new MM_Symptom(sympID, greekName, symptomName, symptomDesc, symptomMode);
                 listSymptoms.add(symptom);
@@ -315,7 +316,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
                 String symptomName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_NAME));
                 String symptomDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_DESC));
                 //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-                boolean symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE))) != 0;
+                int symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE)));
 
                 MM_Symptom symptom = new MM_Symptom(sympID, greekName, symptomName, symptomDesc, symptomMode);
                 listSymptoms.add(symptom);
@@ -372,15 +373,13 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         if(cur != null){
             cur.moveToFirst();
             int sickID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_ID)));
-            int dissID = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DISEASE_ID)));
-            int sympID = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_SYMPTOM_ID)));
             String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_GREEK_NAME));
             String sicknessName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_NAME));
             String sicknessDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DESC));
             //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-            boolean sicknessMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE))) != 0;
+            int sicknessMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
 
-            MM_Sickness sickness = new MM_Sickness(sickID, dissID, sympID, greekName, sicknessName, sicknessDesc, sicknessMode);
+            MM_Sickness sickness = new MM_Sickness(sickID, greekName, sicknessName, sicknessDesc, sicknessMode);
             return sickness;
         }else{
             return null;
@@ -395,15 +394,13 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         if(cur != null){
             cur.moveToFirst();
             int sickID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_ID)));
-            int dissID = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DISEASE_ID)));
-            int sympID = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_SYMPTOM_ID)));
             String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_GREEK_NAME));
             String sicknessName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_NAME));
             String sicknessDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DESC));
             //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-            boolean sicknessMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE))) != 0;
+            int sicknessMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
 
-            MM_Sickness sickness = new MM_Sickness(sickID, dissID, sympID, greekName, sicknessName, sicknessDesc, sicknessMode);
+            MM_Sickness sickness = new MM_Sickness(sickID, greekName, sicknessName, sicknessDesc, sicknessMode);
             return sickness;
         }else{
             return null;
@@ -420,15 +417,13 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         if (cur.moveToFirst()) {
             do {
                 int sickID  =  Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_ID)));
-                int dissID = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DISEASE_ID)));
-                int sympID = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_SYMPTOM_ID)));
                 String greekName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_GREEK_NAME));
                 String sicknessName = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_NAME));
                 String sicknessDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_DESC));
                 //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-                boolean symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE))) != 0;
+                int sicknessMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
 
-                MM_Sickness sickness = new MM_Sickness(sickID, dissID, sympID, greekName, sicknessName, sicknessDesc, symptomMode);
+                MM_Sickness sickness = new MM_Sickness(sickID, greekName, sicknessName, sicknessDesc, sicknessMode);
                 listSicknesses.add(sickness);
             }while (cur.moveToNext());
         }
@@ -453,7 +448,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
                 String diseaseName = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_NAME));
                 String diseaseDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_DESC));
                 //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-                boolean diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE))) != 0;
+                int diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE)));
 
                 MM_Disease disease = new MM_Disease(disID, greekName, diseaseName, diseaseDesc, diseaseMode);
                 listDiseases.add(disease);
@@ -480,9 +475,9 @@ public class MedMe_Helper extends SQLiteOpenHelper {
                 String symptomName = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_NAME));
                 String symptomDesc = cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_DESC));
                 //boolean sicknessMode = Boolean.parseBoolean(cur.getString(cur.getColumnIndex(MedMe_Helper.SICKNESS_MODE)));
-                boolean symptomMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.SYMPTOM_MODE))) != 0;
+                int diseaseMode = Integer.parseInt(cur.getString(cur.getColumnIndex(MedMe_Helper.DISEASE_MODE)));
 
-                MM_Symptom symptom = new MM_Symptom(sympID, greekName, symptomName, symptomDesc, symptomMode);
+                MM_Symptom symptom = new MM_Symptom(sympID, greekName, symptomName, symptomDesc, diseaseMode);
                 listSymptoms.add(symptom);
             }while (cur.moveToNext());
         }
@@ -495,8 +490,6 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(SICKNESS_DISEASE_ID, sickness.GetDiseaseID());
-        values.put(SICKNESS_SYMPTOM_ID, sickness.GetSymptomID());
         values.put(SICKNESS_GREEK_NAME, sickness.GetGreekName());
         values.put(SICKNESS_NAME, sickness.GetSicknessName());
         values.put(SICKNESS_DESC, sickness.GetSicknessDesc());
@@ -516,7 +509,7 @@ public class MedMe_Helper extends SQLiteOpenHelper {
         values.put(SICKNESS_MODE, 1);
 
         db.update(TABLE_SICKNESS, values, SICKNESS_ID + " = ? AND " + SICKNESS_DISEASE_ID + " = ? AND " + SICKNESS_SYMPTOM_ID + " = ?", new String[]{
-                String.valueOf(sickness.GetSicknessID()), String.valueOf(sickness.GetDiseaseID()), String.valueOf(sickness.GetSymptomID())
+                String.valueOf(sickness.GetSicknessID())
         });
         db.close();
     }

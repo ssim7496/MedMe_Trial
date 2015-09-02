@@ -1,7 +1,9 @@
 package com.example.siyo_pc.medme_trial;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -41,11 +43,11 @@ public class GuestHome extends ActionBarActivity {
 
         }
 
-        if (userLoggedIn == null) {
+        /*if (userLoggedIn == null) {
             Toast.makeText(this, "Access restricted! No user is logged in", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
-        } else {
+        } else {*/
             medMeDB = new MedMe_Helper(this);
 
             btnSearch = (Button) findViewById(R.id.btnSearch);
@@ -72,7 +74,7 @@ public class GuestHome extends ActionBarActivity {
             //underConstruction(btnSicknesses);
             underConstruction(btnHelp);
         }
-    }
+    //}
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {
         view.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +93,28 @@ public class GuestHome extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(), "Currently under construction ... ", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setMessage("Do you want to Exit?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                /*finish();*/
+                finishAffinity();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
