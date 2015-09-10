@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
+public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
 
     Button btnBack, btnLogIn;
     EditText edtEmail, edtPassword;
@@ -133,7 +133,7 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
                 nameValuePairs.add(new BasicNameValuePair("personEmailAddress", edtEmail.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("personPassword", edtPassword.getText().toString()));
 
-                DataAccessLogIn taskLogIn = new DataAccessLogIn(this, "http://www.ssimayi-medme.co.za/login.php", nameValuePairs, this);
+                DataAccessLogIn taskLogIn = new DataAccessLogIn(this, "http://www.ssimayi-medme.co.za/login.php", nameValuePairs/*, this*/);
                 taskLogIn.execute();
 
                 /*if (currentObjectList.size() > 0) {
@@ -176,14 +176,14 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
         }
     }
 
-    @Override
+    /*@Override
     public void onTaskCompleted(List<JSONObject> objectList) {
         try{
             currentObjectList = objectList;
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
     public class DataAccessLogIn extends AsyncTask<Void, Void, List<JSONObject>> {
 
@@ -197,11 +197,11 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
 
         public List<JSONObject> jsonObjectList = new ArrayList<>();
 
-        public DataAccessLogIn(Context context, String url, List<NameValuePair> params, AsyncTaskResponse asyncResponse) {
+        public DataAccessLogIn(Context context, String url, List<NameValuePair> params/*, AsyncTaskResponse asyncResponse*/) {
             this.context = context;
             this.url = url;
             this.params = params;
-            this.delegate = asyncResponse;
+            //this.delegate = asyncResponse;
         }
 
         protected void onPreExecute() {
@@ -218,17 +218,22 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
                 String sObjects = tokens.nextToken();
                 String sMessage = tokens.nextToken();
 
+                //getting the message
+                JSONObject jsonResponseMessage = new JSONObject((sMessage));
+                JSONArray jArrayMessage = jsonResponseMessage.getJSONArray("message");
+
+                JSONObject jsonMessageObj = jArrayMessage.getJSONObject(0);
+                message = jsonMessageObj.getString("message");
+
+                //getting the json object
                 JSONObject jsonResponse = new JSONObject((sObjects));
                 JSONArray jArray = jsonResponse.getJSONArray("finalFetch");
-                /*JSONObject jsonResponseMessage = new JSONObject((sMessage));
-                JSONArray jArrayMessage = jsonResponseMessage.getJSONArray("message");*/
 
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject jsonObject = jArray.getJSONObject(i);
                     jsonObjectList.add(jsonObject);
                 }
 
-                //message = jArrayMessage.getJSONObject(0).getString("message");
             } catch (Exception e) {
                 Log.e("log_tag", "Error in parsing data ");
             }
@@ -238,23 +243,28 @@ public class LogIn extends AppCompatActivity implements  AsyncTaskResponse{
         @Override
         protected void onPostExecute(List<JSONObject> result) {
 
-            delegate.onTaskCompleted(result);
+            //delegate.onTaskCompleted(result);
 
             //Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
             //Toast.makeText(context, Integer.toString(result.size()), Toast.LENGTH_LONG).show();
             super.onPostExecute(result);
 
-            try {
-                JSONObject jObject = result.get(0);
-                String personEmail = jObject.getString("PersonEmailAddress");
-                String personRole = jObject.getString("PersonRoleID");
+            if (message.equals("Logged in.")) {
 
-                MM_Person user = new MM_Person(personEmail, personRole);
+                try {
+                    JSONObject jObject = result.get(0);
+                    String personEmail = jObject.getString("PersonEmailAddress");
+                    String personRole = jObject.getString("PersonRoleID");
 
-                userHome(user);
-            } catch (JSONException e) {
+                    MM_Person user = new MM_Person(personEmail, personRole);
 
+                    userHome(user);
+                } catch (JSONException e) {
+
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
         }
 

@@ -105,9 +105,6 @@ public class RegisterUser extends AppCompatActivity {
 
                 BusinessLogic bll = new BusinessLogic(this);
                 bll.addPerson(person);
-
-                Intent intent = new Intent(getApplicationContext(), Start.class);
-                startActivity(intent);
             }
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();

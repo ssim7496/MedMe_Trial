@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.GuestHome;
+import com.example.siyo_pc.medme_trial.Start;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
@@ -55,7 +56,7 @@ public class BusinessLogic implements  AsyncTaskResponse{
         nameValuePairs.add(new BasicNameValuePair("personRecoveryQuestion", person.GetPersonRecoveryQuestion()));
         nameValuePairs.add(new BasicNameValuePair("personRecoveryAnswer", person.GetPersonRecoveryAnswer()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddPerson, nameValuePairs);
+        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddPerson, nameValuePairs, Start.class);
         dataAccess.execute();
     }
 
@@ -65,8 +66,8 @@ public class BusinessLogic implements  AsyncTaskResponse{
         nameValuePairs.add(new BasicNameValuePair("diseaseDesc", disease.GetDiseaseDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", disease.GetGreekName()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDisease, nameValuePairs);
-        dataAccess.execute();
+        //DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDisease, nameValuePairs);
+        //dataAccess.execute();
     }
 
     public void addSymptom(MM_Symptom symptom) {
@@ -75,8 +76,8 @@ public class BusinessLogic implements  AsyncTaskResponse{
         nameValuePairs.add(new BasicNameValuePair("symptomDesc", symptom.GetSymptomDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", symptom.GetGreekName()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDisease, nameValuePairs);
-        dataAccess.execute();
+        //DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDisease, nameValuePairs);
+        //dataAccess.execute();
     }
 
     public void getAllDisease() {
@@ -131,10 +132,12 @@ public class BusinessLogic implements  AsyncTaskResponse{
         private List<NameValuePair> params = new ArrayList<NameValuePair>();
         private String url;
         private String message;
+        private Class nextActivity;
 
-        public DataAccessLayerOperational(String url, List<NameValuePair> params) {
+        public DataAccessLayerOperational(String url, List<NameValuePair> params, Class nextActivity) {
             this.url = url;
             this.params = params;
+            this.nextActivity = nextActivity;
         }
         @Override
         protected void onPreExecute() {
@@ -154,14 +157,19 @@ public class BusinessLogic implements  AsyncTaskResponse{
             } catch (Exception e) {
                 Log.e("log_tag", "Error in parsing data ");
             }
-            return null;
+            return message;
         }
 
         @Override
-        protected void onPostExecute(String file_url)
+        protected void onPostExecute(String retrievedMessage)
         {
             progressDialog.dismiss();
-            Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            Toast.makeText(context.getApplicationContext(), retrievedMessage, Toast.LENGTH_LONG).show();
+
+            if (retrievedMessage.equals("You have been successfully registered.")) {
+                Intent intent = new Intent(context.getApplicationContext(), nextActivity);
+                context.startActivity(intent);
+            }
         }
 
         @Override
