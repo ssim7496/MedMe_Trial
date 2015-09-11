@@ -5,5 +5,5 @@ import org.json.JSONObject;
 import java.util.List;
 
 public interface AsyncTaskResponse {
-    void onTaskCompleted(List<JSONObject> objectList);
+    void onTaskCompleted(List<JSONObject> objectList, int passTypeID);
 }

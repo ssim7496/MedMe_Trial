@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
+import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
+import com.example.siyo_pc.medme_trial.db.AsyncGetAllDiseases;
+import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptoms;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
 import com.example.siyo_pc.medme_trial.db.JSON_Handler;
 
@@ -30,19 +33,103 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
+public class LogIn extends AppCompatActivity implements AsyncTaskResponse{
+
+    private AsyncGetAllDiseases asyncAllDiseases = new AsyncGetAllDiseases(this);
+    private AsyncGetAllSymptoms asyncAllSymptoms = new AsyncGetAllSymptoms(this);
+    private List<MM_Disease> diseaseList = null;
+    private List<MM_Symptom> symptomList = null;
 
     Button btnBack, btnLogIn;
     EditText edtEmail, edtPassword;
-    List<JSONObject> currentObjectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+
+        asyncAllDiseases.execute();
+        asyncAllSymptoms.execute();
+
         addButtonEvents();
     }
 
+    //retrieving the JSON object list from the async task
+    @Override
+    public void onTaskCompleted(List<JSONObject> objectList, int passTypeID) {
+        switch (passTypeID) {
+            case 1 : {
+                diseaseList = convertToDiseases(objectList);
+            } break;
+            case 2 : {
+                symptomList = convertToSymptoms(objectList);
+            } break;
+            case 3 : {
+                //sickness list
+            } break;
+        }
+    }
+
+    //converting retrieved JSON object list to appropriate format
+    private List<MM_Disease> convertToDiseases(List<JSONObject> objectList) {
+        if (objectList.size() > 0) {
+
+            diseaseList = new ArrayList<>();
+
+            try {
+                for (int i = 0; i < objectList.size(); i++) {
+                    JSONObject jObject = objectList.get(i);
+                    int diseaseID = jObject.getInt("DiseaseID");
+                    String greekName = jObject.getString("GreekName");
+                    String diseaseName = jObject.getString("DiseaseName");
+                    String diseaseDesc = jObject.getString("DiseaseDesc");
+
+                    MM_Disease disease = new MM_Disease();
+                    disease.SetDiseaseID(diseaseID);
+                    disease.SetGreekName(greekName);
+                    disease.SetDiseaseName(diseaseName);
+                    disease.SetDiseaseDesc(diseaseDesc);
+
+                    diseaseList.add(disease);
+                }
+            } catch ( JSONException e) {
+
+            }
+        }
+
+        return diseaseList;
+    }
+
+    private List<MM_Symptom> convertToSymptoms(List<JSONObject> objectList) {
+        if (objectList.size() > 0) {
+
+            symptomList = new ArrayList<>();
+
+            try {
+                for (int i = 0; i < objectList.size(); i++) {
+                    JSONObject jObject = objectList.get(i);
+                    int symptomID = jObject.getInt("SymptomID");
+                    String greekName = jObject.getString("GreekName");
+                    String symptomName = jObject.getString("SymptomName");
+                    String symptomDesc = jObject.getString("SymptomDesc");
+
+                    MM_Symptom symptom = new MM_Symptom();
+                    symptom.SetSymptomID(symptomID);
+                    symptom.SetGreekName(greekName);
+                    symptom.SetSymptomName(symptomName);
+                    symptom.SetSymptomDesc(symptomDesc);
+
+                    symptomList.add(symptom);
+                }
+            } catch ( JSONException e) {
+
+            }
+        }
+
+        return symptomList;
+    }
+
+    //setting listeners for buttons
     public void addButtonEvents(){
         btnBack = (Button)findViewById(R.id.btnLogInBack);
         btnLogIn = (Button)findViewById(R.id.btnLogIn);
@@ -56,6 +143,7 @@ public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
         previousActivity(btnBack);
     }
 
+    //go to next activity based on button selection
     public void addNextActivityOnClickListener(View view, final Class nextClass) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +154,7 @@ public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
         });
     }
 
+    //go back to previous activity
     public void previousActivity(View view) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +164,7 @@ public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
         });
     }
 
+    //overriding default hardware back button to custom implementation
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -93,6 +183,7 @@ public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
         return;
     }
 
+    //normal empty fields checks
     private boolean checkFields(EditText edtEmail, EditText edtPassword) {
         boolean result = false;
 
@@ -121,6 +212,7 @@ public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
         return result;
     }
 
+    //logging in a user
     private void logInPerson() {
         edtEmail = (EditText)findViewById(R.id.edtLogInEmail);
         edtPassword = (EditText)findViewById(R.id.edtLogInPassword);
@@ -135,23 +227,15 @@ public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
 
                 DataAccessLogIn taskLogIn = new DataAccessLogIn(this, "http://www.ssimayi-medme.co.za/login.php", nameValuePairs/*, this*/);
                 taskLogIn.execute();
-
-                /*if (currentObjectList.size() > 0) {
-                    JSONObject jObject = currentObjectList.get(0);
-                    String personEmail = jObject.getString("PersonEmailAddress");
-                    String personRole = jObject.getString("PersonRoleID");
-
-                    MM_Person user = new MM_Person(personEmail, personRole);
-
-                    userHome(user);
-                }*/
             }
         } catch (Exception e) {
             //Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
         }
     }
 
+    //method to send user to the appropriate activity based on level of secuirity
     private void userHome(MM_Person user) {
+
         switch (Integer.parseInt(user.GetPersonRoleID())) {
             case 1: {
                 //Admin activity
@@ -176,16 +260,8 @@ public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
         }
     }
 
-    /*@Override
-    public void onTaskCompleted(List<JSONObject> objectList) {
-        try{
-            currentObjectList = objectList;
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-        }
-    }*/
-
-    public class DataAccessLogIn extends AsyncTask<Void, Void, List<JSONObject>> {
+    //internal async task class for secure log in
+    private class DataAccessLogIn extends AsyncTask<Void, Void, List<JSONObject>> {
 
         private ProgressDialog progressDialog;
         private Context context;
@@ -193,20 +269,18 @@ public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
         private List<NameValuePair> params = new ArrayList<NameValuePair>();
         private String message;
         private JSON_Handler jsonHandler = new JSON_Handler();
-        public AsyncTaskResponse delegate = null;
 
         public List<JSONObject> jsonObjectList = new ArrayList<>();
 
-        public DataAccessLogIn(Context context, String url, List<NameValuePair> params/*, AsyncTaskResponse asyncResponse*/) {
+        public DataAccessLogIn(Context context, String url, List<NameValuePair> params) {
             this.context = context;
             this.url = url;
             this.params = params;
-            //this.delegate = asyncResponse;
         }
 
         protected void onPreExecute() {
             progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Trying to get you inside ...");
+            progressDialog.setMessage("Checking user credentials ...");
             progressDialog.show();
         }
 
@@ -242,12 +316,7 @@ public class LogIn extends AppCompatActivity /*implements  AsyncTaskResponse*/{
 
         @Override
         protected void onPostExecute(List<JSONObject> result) {
-
-            //delegate.onTaskCompleted(result);
-
-            //Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
-            //Toast.makeText(context, Integer.toString(result.size()), Toast.LENGTH_LONG).show();
             super.onPostExecute(result);
 
             if (message.equals("Logged in.")) {

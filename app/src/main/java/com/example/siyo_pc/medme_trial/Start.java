@@ -10,12 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.db.BusinessLogic;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Start extends ActionBarActivity {
 
     Button btnRegister, btnLogIn;
+    public List<MM_Disease> diseaseList = new ArrayList<>();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
