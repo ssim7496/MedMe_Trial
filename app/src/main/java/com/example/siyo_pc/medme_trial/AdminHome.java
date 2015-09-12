@@ -43,13 +43,8 @@ public class AdminHome extends ActionBarActivity{
 
     MedMe_Helper medMeDB = null;
     Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnTerminology, btnSicknesses;
-    MM_Person userLoggedIn;
 
-    String jsonResult;
-    JSONArray jArray = null;
-    List<MM_Disease> diseaseList = null;
-    List<MM_Symptom> symptomList = null;
-    List<MM_Sickness> sicknessList = null;
+    MM_Person userLoggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,20 +58,11 @@ public class AdminHome extends ActionBarActivity{
 
         }
 
-        /*if (userLoggedIn == null) {
+        if (userLoggedIn == null) {
             Toast.makeText(this, "Access restricted! No user is logged in", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
-        } else {*/
-            diseaseList = new ArrayList<>();
-            sicknessList = new ArrayList<>();
-            symptomList = new ArrayList<>();
-            //getAllDiseases();
-            //getAllSymptoms();
-            //getAllSicknesses();
-
-            medMeDB = new MedMe_Helper(this);
-
+        } else {
             btnSearch = (Button)findViewById(R.id.btnAdminSearch);
             btnDiagnose = (Button)findViewById(R.id.btnAdminDiagnose);
             btnDiseases = (Button)findViewById(R.id.btnAdminDiseases);
@@ -98,7 +84,7 @@ public class AdminHome extends ActionBarActivity{
             //underConstruction(btnSymptoms);
             underConstruction(btnTerminology);
             //underConstruction(btnSicknesses);
-        //}
+        }
 
     }
 
@@ -143,221 +129,6 @@ public class AdminHome extends ActionBarActivity{
         alert.show();
     }
 
-    public void getAllDiseases() {
-        class GetDiseaseData extends  AsyncTask<String, Void, String>{
-
-            @Override
-            protected String doInBackground(String... params) {
-                InputStream is = null;
-                String result  = null;
-
-                try {
-                    DefaultHttpClient httpClient = new DefaultHttpClient();
-                    HttpPost httpPost = new HttpPost("http://ssimayi-medme.co.za/getAllDiseases.php");
-
-                    HttpResponse httpResponse = httpClient.execute(httpPost);
-                    HttpEntity httpEntity = httpResponse.getEntity();
-                    is = httpEntity.getContent();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    BufferedReader reader =  new BufferedReader(new InputStreamReader(is));
-                    StringBuilder sb = new StringBuilder();
-                    String line = null;
-                    while ((line = reader.readLine()) != null) {
-                        sb.append(line);
-                    }
-                    is.close();
-                    result = sb.toString();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                return  result;
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-                jsonResult = result;
-                showDiseaseList();
-            }
-        }
-
-        GetDiseaseData dataAccess = new GetDiseaseData();
-        dataAccess.execute();
-    }
-
-    protected void showDiseaseList() {
-        try{
-            JSONObject jObject = new JSONObject(jsonResult);
-            jArray = jObject.getJSONArray("finalFetch");
-
-            for (int i = 0; i < jArray.length(); i++) {
-                JSONObject jsonDisease = jArray.getJSONObject(i);
-                int diseaseID = Integer.parseInt(jsonDisease.getString("DiseaseID"));
-                String diseaseName = jsonDisease.getString("DiseaseName");
-                String diseaseDesc = jsonDisease.getString("DiseaseDesc");
-
-                MM_Disease disease = new MM_Disease();
-                disease.SetDiseaseID(diseaseID);
-                disease.SetDiseaseName(diseaseName);
-                disease.SetDiseaseDesc(diseaseDesc);
-                diseaseList.add(disease);
-            }
-
-            this.diseaseList = retrieveDiseaseList(diseaseList);
-
-        } catch (Exception e) {
-
-        }
-    }
-
-    protected List<MM_Disease> retrieveDiseaseList(List<MM_Disease> diseases){
-        return diseases;
-    }
-
-    public void getAllSymptoms() {
-        class GetSymptomData extends  AsyncTask<String, Void, String>{
-
-            @Override
-            protected String doInBackground(String... params) {
-                InputStream is = null;
-                String result  = null;
-
-                try {
-                    DefaultHttpClient httpClient = new DefaultHttpClient();
-                    HttpPost httpPost = new HttpPost("http://ssimayi-medme.co.za/getAllSymptoms.php");
-
-                    HttpResponse httpResponse = httpClient.execute(httpPost);
-                    HttpEntity httpEntity = httpResponse.getEntity();
-                    is = httpEntity.getContent();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    BufferedReader reader =  new BufferedReader(new InputStreamReader(is));
-                    StringBuilder sb = new StringBuilder();
-                    String line = null;
-                    while ((line = reader.readLine()) != null) {
-                        sb.append(line);
-                    }
-                    is.close();
-                    result = sb.toString();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                return  result;
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-                jsonResult = result;
-                showSymptomList();
-            }
-        }
-
-        GetSymptomData dataAccess = new GetSymptomData();
-        dataAccess.execute();
-    }
-
-    protected void showSymptomList() {
-        try{
-            JSONObject jObject = new JSONObject(jsonResult);
-            jArray = jObject.getJSONArray("finalFetch");
-
-            for (int i = 0; i < jArray.length(); i++) {
-                JSONObject jsonSymptom = jArray.getJSONObject(i);
-                int symptomID = Integer.parseInt(jsonSymptom.getString("SymptomID"));
-                String symptomName = jsonSymptom.getString("SymptomName");
-                String symptomDesc = jsonSymptom.getString("SymptomDesc");
-
-                MM_Symptom symptom = new MM_Symptom();
-                symptom.SetSymptomID(symptomID);
-                symptom.SetSymptomName(symptomName);
-                symptom.SetSymptomDesc(symptomDesc);
-                symptomList.add(symptom);
-            }
-
-        } catch (Exception e) {
-
-        }
-    }
-
-    public void getAllSicknesses() {
-        class GetSicknessData extends  AsyncTask<String, Void, String>{
-
-            @Override
-            protected String doInBackground(String... params) {
-                InputStream is = null;
-                String result  = null;
-
-                try {
-                    DefaultHttpClient httpClient = new DefaultHttpClient();
-                    HttpPost httpPost = new HttpPost("http://ssimayi-medme.co.za/getAllSicknesses.php");
-
-                    HttpResponse httpResponse = httpClient.execute(httpPost);
-                    HttpEntity httpEntity = httpResponse.getEntity();
-                    is = httpEntity.getContent();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    BufferedReader reader =  new BufferedReader(new InputStreamReader(is));
-                    StringBuilder sb = new StringBuilder();
-                    String line = null;
-                    while ((line = reader.readLine()) != null) {
-                        sb.append(line);
-                    }
-                    is.close();
-                    result = sb.toString();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                return  result;
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-                jsonResult = result;
-                showSicknessList();
-            }
-        }
-
-        GetSicknessData dataAccess = new GetSicknessData();
-        dataAccess.execute();
-    }
-
-    protected void showSicknessList() {
-        try{
-            JSONObject jObject = new JSONObject(jsonResult);
-            jArray = jObject.getJSONArray("finalFetch");
-
-            for (int i = 0; i < jArray.length(); i++) {
-                JSONObject jsonSickness = jArray.getJSONObject(i);
-                int sicknessID = Integer.parseInt(jsonSickness.getString("SicknessID"));
-                String sicknessName = jsonSickness.getString("SicknessName");
-                String sicknessDesc = jsonSickness.getString("SicknessDesc");
-
-                MM_Sickness sickness = new MM_Sickness();
-                sickness.SetSicknessID(sicknessID);
-                sickness.SetSicknessName(sicknessName);
-                sickness.SetSicknessDesc(sicknessDesc);
-                sicknessList.add(sickness);
-            }
-
-        } catch (Exception e) {
-
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -380,58 +151,4 @@ public class AdminHome extends ActionBarActivity{
 
         return super.onOptionsItemSelected(item);
     }
-
-    /*private class DataAccessAllDisease extends AsyncTask<Void, Void, List<JSONObject>> {
-
-        private ProgressDialog progressDialog;
-        private Context context;
-        private String url;
-        private String message;
-        private JSON_Handler jsonHandler = new JSON_Handler();
-        public AsyncTaskResponse delegate = null;
-
-        public List<JSONObject> jsonObjectList = new ArrayList<>();
-
-        public DataAccessAllDisease(Context context, String url, AsyncTaskResponse asyncResponse) {
-            this.context = context;
-            this.url = url;
-            this.delegate = asyncResponse;
-        }
-
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("We are almost done ...");
-            progressDialog.show();
-        }
-
-        @Override
-        protected List<JSONObject> doInBackground(Void... param) {
-            try {
-                String result = jsonHandler.getJSONFromUrl(url);
-
-                JSONObject jsonResponse = new JSONObject((result));
-                JSONArray jArray = jsonResponse.getJSONArray("finalFetch");
-
-                for (int i = 0; i < jArray.length(); i++) {
-                    JSONObject jsonObject = jArray.getJSONObject(i);
-                    jsonObjectList.add(jsonObject);
-                }
-            } catch (Exception e) {
-                Log.e("log_tag", "Error in parsing data ");
-            }
-            return jsonObjectList;
-        }
-
-        @Override
-        protected void onPostExecute(List<JSONObject> result) {
-            delegate.onTaskCompleted(result);
-            progressDialog.dismiss();
-            super.onPostExecute(result);
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-
-        }
-    }*/
 }
