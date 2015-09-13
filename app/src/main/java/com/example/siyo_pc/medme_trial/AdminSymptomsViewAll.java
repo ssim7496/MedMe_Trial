@@ -70,7 +70,7 @@ public class AdminSymptomsViewAll extends ActionBarActivity implements AsyncTask
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, AdminDiseasesHome.class);
+        Intent intent = new Intent(this, AdminSymptomsHome.class);
         intent.putExtra("userCred", userLoggedIn);
         startActivity(intent);
     }

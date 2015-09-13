@@ -65,7 +65,7 @@ public class AdminDiseasesUpdate extends ActionBarActivity implements AsyncTaskR
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
         } else {
-            spnDiseaseList = (Spinner)findViewById(R.id.spinnerUpdateDisease);
+            spnDiseaseList = (Spinner)findViewById(R.id.spinnerAdminUpdateDisease);
             btnUpdate = (Button)findViewById(R.id.btnAdminConfirmUpdate);
             btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancel);
             edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseNameUpdate);
@@ -77,34 +77,6 @@ public class AdminDiseasesUpdate extends ActionBarActivity implements AsyncTaskR
             addButtonEvents();
             addIntentFiltersAndBroadcastReceivers();
         }
-
-
-
-        /*ArrayList<MM_Disease> diseaseList = medMeDB.GetAllDiseases();
-        final ArrayAdapter<MM_Disease> adapter = new DiseaseSpinnerAdapter(this, android.R.layout.simple_spinner_item,diseaseList);
-
-        spnDiseaseList.setPrompt("Please select a Disease");
-        spnDiseaseList.setAdapter(new NothingSelectedSpinnerAdapter(
-                adapter, R.layout.spinner_row_default_disease, this
-        ));
-        spnDiseaseList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateDisease(edtDiseaseName, edtDiseaseGreekName, edtDiseaseDesc);
-            }
-        });*/
     }
 
     private void previousActivity(View view) {

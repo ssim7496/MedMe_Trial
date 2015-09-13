@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.AdminDiseasesHome;
+import com.example.siyo_pc.medme_trial.AdminSymptomsHome;
 import com.example.siyo_pc.medme_trial.GuestHome;
 import com.example.siyo_pc.medme_trial.Start;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
@@ -34,10 +35,11 @@ public class BusinessLogic{
     private String urlGetAllPeople = "http://ssimayi-medme.co.za/test.php";
 
     private String urlAddPerson = "http://www.ssimayi-medme.co.za/insertPerson.php";
-    private String urlAddDisease = "http://www.ssimayi-medme.co.za/insertDisease.php";
-    private String urlAddSymptom = "http://www.ssimayi-medme.co.za/insertSymptom.php";
+    private String urlAddDiseaseAdmin = "http://www.ssimayi-medme.co.za/insertDiseaseAdmin.php";
+    private String urlAddSymptomAdmin = "http://www.ssimayi-medme.co.za/insertSymptomAdmin.php";
 
-    private String urlUpdateDisease = "http://www.ssimayi-medme.co.za/updateDisease.php";
+    private String urlUpdateDiseaseAdmin = "http://www.ssimayi-medme.co.za/updateDiseaseAdmin.php";
+    private String urlUpdateSymptomAdmin = "http://www.ssimayi-medme.co.za/updateSymptomAdmin.php";
 
     public List<MM_Disease> diseaseList;
     private MM_Person userLoggedIn;
@@ -73,7 +75,7 @@ public class BusinessLogic{
         nameValuePairs.add(new BasicNameValuePair("diseaseDesc", disease.GetDiseaseDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", disease.GetGreekName()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDisease, nameValuePairs, AdminDiseasesHome.class);
+        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDiseaseAdmin, nameValuePairs, AdminDiseasesHome.class);
         dataAccess.execute();
     }
 
@@ -84,18 +86,29 @@ public class BusinessLogic{
         nameValuePairs.add(new BasicNameValuePair("diseaseDesc", disease.GetDiseaseDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", disease.GetGreekName()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlUpdateDisease, nameValuePairs, AdminDiseasesHome.class);
+        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlUpdateDiseaseAdmin, nameValuePairs, AdminDiseasesHome.class);
         dataAccess.execute();
     }
 
-    public void addSymptom(MM_Symptom symptom) {
+    public void addSymptomAdmin(MM_Symptom symptom) {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
         nameValuePairs.add(new BasicNameValuePair("symptomName", symptom.GetSymptomName()));
         nameValuePairs.add(new BasicNameValuePair("symptomDesc", symptom.GetSymptomDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", symptom.GetGreekName()));
 
-        //DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDisease, nameValuePairs);
-        //dataAccess.execute();
+        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSymptomAdmin, nameValuePairs, AdminSymptomsHome.class);
+        dataAccess.execute();
+    }
+
+    public void updateSymptomAdmin(MM_Symptom symptom) {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+        nameValuePairs.add(new BasicNameValuePair("symptomID", Integer.toString(symptom.GetSymptomID())));
+        nameValuePairs.add(new BasicNameValuePair("symptomName", symptom.GetSymptomName()));
+        nameValuePairs.add(new BasicNameValuePair("symptomDesc", symptom.GetSymptomDesc()));
+        nameValuePairs.add(new BasicNameValuePair("greekName", symptom.GetGreekName()));
+
+        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlUpdateSymptomAdmin, nameValuePairs, AdminSymptomsHome.class);
+        dataAccess.execute();
     }
 
     public class DataAccessLayerOperational extends AsyncTask<String, Void, String> {
@@ -146,12 +159,22 @@ public class BusinessLogic{
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     intent.putExtra("userCred", userLoggedIn);
                     context.startActivity(intent);
-                }
+                } break;
                 case "Disease has been updated." : {
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     intent.putExtra("userCred", userLoggedIn);
                     context.startActivity(intent);
-                }
+                } break;
+                case "Symptom has been added." : {
+                    Intent intent = new Intent(context.getApplicationContext(), nextActivity);
+                    intent.putExtra("userCred", userLoggedIn);
+                    context.startActivity(intent);
+                } break;
+                case "Symptom has been updated." : {
+                    Intent intent = new Intent(context.getApplicationContext(), nextActivity);
+                    intent.putExtra("userCred", userLoggedIn);
+                    context.startActivity(intent);
+                } break;
             }
         }
 
