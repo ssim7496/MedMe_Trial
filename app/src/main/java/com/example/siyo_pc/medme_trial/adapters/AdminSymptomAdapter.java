@@ -12,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.AdminSymptomView;
 import com.example.siyo_pc.medme_trial.GuestSicknessView;
 import com.example.siyo_pc.medme_trial.GuestSymptomView;
 import com.example.siyo_pc.medme_trial.R;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
+import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 
@@ -23,15 +25,17 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class SymptomAdapter extends ArrayAdapter<MM_Symptom>{
+public class AdminSymptomAdapter extends ArrayAdapter<MM_Symptom>{
 
     private Context context;
     ArrayList<MM_Symptom> data = null;
+    MM_Person userLoggedIn = null;
 
-    public SymptomAdapter(Context context, ArrayList<MM_Symptom> data) {
+    public AdminSymptomAdapter(Context context, ArrayList<MM_Symptom> data, MM_Person userLoggedIn) {
         super(context, 0, data);
         this.context = context;
         this.data = data;
+        this.userLoggedIn = userLoggedIn;
     }
 
     @Override
@@ -48,9 +52,10 @@ public class SymptomAdapter extends ArrayAdapter<MM_Symptom>{
         tvName.setOnClickListener(new TextView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, GuestSymptomView.class);
+                Intent intent = new Intent(context, AdminSymptomView.class);
                 Bundle bundle = intent.getExtras();
                 intent.putExtra("symptom", Integer.toString(symptom.GetSymptomID()));
+                intent.putExtra("userCred", userLoggedIn);
                 Intent i = new Intent("com.example.siyo_pc.medme_trial.adapters").putExtra("symptomItem", Integer.toString(symptom.GetSymptomID()));
                 context.sendBroadcast(i);
                 context.startActivity(intent);

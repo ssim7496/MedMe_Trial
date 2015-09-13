@@ -7,21 +7,43 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.siyo_pc.medme_trial.classes.MM_Person;
 
 
 public class AdminDiseasesHome extends ActionBarActivity {
 
     Button btnAdd, btnUpdate, btnViewAll;
 
+    MM_Person userLoggedIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_diseases_home);
 
-        btnAdd = (Button)findViewById(R.id.btnAdminAdd);
-        btnUpdate = (Button)findViewById(R.id.btnAdminUpdate);
-        btnViewAll = (Button)findViewById(R.id.btnAdminViewAll);
+        try {
+            Intent intent = getIntent();
+            userLoggedIn = (MM_Person) intent.getParcelableExtra("userCred");
+        } catch (Exception e) {
 
+        }
+
+        if (userLoggedIn == null) {
+            Toast.makeText(this, "Access restricted! No user is logged in", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, Start.class);
+            startActivity(intent);
+        } else {
+            btnAdd = (Button)findViewById(R.id.btnAdminAdd);
+            btnUpdate = (Button)findViewById(R.id.btnAdminUpdate);
+            btnViewAll = (Button)findViewById(R.id.btnAdminViewAll);
+
+            addButtonEvents();
+        }
+    }
+
+    private void addButtonEvents() {
         addNextActivityOnClickListener(btnAdd, AdminDiseasesAdd.class);
         addNextActivityOnClickListener(btnUpdate, AdminDiseasesUpdate.class);
         addNextActivityOnClickListener(btnViewAll, AdminDiseasesViewAll.class);
@@ -32,6 +54,7 @@ public class AdminDiseasesHome extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), nextClass);
+                intent.putExtra("userCred", userLoggedIn);
                 startActivity(intent);
             }
         });
@@ -40,6 +63,7 @@ public class AdminDiseasesHome extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, AdminHome.class);
+        intent.putExtra("userCred", userLoggedIn);
         startActivity(intent);
     }
 

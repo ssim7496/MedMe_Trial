@@ -12,43 +12,47 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
+import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.db.BusinessLogic;
 import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 
 public class AdminDiseasesAdd extends ActionBarActivity {
 
-    MedMe_Helper medMeDB = null;
     Button btnAdd, btnCancel;
     EditText edtDiseaseName, edtDiseaseGreekName, edtDiseaseDesc;
+
+    MM_Person userLoggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_diseases_add);
-        addButtonEvents();
-        /*medMeDB = new MedMe_Helper(this);
-        btnAdd = (Button)findViewById(R.id.btnAdminConfirmAddDisease);
-        btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelDisease);
-        edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseNameAdd);
-        edtDiseaseGreekName = (EditText)findViewById(R.id.edtAdminDiseaseGreekNameAdd);
-        edtDiseaseDesc = (EditText)findViewById(R.id.edtAdminDiseaseDescAdd);
 
-        addNextActivityOnClickListener(btnCancel, AdminDiseasesHome.class);
+        try {
+            Intent intent = getIntent();
+            userLoggedIn = (MM_Person) intent.getParcelableExtra("userCred");
+        } catch (Exception e) {
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addDisease(edtDiseaseName, edtDiseaseGreekName, edtDiseaseDesc);
-            }
-        });*/
+        }
+
+        if (userLoggedIn == null) {
+            Toast.makeText(this, "Access restricted! No user is logged in", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, Start.class);
+            startActivity(intent);
+        } else {
+            btnAdd = (Button)findViewById(R.id.btnAdminConfirmAddDisease);
+            btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelDisease);
+            edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseNameAdd);
+            edtDiseaseGreekName = (EditText)findViewById(R.id.edtAdminDiseaseGreekNameAdd);
+            edtDiseaseDesc = (EditText)findViewById(R.id.edtAdminDiseaseDescAdd);
+
+            addButtonEvents();
+        }
+
     }
 
-    public void addButtonEvents(){
-        btnAdd = (Button)findViewById(R.id.btnAdminConfirmAddDisease);
-        btnCancel = (Button)findViewById(R.id.btnAdminConfirmCancelDisease);
-
-        //addNextActivityOnClickListener(btnRegister, RegisterUser.class);
+    private void addButtonEvents(){
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,23 +62,7 @@ public class AdminDiseasesAdd extends ActionBarActivity {
         previousActivity(btnCancel);
     }
 
-    public void addNextActivityOnClickListener(View view, final Class nextClass) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), nextClass);
-                startActivity(intent);
-            }
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, AdminDiseasesHome.class);
-        startActivity(intent);
-    }
-
-    public void previousActivity(View view) {
+    private void previousActivity(View view) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,22 +71,22 @@ public class AdminDiseasesAdd extends ActionBarActivity {
         });
     }
 
-    public void addDisease() {
-        edtDiseaseName = (EditText)findViewById(R.id.edtAdminDiseaseNameAdd);
-        edtDiseaseGreekName = (EditText)findViewById(R.id.edtAdminDiseaseGreekNameAdd);
-        edtDiseaseDesc = (EditText)findViewById(R.id.edtAdminDiseaseDescAdd);
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, AdminDiseasesHome.class);
+        intent.putExtra("userCred", userLoggedIn);
+        startActivity(intent);
+    }
 
+    private void addDisease() {
         if (edtDiseaseName != null && edtDiseaseGreekName != null && edtDiseaseDesc != null){
             if (edtDiseaseName.length() > 1 && edtDiseaseGreekName.length() > 1 && edtDiseaseDesc.length() > 1) {
                 String gName = edtDiseaseGreekName.getText().toString();
                 String dName = edtDiseaseName.getText().toString();
                 String dDesc = edtDiseaseDesc.getText().toString();
                 MM_Disease disease = new MM_Disease(gName, dName, dDesc);
-                BusinessLogic bll = new BusinessLogic(this);
-                bll.addDisease(disease);
-
-                Intent intent = new Intent(getApplicationContext(), AdminDiseasesHome.class);
-                startActivity(intent);
+                BusinessLogic bll = new BusinessLogic(this, userLoggedIn);
+                bll.addDiseaseAdmin(disease);
             }
             else {
                 Toast.makeText(getApplicationContext(), "All fields must be at least 2 characters in length.", Toast.LENGTH_LONG).show();

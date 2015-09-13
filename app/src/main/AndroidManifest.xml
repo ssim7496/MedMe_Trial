@@ -40,6 +40,7 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="ANDROID.INTENT.ACTION.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -139,6 +140,14 @@
         <activity
             android:name=".RegisterUser"
             android:label="@string/title_activity_register_user" >
+        </activity>
+        <activity
+            android:name=".AdminDiseaseView"
+            android:label="@string/title_activity_admin_disease_view" >
+        </activity>
+        <activity
+            android:name=".AdminSymptomView"
+            android:label="@string/title_activity_admin_symptom_view" >
         </activity>
     </application>
 

@@ -1,24 +1,26 @@
 package com.example.siyo_pc.medme_trial;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.siyo_pc.medme_trial.adapters.AdminDiseaseAdapter;
 import com.example.siyo_pc.medme_trial.adapters.AdminSymptomAdapter;
-import com.example.siyo_pc.medme_trial.adapters.DiseaseAdapter;
 import com.example.siyo_pc.medme_trial.adapters.SymptomAdapter;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
+import com.example.siyo_pc.medme_trial.db.AsyncGetAllDiseases;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptoms;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
-import com.example.siyo_pc.medme_trial.db.MedMe_Helper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,20 +28,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+public class AdminDiseaseView extends AppCompatActivity implements AsyncTaskResponse {
 
-public class AdminSymptomsViewAll extends ActionBarActivity implements AsyncTaskResponse{
-
-    private ListView listSymptoms;
+    TextView diseaseTitle, diseaseGreekName, diseaseDesc;
+    ListView lstSymptoms;
 
     MM_Person userLoggedIn;
 
+    private AsyncGetAllDiseases asyncAllDiseases = new AsyncGetAllDiseases(this, this);
     private AsyncGetAllSymptoms asyncAllSymptoms = new AsyncGetAllSymptoms(this, this);
+    private ArrayList<MM_Disease> diseaseList = null;
     private ArrayList<MM_Symptom> symptomList = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_symptoms_view_all);
+        setContentView(R.layout.activity_admin_disease_view);
 
         try {
             Intent intent = getIntent();
@@ -53,33 +58,60 @@ public class AdminSymptomsViewAll extends ActionBarActivity implements AsyncTask
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
         } else {
-            listSymptoms = (ListView) findViewById(R.id.listViewAdminSymptoms);
+            diseaseTitle = (TextView)findViewById(R.id.tvAdminDiseaseTitle);
+            diseaseGreekName = (TextView)findViewById(R.id.tvAdminDiseaseGreekName);
+            diseaseDesc = (TextView)findViewById(R.id.tvAdminDiseaseDescription);
 
+            asyncAllDiseases.execute();
             asyncAllSymptoms.execute();
+
         }
-    }
-
-    private void previousActivity(View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, AdminDiseasesHome.class);
-        intent.putExtra("userCred", userLoggedIn);
-        startActivity(intent);
     }
 
     @Override
     public void onTaskCompleted(List<JSONObject> objectList, int passTypeID) {
-        symptomList = convertToSymptoms(objectList);
+        switch (passTypeID) {
+            case 1 : {
+                diseaseList = convertToDiseases(objectList);
+                getDiseaseInformation(diseaseList);
+            } break;
+            case 2 : {
+                symptomList = convertToSymptoms(objectList);
+                getSymptomInformation(symptomList);
+            } break;
+            case 3 : {
+                //sickness list
+            } break;
+        }
+    }
 
-        fillSymptomList(symptomList);
+    private ArrayList<MM_Disease> convertToDiseases(List<JSONObject> objectList) {
+        if (objectList.size() > 0) {
+
+            diseaseList = new ArrayList<>();
+
+            try {
+                for (int i = 0; i < objectList.size(); i++) {
+                    JSONObject jObject = objectList.get(i);
+                    int diseaseID = jObject.getInt("DiseaseID");
+                    String greekName = jObject.getString("GreekName");
+                    String diseaseName = jObject.getString("DiseaseName");
+                    String diseaseDesc = jObject.getString("DiseaseDesc");
+
+                    MM_Disease disease = new MM_Disease();
+                    disease.SetDiseaseID(diseaseID);
+                    disease.SetGreekName(greekName);
+                    disease.SetDiseaseName(diseaseName);
+                    disease.SetDiseaseDesc(diseaseDesc);
+
+                    diseaseList.add(disease);
+                }
+            } catch ( JSONException e) {
+
+            }
+        }
+
+        return diseaseList;
     }
 
     private ArrayList<MM_Symptom> convertToSymptoms(List<JSONObject> objectList) {
@@ -111,33 +143,37 @@ public class AdminSymptomsViewAll extends ActionBarActivity implements AsyncTask
         return symptomList;
     }
 
-    private void fillSymptomList(ArrayList<MM_Symptom> symptomList){
+    private void getDiseaseInformation(ArrayList<MM_Disease> diseaseList) {
+        Intent intent = getIntent();
+        String diss = intent.getStringExtra("disease");
+        MM_Disease disease = null;
 
-        if (symptomList != null) {
-            AdminSymptomAdapter adapter = new AdminSymptomAdapter(this, symptomList, userLoggedIn);
-            View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
-            listSymptoms.addHeaderView(header);
-            listSymptoms.setAdapter(adapter);
+        for (int i = 0; i < diseaseList.size(); i++) {
+            if (diseaseList.get(i).GetDiseaseID() == Integer.parseInt(diss)) {
+                disease = diseaseList.get(i);
+                break;
+            }
         }
+
+        diseaseTitle.setText(disease.GetDiseaseName());
+        diseaseGreekName.setText("Greek Name: \n" + disease.GetGreekName());
+        diseaseDesc.setText("Disease Description: \n" + disease.GetDiseaseDesc());
     }
 
-    //public void (ArrayList<> ){
-
-        /*ArrayList<MM_Symptom> symptomList = medMeDB.GetAllSymptoms();
-
+    private void getSymptomInformation(ArrayList<MM_Symptom> symptomList) {
         if (symptomList != null) {
-            SymptomAdapter adapter = new SymptomAdapter(this, symptomList);
-            listSymptoms = (ListView) findViewById(R.id.listViewAdmin1);
+            AdminSymptomAdapter adapter = new AdminSymptomAdapter(this, symptomList, userLoggedIn);
+            lstSymptoms = (ListView) findViewById(R.id.listViewAdminSymptomDiseaseLink);
             View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
-            listSymptoms.addHeaderView(header);
-            listSymptoms.setAdapter(adapter);
-        }*/
-    //}
+            lstSymptoms.addHeaderView(header);
+            lstSymptoms.setAdapter(adapter);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_admin_symptoms_view_all, menu);
+        getMenuInflater().inflate(R.menu.menu_admin_disease_view, menu);
         return true;
     }
 

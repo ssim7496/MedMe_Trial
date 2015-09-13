@@ -33,13 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class LogIn extends AppCompatActivity implements AsyncTaskResponse{
-
-    private AsyncGetAllDiseases asyncAllDiseases = new AsyncGetAllDiseases(this);
-    private AsyncGetAllSymptoms asyncAllSymptoms = new AsyncGetAllSymptoms(this);
-    private List<MM_Disease> diseaseList = null;
-    private List<MM_Symptom> symptomList = null;
-
+public class LogIn extends AppCompatActivity{
     Button btnBack, btnLogIn;
     EditText edtEmail, edtPassword;
 
@@ -48,85 +42,7 @@ public class LogIn extends AppCompatActivity implements AsyncTaskResponse{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        asyncAllDiseases.execute();
-        asyncAllSymptoms.execute();
-
         addButtonEvents();
-    }
-
-    //retrieving the JSON object list from the async task
-    @Override
-    public void onTaskCompleted(List<JSONObject> objectList, int passTypeID) {
-        switch (passTypeID) {
-            case 1 : {
-                diseaseList = convertToDiseases(objectList);
-            } break;
-            case 2 : {
-                symptomList = convertToSymptoms(objectList);
-            } break;
-            case 3 : {
-                //sickness list
-            } break;
-        }
-    }
-
-    //converting retrieved JSON object list to appropriate format
-    private List<MM_Disease> convertToDiseases(List<JSONObject> objectList) {
-        if (objectList.size() > 0) {
-
-            diseaseList = new ArrayList<>();
-
-            try {
-                for (int i = 0; i < objectList.size(); i++) {
-                    JSONObject jObject = objectList.get(i);
-                    int diseaseID = jObject.getInt("DiseaseID");
-                    String greekName = jObject.getString("GreekName");
-                    String diseaseName = jObject.getString("DiseaseName");
-                    String diseaseDesc = jObject.getString("DiseaseDesc");
-
-                    MM_Disease disease = new MM_Disease();
-                    disease.SetDiseaseID(diseaseID);
-                    disease.SetGreekName(greekName);
-                    disease.SetDiseaseName(diseaseName);
-                    disease.SetDiseaseDesc(diseaseDesc);
-
-                    diseaseList.add(disease);
-                }
-            } catch ( JSONException e) {
-
-            }
-        }
-
-        return diseaseList;
-    }
-
-    private List<MM_Symptom> convertToSymptoms(List<JSONObject> objectList) {
-        if (objectList.size() > 0) {
-
-            symptomList = new ArrayList<>();
-
-            try {
-                for (int i = 0; i < objectList.size(); i++) {
-                    JSONObject jObject = objectList.get(i);
-                    int symptomID = jObject.getInt("SymptomID");
-                    String greekName = jObject.getString("GreekName");
-                    String symptomName = jObject.getString("SymptomName");
-                    String symptomDesc = jObject.getString("SymptomDesc");
-
-                    MM_Symptom symptom = new MM_Symptom();
-                    symptom.SetSymptomID(symptomID);
-                    symptom.SetGreekName(greekName);
-                    symptom.SetSymptomName(symptomName);
-                    symptom.SetSymptomDesc(symptomDesc);
-
-                    symptomList.add(symptom);
-                }
-            } catch ( JSONException e) {
-
-            }
-        }
-
-        return symptomList;
     }
 
     //setting listeners for buttons

@@ -80,5 +80,7 @@
     <string name="title_activity_admin_sickness_symptom_select">Select A Symptom</string>
     <string name="title_activity_register_user">Registration</string>
     <string name="title_activity_log_in">Log In</string>
+    <string name="title_activity_admin_disease_view">Disease View</string>
+    <string name="title_activity_admin_symptom_view">Symptom View</string>
 
 </resources>

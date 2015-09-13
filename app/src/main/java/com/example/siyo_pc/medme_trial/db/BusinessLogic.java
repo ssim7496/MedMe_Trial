@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.AdminDiseasesHome;
 import com.example.siyo_pc.medme_trial.GuestHome;
 import com.example.siyo_pc.medme_trial.Start;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
@@ -36,11 +37,20 @@ public class BusinessLogic{
     private String urlAddDisease = "http://www.ssimayi-medme.co.za/insertDisease.php";
     private String urlAddSymptom = "http://www.ssimayi-medme.co.za/insertSymptom.php";
 
+    private String urlUpdateDisease = "http://www.ssimayi-medme.co.za/updateDisease.php";
+
     public List<MM_Disease> diseaseList;
+    private MM_Person userLoggedIn;
 
     public BusinessLogic(Context context) {
         currentList = new ArrayList<>();
         this.context = context;
+    }
+
+    public BusinessLogic(Context context, MM_Person userLoggedIn) {
+        currentList = new ArrayList<>();
+        this.context = context;
+        this.userLoggedIn = userLoggedIn;
     }
 
     public void addPerson(MM_Person person) {
@@ -57,14 +67,25 @@ public class BusinessLogic{
         dataAccess.execute();
     }
 
-    public void addDisease(MM_Disease disease) {
+    public void addDiseaseAdmin(MM_Disease disease) {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
         nameValuePairs.add(new BasicNameValuePair("diseaseName", disease.GetDiseaseName()));
         nameValuePairs.add(new BasicNameValuePair("diseaseDesc", disease.GetDiseaseDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", disease.GetGreekName()));
 
-        //DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDisease, nameValuePairs);
-        //dataAccess.execute();
+        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDisease, nameValuePairs, AdminDiseasesHome.class);
+        dataAccess.execute();
+    }
+
+    public void updateDiseaseAdmin(MM_Disease disease) {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+        nameValuePairs.add(new BasicNameValuePair("diseaseID", Integer.toString(disease.GetDiseaseID())));
+        nameValuePairs.add(new BasicNameValuePair("diseaseName", disease.GetDiseaseName()));
+        nameValuePairs.add(new BasicNameValuePair("diseaseDesc", disease.GetDiseaseDesc()));
+        nameValuePairs.add(new BasicNameValuePair("greekName", disease.GetGreekName()));
+
+        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlUpdateDisease, nameValuePairs, AdminDiseasesHome.class);
+        dataAccess.execute();
     }
 
     public void addSymptom(MM_Symptom symptom) {
@@ -116,9 +137,21 @@ public class BusinessLogic{
             progressDialog.dismiss();
             Toast.makeText(context.getApplicationContext(), retrievedMessage, Toast.LENGTH_LONG).show();
 
-            if (retrievedMessage.equals("You have been successfully registered.")) {
-                Intent intent = new Intent(context.getApplicationContext(), nextActivity);
-                context.startActivity(intent);
+            switch (retrievedMessage) {
+                case "You have been successfully registered." : {
+                    Intent intent = new Intent(context.getApplicationContext(), nextActivity);
+                    context.startActivity(intent);
+                } break;
+                case "Disease has been added." : {
+                    Intent intent = new Intent(context.getApplicationContext(), nextActivity);
+                    intent.putExtra("userCred", userLoggedIn);
+                    context.startActivity(intent);
+                }
+                case "Disease has been updated." : {
+                    Intent intent = new Intent(context.getApplicationContext(), nextActivity);
+                    intent.putExtra("userCred", userLoggedIn);
+                    context.startActivity(intent);
+                }
             }
         }
 

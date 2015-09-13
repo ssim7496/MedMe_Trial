@@ -41,7 +41,6 @@ import java.util.concurrent.ExecutionException;
 
 public class AdminHome extends ActionBarActivity{
 
-    MedMe_Helper medMeDB = null;
     Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnTerminology, btnSicknesses;
 
     MM_Person userLoggedIn;
@@ -88,17 +87,18 @@ public class AdminHome extends ActionBarActivity{
 
     }
 
-    public void addNextActivityOnClickListener(View view, final Class nextClass) {
+    private void addNextActivityOnClickListener(View view, final Class nextClass) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), nextClass);
+                intent.putExtra("userCred", userLoggedIn);
                 startActivity(intent);
             }
         });
     }
 
-    public void underConstruction(View view) {
+    private void underConstruction(View view) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

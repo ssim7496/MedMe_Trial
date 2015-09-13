@@ -39,7 +39,7 @@ public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_item_row, parent, false);
         }
 
-        TextView tvName = (TextView)convertView.findViewById(R.id.txtTitle);
+        TextView tvName = (TextView)convertView.findViewById(R.id.txtLstTitle);
         tvName.setText(sickness.GetSicknessName());
 
         tvName.setOnClickListener(new TextView.OnClickListener() {

@@ -8,52 +8,49 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.siyo_pc.medme_trial.GuestDiseaseView;
-import com.example.siyo_pc.medme_trial.GuestSicknessView;
+import com.example.siyo_pc.medme_trial.AdminDiseasesUpdate;
 import com.example.siyo_pc.medme_trial.R;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
-import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class DiseaseAdapter extends ArrayAdapter<MM_Disease>{
+public class AdminDiseaseSpinnerAdapter extends ArrayAdapter<MM_Disease>{
 
-    private Context context;
+    Context context;
+    int resource;
     ArrayList<MM_Disease> data = null;
 
-    public DiseaseAdapter(Context context, ArrayList<MM_Disease> data) {
-        super(context, 0, data);
+    public AdminDiseaseSpinnerAdapter(Context context, int resource, ArrayList<MM_Disease> data) {
+        super(context, resource, data);
         this.context = context;
+        this.resource = resource;
         this.data = data;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
         final MM_Disease disease = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_item_row, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.spinner_item_row, parent, false);
         }
 
-        TextView tvName = (TextView)convertView.findViewById(R.id.txtLstTitle);
+        TextView tvName = (TextView)convertView.findViewById(R.id.itemName);
         tvName.setText(disease.GetDiseaseName());
 
         tvName.setOnClickListener(new TextView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, GuestDiseaseView.class);
+                /*Intent intent = new Intent(context, AdminDiseasesUpdate.class);
                 Bundle bundle = intent.getExtras();
                 intent.putExtra("disease", Integer.toString(disease.GetDiseaseID()));
-                Intent i = new Intent("com.example.siyo_pc.medme_trial.adapters").putExtra("diseaseItem", Integer.toString(disease.GetDiseaseID()));
+                context.startActivity(intent);*/
+                Intent i = new Intent("com.example.siyo_pc.medme_trial.adapters").putExtra("diseaseItem2", Integer.toString(disease.GetDiseaseID()));
                 context.sendBroadcast(i);
-                context.startActivity(intent);
-
             }
         });
 
