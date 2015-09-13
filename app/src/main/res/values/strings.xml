@@ -20,6 +20,7 @@
     <string name="register">Register</string>
     <string name="logIn">Log In</string>
     <string name="back">Back</string>
+    <string name="next">Next</string>
 
     <string name="name">Name:</string>
     <string name="surname">Surname:</string>
@@ -82,5 +83,7 @@
     <string name="title_activity_log_in">Log In</string>
     <string name="title_activity_admin_disease_view">Disease View</string>
     <string name="title_activity_admin_symptom_view">Symptom View</string>
+    <string name="title_activity_admin_sickness_view">View Sickness</string>
+    <string name="title_activity_admin_sicknesses_add_symptoms">Add Symptoms to Sickness</string>
 
 </resources>

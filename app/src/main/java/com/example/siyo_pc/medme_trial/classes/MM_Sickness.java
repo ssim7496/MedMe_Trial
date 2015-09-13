@@ -1,6 +1,9 @@
 package com.example.siyo_pc.medme_trial.classes;
 
-public class MM_Sickness {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MM_Sickness implements Parcelable {
 
     private int sSicknessID;
     private String sGreekName;
@@ -75,5 +78,36 @@ public class MM_Sickness {
 
     public void SetMode(int mode) {
         sMode = mode;
+    }
+
+    //parcel methods
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(sSicknessID);
+        dest.writeString(sGreekName);
+        dest.writeString(sSicknessName);
+        dest.writeString(sSicknessDesc);
+    }
+
+    public static final Parcelable.Creator<MM_Sickness> CREATOR = new Parcelable.Creator<MM_Sickness>() {
+        public MM_Sickness createFromParcel(Parcel in) {
+            return new MM_Sickness(in);
+        }
+
+        public MM_Sickness[] newArray(int size) {
+            return  new MM_Sickness[size];
+        }
+    };
+
+    private MM_Sickness(Parcel in) {
+        this.sSicknessID = in.readInt();
+        this.sGreekName = in.readString();
+        this.sSicknessName = in.readString();
+        this.sSicknessDesc = in.readString();
     }
 }

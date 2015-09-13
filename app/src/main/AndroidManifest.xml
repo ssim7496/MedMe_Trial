@@ -149,6 +149,14 @@
             android:name=".AdminSymptomView"
             android:label="@string/title_activity_admin_symptom_view" >
         </activity>
+        <activity
+            android:name=".AdminSicknessView"
+            android:label="@string/title_activity_admin_sickness_view" >
+        </activity>
+        <activity
+            android:name=".AdminSicknessesAddSymptoms"
+            android:label="@string/title_activity_admin_sicknesses_add_symptoms" >
+        </activity>
     </application>
 
 </manifest>
