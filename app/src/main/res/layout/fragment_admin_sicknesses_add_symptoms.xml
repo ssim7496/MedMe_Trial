@@ -6,6 +6,16 @@
     android:background="@color/default_background"
     tools:context="com.example.siyo_pc.medme_trial.AdminSicknessesAddSymptomsFragment">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:id="@+id/linAdminSicknessSymptomsAdd">
 
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

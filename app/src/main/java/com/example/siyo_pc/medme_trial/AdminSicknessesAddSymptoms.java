@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +40,8 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
     private AsyncGetAllSymptoms asyncAllSymptoms = new AsyncGetAllSymptoms(this, this);
     private ArrayList<MM_Symptom> symptomList = null;
 
+    LinearLayout linSymptoms = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,7 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
         } else {
+            linSymptoms = (LinearLayout)findViewById(R.id.linAdminSicknessSymptomsAdd);
 
             asyncAllSymptoms.execute();
 
@@ -118,6 +123,21 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
     }
 
     private void fillSymptomsSpinner(ArrayList<MM_Symptom> symptomList){
+        try {
+
+            /*int i = 1;
+            cbSymptom.setId(i);*/
+            for (int i = 0; i < symptomList.size(); i++) {
+                CheckBox cbSymptom = new CheckBox(getApplicationContext());
+                cbSymptom.setText(symptomList.get(i).GetSymptomName());
+                cbSymptom.setTextSize(30);
+                linSymptoms.addView(cbSymptom);
+            }
+
+        } catch (Exception e) {
+
+        }
+
 
         /*final ArrayAdapter<MM_Symptom> adapter = new AdminSymptomSpinnerAdapter(this, android.R.layout.simple_spinner_item, symptomList);
 
