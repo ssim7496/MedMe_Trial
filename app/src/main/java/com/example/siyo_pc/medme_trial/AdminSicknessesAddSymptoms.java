@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -39,6 +40,7 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
 
     private AsyncGetAllSymptoms asyncAllSymptoms = new AsyncGetAllSymptoms(this, this);
     private ArrayList<MM_Symptom> symptomList = null;
+    private ArrayList<MM_Symptom> symptomToAddList = new ArrayList<>();
 
     LinearLayout linSymptoms = null;
 
@@ -122,16 +124,26 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
         return symptomList;
     }
 
-    private void fillSymptomsSpinner(ArrayList<MM_Symptom> symptomList){
+    private void fillSymptomsSpinner(final ArrayList<MM_Symptom> symptomList){
         try {
 
             /*int i = 1;
             cbSymptom.setId(i);*/
             for (int i = 0; i < symptomList.size(); i++) {
+                final int count = i;
                 CheckBox cbSymptom = new CheckBox(getApplicationContext());
                 cbSymptom.setText(symptomList.get(i).GetSymptomName());
                 cbSymptom.setTextSize(30);
                 linSymptoms.addView(cbSymptom);
+                cbSymptom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked)
+                            symptomToAddList.add(symptomList.get(count));
+                        else
+                            symptomToAddList.remove(symptomList.get(count));
+                    }
+                });
             }
 
         } catch (Exception e) {
