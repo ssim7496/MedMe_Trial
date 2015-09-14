@@ -1,21 +1,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@color/default_background"
-    tools:context="com.example.siyo_pc.medme_trial.AdminSicknessesAddSymptomsFragment">
+    tools:context="com.example.siyo_pc.medme_trial.AdminSicknessesAddSymptomsFragment"
+    android:weightSum="1">
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/rowAddSickSymp1"
+            android:layout_weight="0.97">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/linAdminSicknessSymptomsAdd">
+                </LinearLayout>
+            </ScrollView>
 
+        </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:id="@+id/linAdminSicknessSymptomsAdd">
-
+            android:layout_height="60dp"
+            android:id="@+id/rowAddSickSymp2"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <Button
+                android:layout_width="0dip"
+                android:layout_weight="0.1"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_button"
+                style="@style/button_text"
+                android:id="@+id/btnAdminSicknessSymptomBack"
+                android:text="@string/back"
+                />
+            <Button
+                android:layout_width="0dip"
+                android:layout_weight="0.1"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_button"
+                style="@style/button_text"
+                android:id="@+id/btnAdminSicknessSymptomAdd"
+                android:text="@string/Add"
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

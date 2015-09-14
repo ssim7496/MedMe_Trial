@@ -130,10 +130,6 @@
             android:label="@string/title_activity_admin_sicknesses_home" >
         </activity>
         <activity
-            android:name=".AdminSicknessSymptomSelect"
-            android:label="@string/title_activity_admin_sickness_symptom_select" >
-        </activity>
-        <activity
             android:name=".LogIn"
             android:label="@string/title_activity_log_in" >
         </activity>

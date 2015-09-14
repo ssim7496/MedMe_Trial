@@ -141,7 +141,7 @@ public class LogIn extends AppCompatActivity{
                 nameValuePairs.add(new BasicNameValuePair("personEmailAddress", edtEmail.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("personPassword", edtPassword.getText().toString()));
 
-                DataAccessLogIn taskLogIn = new DataAccessLogIn(this, "http://www.ssimayi-medme.co.za/login.php", nameValuePairs/*, this*/);
+                DataAccessLogIn taskLogIn = new DataAccessLogIn(this, "http://www.ssimayi-medme.co.za/login.php", nameValuePairs);
                 taskLogIn.execute();
             }
         } catch (Exception e) {

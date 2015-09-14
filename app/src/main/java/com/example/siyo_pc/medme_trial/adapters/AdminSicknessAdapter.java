@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.siyo_pc.medme_trial.AdminSicknessView;
 import com.example.siyo_pc.medme_trial.GuestSicknessView;
 import com.example.siyo_pc.medme_trial.R;
+import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 
 import org.w3c.dom.Text;
@@ -25,11 +26,13 @@ public class AdminSicknessAdapter extends ArrayAdapter<MM_Sickness>{
 
     private Context context;
     ArrayList<MM_Sickness> data = null;
+    MM_Person userLoggedIn = null;
 
-    public AdminSicknessAdapter(Context context, ArrayList<MM_Sickness> data) {
+    public AdminSicknessAdapter(Context context, ArrayList<MM_Sickness> data, MM_Person userLogged) {
         super(context, 0, data);
         this.context = context;
         this.data = data;
+        this.userLoggedIn = userLogged;
     }
 
     @Override
@@ -49,7 +52,8 @@ public class AdminSicknessAdapter extends ArrayAdapter<MM_Sickness>{
                 Intent intent = new Intent(context, AdminSicknessView.class);
                 Bundle bundle = intent.getExtras();
                 intent.putExtra("sickness", Integer.toString(sickness.GetSicknessID()));
-                Intent i = new Intent("com.example.siyo_pc.medme_trial.adapters").putExtra("diseaseItem", Integer.toString(sickness.GetSicknessID()));
+                intent.putExtra("userCred", userLoggedIn);
+                Intent i = new Intent("com.example.siyo_pc.medme_trial.adapters").putExtra("sicknessItem", Integer.toString(sickness.GetSicknessID()));
                 context.sendBroadcast(i);
                 context.startActivity(intent);
             }

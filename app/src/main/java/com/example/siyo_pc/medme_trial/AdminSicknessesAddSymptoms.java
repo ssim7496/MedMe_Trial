@@ -25,6 +25,7 @@ import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptoms;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
+import com.example.siyo_pc.medme_trial.db.BusinessLogic;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +44,7 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
     private ArrayList<MM_Symptom> symptomToAddList = new ArrayList<>();
 
     LinearLayout linSymptoms = null;
+    Button btnAdd, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +66,24 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
             startActivity(intent);
         } else {
             linSymptoms = (LinearLayout)findViewById(R.id.linAdminSicknessSymptomsAdd);
+            btnAdd = (Button) findViewById(R.id.btnAdminSicknessSymptomAdd);
+            btnBack = (Button) findViewById(R.id.btnAdminSicknessSymptomBack);
 
             asyncAllSymptoms.execute();
 
-            //addButtonEvents();
-            //addIntentFiltersAndBroadcastReceivers();
+            addButtonEvents();
         }
+    }
+
+    private  void addButtonEvents() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addSymptomsToSickness();
+            }
+        });
+
+        previousActivity(btnBack);
     }
 
     private void previousActivity(View view) {
@@ -83,7 +97,7 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, AdminSymptomsHome.class);
+        Intent intent = new Intent(this, AdminSicknessesAdd.class);
         intent.putExtra("userCred", userLoggedIn);
         startActivity(intent);
     }
@@ -92,7 +106,7 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
     public void onTaskCompleted(List<JSONObject> objectList, int passTypeID) {
         symptomList = convertToSymptoms(objectList);
 
-        fillSymptomsSpinner(symptomList);
+        fillSymptomsCheckBoxes(symptomList);
     }
 
     private ArrayList<MM_Symptom> convertToSymptoms(List<JSONObject> objectList) {
@@ -124,11 +138,9 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
         return symptomList;
     }
 
-    private void fillSymptomsSpinner(final ArrayList<MM_Symptom> symptomList){
+    private void fillSymptomsCheckBoxes(final ArrayList<MM_Symptom> symptomList){
         try {
 
-            /*int i = 1;
-            cbSymptom.setId(i);*/
             for (int i = 0; i < symptomList.size(); i++) {
                 final int count = i;
                 CheckBox cbSymptom = new CheckBox(getApplicationContext());
@@ -149,25 +161,25 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
         } catch (Exception e) {
 
         }
+    }
 
-
-        /*final ArrayAdapter<MM_Symptom> adapter = new AdminSymptomSpinnerAdapter(this, android.R.layout.simple_spinner_item, symptomList);
-
-        spnSymptomList.setPrompt("Please select a symptom");
-        spnSymptomList.setAdapter(new NothingSelectedSpinnerAdapter(
-                adapter, R.layout.spinner_row_default_symptom, this
-        ));
-        spnSymptomList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+    private void addSymptomsToSickness() {
+        if (diseaseChosen != null) {
+            if (sicknessSaved != null) {
+                if (symptomToAddList != null && symptomToAddList.size() > 0) {
+                    BusinessLogic bll = new BusinessLogic(this, userLoggedIn);
+                    bll.addSicknessAdmin(sicknessSaved, diseaseChosen, symptomToAddList);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please choose at least one symptom.", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                onBackPressed();
+                Toast.makeText(getApplicationContext(), "No sickness has been made for symptoms to be added.", Toast.LENGTH_LONG).show();
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
+        } else {
+            onBackPressed();
+            Toast.makeText(getApplicationContext(), "No disease has been chosen for a sickness to have symptoms.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

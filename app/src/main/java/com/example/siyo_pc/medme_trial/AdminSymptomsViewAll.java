@@ -121,19 +121,6 @@ public class AdminSymptomsViewAll extends ActionBarActivity implements AsyncTask
         }
     }
 
-    //public void (ArrayList<> ){
-
-        /*ArrayList<MM_Symptom> symptomList = medMeDB.GetAllSymptoms();
-
-        if (symptomList != null) {
-            SymptomAdapter adapter = new SymptomAdapter(this, symptomList);
-            listSymptoms = (ListView) findViewById(R.id.listViewAdmin1);
-            View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
-            listSymptoms.addHeaderView(header);
-            listSymptoms.setAdapter(adapter);
-        }*/
-    //}
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

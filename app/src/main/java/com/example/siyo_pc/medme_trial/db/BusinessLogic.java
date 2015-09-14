@@ -9,11 +9,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.AdminDiseasesHome;
+import com.example.siyo_pc.medme_trial.AdminSicknessesHome;
 import com.example.siyo_pc.medme_trial.AdminSymptomsHome;
 import com.example.siyo_pc.medme_trial.GuestHome;
 import com.example.siyo_pc.medme_trial.Start;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
+import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 
 import org.apache.http.NameValuePair;
@@ -37,6 +39,8 @@ public class BusinessLogic{
     private String urlAddPerson = "http://www.ssimayi-medme.co.za/insertPerson.php";
     private String urlAddDiseaseAdmin = "http://www.ssimayi-medme.co.za/insertDiseaseAdmin.php";
     private String urlAddSymptomAdmin = "http://www.ssimayi-medme.co.za/insertSymptomAdmin.php";
+    private String urlAddSicknessAdmin = "http://www.ssimayi-medme.co.za/insertSicknessAdmin.php";
+    private String urlAddSicknessSymptomsAdmin = "http://www.ssimayi-medme.co.za/insertSicknessSymptomsAdmin.php";
 
     private String urlUpdateDiseaseAdmin = "http://www.ssimayi-medme.co.za/updateDiseaseAdmin.php";
     private String urlUpdateSymptomAdmin = "http://www.ssimayi-medme.co.za/updateSymptomAdmin.php";
@@ -111,6 +115,16 @@ public class BusinessLogic{
         dataAccess.execute();
     }
 
+    public void addSicknessAdmin(MM_Sickness sickness, MM_Disease disease, ArrayList<MM_Symptom> symptomToAddList) {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+        nameValuePairs.add(new BasicNameValuePair("sicknessName", sickness.GetSicknessName()));
+        nameValuePairs.add(new BasicNameValuePair("sicknessDesc", sickness.GetSicknessDesc()));
+        nameValuePairs.add(new BasicNameValuePair("greekName", sickness.GetGreekName()));
+
+        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSicknessAdmin, nameValuePairs, AdminSicknessesHome.class, sickness, disease, symptomToAddList);
+        dataAccess.execute();
+    }
+
     public class DataAccessLayerOperational extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog = new ProgressDialog(context);
         private List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -118,10 +132,29 @@ public class BusinessLogic{
         private String message;
         private Class nextActivity;
 
+        private MM_Sickness sickness;
+        private MM_Disease disease;
+        private ArrayList<MM_Symptom> symptomToAddList;
+
+        public DataAccessLayerOperational(String url, List<NameValuePair> params) {
+            this.url = url;
+            this.params = params;
+        }
+
         public DataAccessLayerOperational(String url, List<NameValuePair> params, Class nextActivity) {
             this.url = url;
             this.params = params;
             this.nextActivity = nextActivity;
+        }
+
+        public DataAccessLayerOperational(String url, List<NameValuePair> params, Class nextActivity, MM_Sickness sickness, MM_Disease disease,
+                                          ArrayList<MM_Symptom> symptomToAddList) {
+            this.url = url;
+            this.params = params;
+            this.nextActivity = nextActivity;
+            this.sickness = sickness;
+            this.disease = disease;
+            this.symptomToAddList = symptomToAddList;
         }
         @Override
         protected void onPreExecute() {
@@ -145,10 +178,32 @@ public class BusinessLogic{
         }
 
         @Override
-        protected void onPostExecute(String retrievedMessage)
+        protected void onPostExecute(String retrievedMessaged)
         {
             progressDialog.dismiss();
-            Toast.makeText(context.getApplicationContext(), retrievedMessage, Toast.LENGTH_LONG).show();
+            int sickID = 0;
+            String retrievedMessage = "";
+
+            if (retrievedMessaged.contains("Sickness has been added.")){
+                int sickPos = retrievedMessaged.indexOf("Sickness");
+                String sickIDs = retrievedMessaged.substring(0, sickPos);
+
+                sickID = Integer.parseInt(sickIDs);
+
+                for (int i = 0; i < symptomToAddList.size(); i++) {
+                    List<NameValuePair> nameValuePairsSymp = new ArrayList<NameValuePair>(1);
+                    nameValuePairsSymp.add(new BasicNameValuePair("sicknessID", Integer.toString(sickID)));
+                    nameValuePairsSymp.add(new BasicNameValuePair("diseaseID", Integer.toString(disease.GetDiseaseID())));
+                    nameValuePairsSymp.add(new BasicNameValuePair("symptomID", Integer.toString(symptomToAddList.get(i).GetSymptomID())));
+                    DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSicknessSymptomsAdmin, nameValuePairsSymp);
+                    dataAccess.execute();
+                }
+
+                retrievedMessage = retrievedMessaged.substring(sickPos, retrievedMessaged.length() - 1);
+
+            } else {
+                retrievedMessage = retrievedMessaged;
+            }
 
             switch (retrievedMessage) {
                 case "You have been successfully registered." : {
@@ -171,6 +226,16 @@ public class BusinessLogic{
                     context.startActivity(intent);
                 } break;
                 case "Symptom has been updated." : {
+                    Intent intent = new Intent(context.getApplicationContext(), nextActivity);
+                    intent.putExtra("userCred", userLoggedIn);
+                    context.startActivity(intent);
+                } break;
+                case "Sickness has been added." : {
+                    Intent intent = new Intent(context.getApplicationContext(), nextActivity);
+                    intent.putExtra("userCred", userLoggedIn);
+                    context.startActivity(intent);
+                } break;
+                case "Sickness has been updated." : {
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     intent.putExtra("userCred", userLoggedIn);
                     context.startActivity(intent);

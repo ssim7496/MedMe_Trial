@@ -8,6 +8,9 @@
     android:background="@color/default_background"
     tools:context="com.example.siyo_pc.medme_trial.AdminSicknessesViewAllFragment">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -31,6 +34,7 @@
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/listViewGuestSicknessListAdmin"></ListView>
+            android:id="@+id/listViewAdminSicknessList"></ListView>
     </LinearLayout>
+    </ScrollView>
 </LinearLayout>
