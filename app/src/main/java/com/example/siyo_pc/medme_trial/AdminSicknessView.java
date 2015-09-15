@@ -18,10 +18,14 @@ import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllDiseases;
+import com.example.siyo_pc.medme_trial.db.AsyncGetAllDiseasesForSickness;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSicknesses;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptoms;
+import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptomsForSickness;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,9 +39,7 @@ public class AdminSicknessView extends AppCompatActivity implements AsyncTaskRes
 
     MM_Person userLoggedIn;
 
-    private AsyncGetAllDiseases asyncAllDiseases = new AsyncGetAllDiseases(this, this);
     private ArrayList<MM_Disease> diseaseList = null;
-    private AsyncGetAllSymptoms asyncAllSymptoms = new AsyncGetAllSymptoms(this, this);
     private ArrayList<MM_Symptom> symptomList = null;
     private AsyncGetAllSicknesses asyncAllSicknessess = new AsyncGetAllSicknesses(this, this);
     private ArrayList<MM_Sickness> sicknessList = null;
@@ -65,8 +67,6 @@ public class AdminSicknessView extends AppCompatActivity implements AsyncTaskRes
             listDiseases = (ListView) findViewById(R.id.listAdminViewRelatedDiseases);
             listSymptoms = (ListView) findViewById(R.id.listAdminViewRelatedSymptoms);
 
-            asyncAllDiseases.execute();
-            asyncAllSymptoms.execute();
             asyncAllSicknessess.execute();
         }
     }
@@ -228,6 +228,14 @@ public class AdminSicknessView extends AppCompatActivity implements AsyncTaskRes
         sicknessTitle.setText(sickness.GetSicknessName());
         sicknessGreekName.setText("Greek Name: \n" + sickness.GetGreekName());
         sicknessDesc.setText("Sickness Description: \n" + sickness.GetSicknessDesc());
+
+        ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("sicknessID", Integer.toString(sickness.GetSicknessID())));
+
+        AsyncGetAllDiseasesForSickness asyncAllDiseasesForSickness = new AsyncGetAllDiseasesForSickness(this, this, params);
+        AsyncGetAllSymptomsForSickness asyncAllSymptomsForSickness = new AsyncGetAllSymptomsForSickness(this, this, params);
+        asyncAllDiseasesForSickness.execute();
+        asyncAllSymptomsForSickness.execute();
     }
 
     @Override
