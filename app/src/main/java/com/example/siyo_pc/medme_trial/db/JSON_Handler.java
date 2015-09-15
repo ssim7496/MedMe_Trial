@@ -11,6 +11,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JSON_Handler {
@@ -49,6 +51,44 @@ public class JSON_Handler {
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+            is.close();
+            result = sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /*try {
+            jsonObject = new JSONObject(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+        return result;
+
+    }
+
+    public String getJSONFromUrl(String url, ArrayList<NameValuePair> params) {
+
+        try {
+            DefaultHttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(url);
+
+            httpPost.setEntity(new UrlEncodedFormEntity(params));
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+
+            HttpEntity httpEntity = httpResponse.getEntity();
+            is = httpEntity.getContent();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            BufferedReader br =  new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
             is.close();

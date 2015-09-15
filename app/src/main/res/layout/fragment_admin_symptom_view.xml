@@ -65,10 +65,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
         <TextView
-            android:id="@+id/tvAdminDiseasesTitle"
+            android:id="@+id/tvAdminSicknessesSymptomTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Related Diseases"
+            android:text="Related Sicknesses"
             android:textColor="@color/default_text_colour"
             android:textStyle="bold"
             android:textSize="30sp"
@@ -88,6 +88,6 @@
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/listViewAdminDiseaeSymptomLink"></ListView>
+            android:id="@+id/listViewAdminSicknessSymptomLink"></ListView>
     </LinearLayout>
 </LinearLayout>

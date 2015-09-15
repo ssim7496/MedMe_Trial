@@ -11,13 +11,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.adapters.AdminDiseaseAdapter;
+import com.example.siyo_pc.medme_trial.adapters.AdminSicknessAdapter;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
+import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllDiseases;
+import com.example.siyo_pc.medme_trial.db.AsyncGetAllSicknessesForDisease;
+import com.example.siyo_pc.medme_trial.db.AsyncGetAllSicknessesForSymptom;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptoms;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,15 +32,14 @@ import java.util.List;
 
 public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResponse{
 
-    ListView listDiseases;
+    ListView listSickness;
     TextView symptomTitle, symptomDesc, symptomGreekName;
 
     MM_Person userLoggedIn;
 
-    private AsyncGetAllDiseases asyncAllDiseases = new AsyncGetAllDiseases(this, this);
     private AsyncGetAllSymptoms asyncAllSymptoms = new AsyncGetAllSymptoms(this, this);
-    private ArrayList<MM_Disease> diseaseList = null;
     private ArrayList<MM_Symptom> symptomList = null;
+    private ArrayList<MM_Sickness> sicknessList = null;
 
 
     @Override
@@ -58,7 +63,6 @@ public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResp
             symptomDesc = (TextView) findViewById(R.id.tvAdminSymptomDescription);
             symptomGreekName = (TextView) findViewById(R.id.tvAdminSymptomGreekName);
 
-            asyncAllDiseases.execute();
             asyncAllSymptoms.execute();
 
         }
@@ -68,46 +72,46 @@ public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResp
     public void onTaskCompleted(List<JSONObject> objectList, int passTypeID) {
         switch (passTypeID) {
             case 1 : {
-                diseaseList = convertToDiseases(objectList);
-                getDiseaseInformation(diseaseList);
+
             } break;
             case 2 : {
                 symptomList = convertToSymptoms(objectList);
                 getSymptomInformation(symptomList);
             } break;
             case 3 : {
-                //sickness list
+                sicknessList = convertToSickness(objectList);
+                getSicknessInformation(sicknessList);
             } break;
         }
     }
 
-    private ArrayList<MM_Disease> convertToDiseases(List<JSONObject> objectList) {
+    private ArrayList<MM_Sickness> convertToSickness(List<JSONObject> objectList) {
         if (objectList.size() > 0) {
 
-            diseaseList = new ArrayList<>();
+            sicknessList = new ArrayList<>();
 
             try {
                 for (int i = 0; i < objectList.size(); i++) {
                     JSONObject jObject = objectList.get(i);
-                    int diseaseID = jObject.getInt("DiseaseID");
+                    int sicknessID = jObject.getInt("SicknessID");
                     String greekName = jObject.getString("GreekName");
-                    String diseaseName = jObject.getString("DiseaseName");
-                    String diseaseDesc = jObject.getString("DiseaseDesc");
+                    String sicknessName = jObject.getString("SicknessName");
+                    String sicknessDesc = jObject.getString("SicknessDesc");
 
-                    MM_Disease disease = new MM_Disease();
-                    disease.SetDiseaseID(diseaseID);
-                    disease.SetGreekName(greekName);
-                    disease.SetDiseaseName(diseaseName);
-                    disease.SetDiseaseDesc(diseaseDesc);
+                    MM_Sickness sickness = new MM_Sickness();
+                    sickness.SetSicknessID(sicknessID);
+                    sickness.SetGreekName(greekName);
+                    sickness.SetSicknessName(sicknessName);
+                    sickness.SetSicknessDesc(sicknessDesc);
 
-                    diseaseList.add(disease);
+                    sicknessList.add(sickness);
                 }
             } catch ( JSONException e) {
 
             }
         }
 
-        return diseaseList;
+        return sicknessList;
     }
 
     private ArrayList<MM_Symptom> convertToSymptoms(List<JSONObject> objectList) {
@@ -154,15 +158,21 @@ public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResp
         symptomTitle.setText(symptom.GetSymptomName());
         symptomGreekName.setText("Greek Name: \n" + symptom.GetGreekName());
         symptomDesc.setText("Disease Description: \n" + symptom.GetSymptomDesc());
+
+        ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("symptomID", Integer.toString(symptom.GetSymptomID())));
+
+        AsyncGetAllSicknessesForSymptom asyncGetAllSicknessesForSymptom = new AsyncGetAllSicknessesForSymptom(this, this, params);
+        asyncGetAllSicknessesForSymptom.execute();
     }
 
-    private void getDiseaseInformation(ArrayList<MM_Disease> diseaseList) {
-        if (diseaseList != null) {
-            AdminDiseaseAdapter adapter = new AdminDiseaseAdapter(this, diseaseList, userLoggedIn);
-            listDiseases = (ListView) findViewById(R.id.listViewAdminDiseaeSymptomLink);
+    private void getSicknessInformation(ArrayList<MM_Sickness> sicknessList) {
+        if (sicknessList != null) {
+            AdminSicknessAdapter adapter = new AdminSicknessAdapter(this, sicknessList, userLoggedIn);
+            listSickness = (ListView) findViewById(R.id.listViewAdminSicknessSymptomLink);
             View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
-            listDiseases.addHeaderView(header);
-            listDiseases.setAdapter(adapter);
+            listSickness.addHeaderView(header);
+            listSickness.setAdapter(adapter);
         }
     }
 
