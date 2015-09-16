@@ -51,7 +51,7 @@ public class AdminSearch extends AppCompatActivity implements AsyncTaskResponse{
         } else {
             //new SearchText().execute("sex");
 
-            search.execute("sex");
+            //search.execute("hiv");
         }
 
     }

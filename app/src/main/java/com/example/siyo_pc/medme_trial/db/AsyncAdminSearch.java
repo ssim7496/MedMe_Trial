@@ -15,6 +15,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AsyncAdminSearch extends AsyncTask<String, Void, String> {
+public class AsyncAdminSearch extends AsyncTask<String, Void, List<JSONObject>> {
 
     private Context context;
     private ProgressDialog progressDialog;
@@ -47,34 +48,86 @@ public class AsyncAdminSearch extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected String doInBackground(String... params) {
-        String xml = null;
-
+    protected List<JSONObject> doInBackground(String... params) {
         try {
-            // defaultHttpClient
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(url + params[0]);
 
-            HttpResponse httpResponse = httpClient.execute(httpGet);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            xml = EntityUtils.toString(httpEntity);
+            String result = null;
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                // defaultHttpClient
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet(url + params[0]);
+
+                HttpResponse httpResponse = httpClient.execute(httpGet);
+                HttpEntity httpEntity = httpResponse.getEntity();
+                result = EntityUtils.toString(httpEntity);
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            JSONObject jsonResponse = new JSONObject((result));
+            JSONArray jArray = jsonResponse.getJSONArray("@attributes");
+
+            for (int i = 0; i < jArray.length(); i++) {
+                JSONObject jsonObject = jArray.getJSONObject(i);
+                jsonObjectList.add(jsonObject);
+            }
+        } catch (Exception e) {
+            Log.e("log_tag", "Error in parsing data ");
         }
-        // return XML
-        return xml;
+        return jsonObjectList;
     }
 
     @Override
-    protected void onPostExecute(String result) {
-        // Result is in String Format
-        // you can use JSON api to convert into JSONObject
+    protected void onPostExecute(List<JSONObject> result) {
         progressDialog.dismiss();
-        Toast.makeText(context.getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        callBack.onTaskCompleted(result, 1);
+
     }
 }
+
+ /*class XML extends java.lang.Object {
+    public XML()
+    {
+
+    }
+
+     public static java.lang.String escape(java.lang.String string)
+     {
+
+     }
+
+     public static void noSpace(java.lang.String string)
+             throws JSONException
+     {
+
+     }
+
+     public static java.lang.Object stringToValue(java.lang.String string)
+     {
+
+     }
+
+     public static JSONObject toJSONObject(java.lang.String string)
+             throws JSONException
+     {
+
+     }
+
+     public static java.lang.String toString(java.lang.Object object)
+             throws JSONException
+     {
+
+     }
+
+     public static java.lang.String toString(java.lang.Object object, java.lang.String tagName)
+             throws JSONException
+     {
+
+     }
+}*/
