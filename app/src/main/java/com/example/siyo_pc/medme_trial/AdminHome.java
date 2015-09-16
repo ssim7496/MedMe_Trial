@@ -70,7 +70,7 @@ public class AdminHome extends ActionBarActivity{
             btnSicknesses = (Button)findViewById(R.id.btnAdminSicknesses);
 
             addNextActivityOnClickListener(btnDiseases, AdminDiseasesHome.class);
-            //addNextActivityOnClickListener(btnSearch, GuestSearch.class);
+            addNextActivityOnClickListener(btnSearch, AdminSearch.class);
             //addNextActivityOnClickListener(btnDiagnose, GuestDiagnose.class);
             addNextActivityOnClickListener(btnSymptoms, AdminSymptomsHome.class);
             //addNextActivityOnClickListener(btnTerminology, GuestTerminology.class);
@@ -78,7 +78,7 @@ public class AdminHome extends ActionBarActivity{
             //addNextActivityOnClickListener(btnHelp, GuestHelp.class);
 
             //underConstruction(btnDiseases);
-            underConstruction(btnSearch);
+            //underConstruction(btnSearch);
             underConstruction(btnDiagnose);
             //underConstruction(btnSymptoms);
             underConstruction(btnTerminology);

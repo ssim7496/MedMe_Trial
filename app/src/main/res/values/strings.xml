@@ -30,6 +30,7 @@
     <string name="confirmPassword">Confirm Password:</string>
     <string name="recovQues">Recovery Question:</string>
     <string name="recovAns">Recovery Answer:</string>
+    <string name="defaultSearch">Please enter what you would like to search in the text box below and click on the Search button.</string>
 
     <string name="title_activity_guest_sickness">Sickness</string>
     <string name="sicknessBeginDesc">1. The state of being ill. \n\n2.A particular type of illness or disease.</string>
@@ -85,5 +86,6 @@
     <string name="title_activity_admin_symptom_view">Symptom View</string>
     <string name="title_activity_admin_sickness_view">View Sickness</string>
     <string name="title_activity_admin_sicknesses_add_symptoms">Add Symptoms to Sickness</string>
+    <string name="title_activity_admin_search">Search</string>
 
 </resources>

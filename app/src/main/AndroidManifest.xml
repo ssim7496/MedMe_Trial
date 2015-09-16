@@ -153,6 +153,10 @@
             android:name=".AdminSicknessesAddSymptoms"
             android:label="@string/title_activity_admin_sicknesses_add_symptoms" >
         </activity>
+        <activity
+            android:name=".AdminSearch"
+            android:label="@string/title_activity_admin_search" >
+        </activity>
     </application>
 
 </manifest>
