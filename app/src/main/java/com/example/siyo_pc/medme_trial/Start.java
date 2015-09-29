@@ -36,13 +36,13 @@ public class Start extends ActionBarActivity {
         btnLogIn = (Button)findViewById(R.id.btnLogIn);
 
         addNextActivityOnClickListener(btnRegister, RegisterUser.class);
-        //addNextActivityOnClickListener(btnLogIn, LogIn.class);
-        btnLogIn.setOnClickListener(new View.OnClickListener() {
+        addNextActivityOnClickListener(btnLogIn, LogIn.class);
+        /*btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 yes();
             }
-        });
+        });*/
         //underConstruction(btnRegister);
         //underConstruction(btnLogIn);
     }
