@@ -74,7 +74,7 @@ public class AdminSearch extends AppCompatActivity implements AsyncSearchRespons
             public void onClick(View v) {
                 String searchText = edtAdminSearchText.getText().toString();
                 if ((searchText.trim()).equals("") || (searchText.trim()).length() < 1) {
-                    Toast.makeText(context, "Please enter some text to search for", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Please enter some text to search for.", Toast.LENGTH_LONG).show();
                 } else {
                     new AsyncAdminSearch(asyncSearchResponse, context).execute(searchText);
                 }
