@@ -23,7 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AsyncAdminSearch extends AsyncTask<String, Void, List<JSONObject>> {
+public class AsyncAdminSearch extends AsyncTask<String, Void, String> {
 
     private Context context;
     private ProgressDialog progressDialog;
@@ -31,9 +31,9 @@ public class AsyncAdminSearch extends AsyncTask<String, Void, List<JSONObject>> 
     private String url;
     private String message;
     public List<JSONObject> jsonObjectList = new ArrayList<>();
-    public AsyncTaskResponse callBack = null;
+    public AsyncSearchResponse callBack = null;
 
-    public AsyncAdminSearch(AsyncTaskResponse callBack, Context context) {
+    public AsyncAdminSearch(AsyncSearchResponse callBack, Context context) {
         this.callBack = callBack;
         this.url = "http://ssimayi-medme.co.za/searchWebster.php?word=";
         this.context = context;
@@ -48,10 +48,9 @@ public class AsyncAdminSearch extends AsyncTask<String, Void, List<JSONObject>> 
     }
 
     @Override
-    protected List<JSONObject> doInBackground(String... params) {
+    protected String doInBackground(String... params) {
+        String result = null;
         try {
-
-            String result = null;
 
             try {
                 // defaultHttpClient
@@ -70,23 +69,23 @@ public class AsyncAdminSearch extends AsyncTask<String, Void, List<JSONObject>> 
                 e.printStackTrace();
             }
 
-            JSONObject jsonResponse = new JSONObject((result));
-            JSONArray jArray = jsonResponse.getJSONArray("@attributes");
+            /*JSONObject jsonResponse = new JSONObject((result));
+            JSONArray jArray = jsonResponse.getJSONArray("@attributes");*/
 
-            for (int i = 0; i < jArray.length(); i++) {
+            /*for (int i = 0; i < jArray.length(); i++) {
                 JSONObject jsonObject = jArray.getJSONObject(i);
                 jsonObjectList.add(jsonObject);
-            }
+            }*/
         } catch (Exception e) {
             Log.e("log_tag", "Error in parsing data ");
         }
-        return jsonObjectList;
+        return result;
     }
 
     @Override
-    protected void onPostExecute(List<JSONObject> result) {
+    protected void onPostExecute(String result) {
         progressDialog.dismiss();
-        callBack.onTaskCompleted(result, 1);
+        callBack.onTaskCompleted(result);
 
     }
 }

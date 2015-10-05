@@ -1,17 +1,22 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.db.AsyncAdminSearch;
+import com.example.siyo_pc.medme_trial.db.AsyncSearchResponse;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
+import com.example.siyo_pc.medme_trial.db.XML_EntryList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,11 +31,14 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class AdminSearch extends AppCompatActivity implements AsyncTaskResponse{
+public class AdminSearch extends AppCompatActivity implements AsyncSearchResponse{
 
     MM_Person userLoggedIn;
 
-    AsyncAdminSearch search = new AsyncAdminSearch(this, this);
+    //AsyncAdminSearch search = new AsyncAdminSearch(this, this);
+
+    Button btnAdminSearch;
+    EditText edtAdminSearchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +57,31 @@ public class AdminSearch extends AppCompatActivity implements AsyncTaskResponse{
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
         } else {
-            //new SearchText().execute("sex");
+            btnAdminSearch = (Button)findViewById(R.id.btnAdminSearch);
+            edtAdminSearchText = (EditText)findViewById(R.id.edtAdminSearchText);
 
-            //search.execute("hiv");
+            addButtonEvents();
         }
 
+    }
+
+    public void addButtonEvents(){
+        final Context context = this;
+        final AsyncSearchResponse asyncSearchResponse = this;
+
+        btnAdminSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchText = edtAdminSearchText.getText().toString();
+                if ((searchText.trim()).equals("") || (searchText.trim()).length() < 1) {
+                    Toast.makeText(context, "Please enter some text to search for", Toast.LENGTH_LONG).show();
+                } else {
+                    new AsyncAdminSearch(asyncSearchResponse, context).execute(searchText);
+                }
+            }
+        });
+        //underConstruction(btnRegister);
+        //underConstruction(btnLogIn);
     }
 
     @Override
@@ -64,8 +92,9 @@ public class AdminSearch extends AppCompatActivity implements AsyncTaskResponse{
     }
 
     @Override
-    public void onTaskCompleted(List<JSONObject> objectList, int passTypeID) {
-
+    public void onTaskCompleted(String xmlSearch) {
+        XML_EntryList entryList = new XML_EntryList(this, xmlSearch);
+        entryList.showNow();
     }
 
     @Override
