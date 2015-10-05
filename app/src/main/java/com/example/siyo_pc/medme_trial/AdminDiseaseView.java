@@ -1,5 +1,8 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -158,6 +161,26 @@ public class AdminDiseaseView extends AppCompatActivity implements AsyncTaskResp
         diseaseTitle.setText(disease.GetDiseaseName());
         diseaseGreekName.setText("Greek Name: \n" + disease.GetGreekName());
         diseaseDesc.setText("Disease Description: \n" + disease.GetDiseaseDesc());
+
+        //setting alert dialog to show more information
+        final Context context = this;
+        final MM_Disease diseaseInfo = disease;
+
+        diseaseDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("Disease Information");
+                alertDialog.setMessage(diseaseInfo.GetDiseaseDesc());
+                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
+            }
+        });
 
         ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("diseaseID", Integer.toString(disease.GetDiseaseID())));

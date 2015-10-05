@@ -51,7 +51,9 @@
             android:textColor="@color/default_text_colour"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:padding="14sp" />
+            android:padding="14sp"
+            android:minHeight="60dp"
+            android:maxHeight="145dp" />
     </LinearLayout>
 
     <LinearLayout

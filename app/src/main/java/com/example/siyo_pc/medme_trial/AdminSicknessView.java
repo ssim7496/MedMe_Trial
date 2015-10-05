@@ -1,11 +1,16 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DialerFilter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -228,6 +233,26 @@ public class AdminSicknessView extends AppCompatActivity implements AsyncTaskRes
         sicknessTitle.setText(sickness.GetSicknessName());
         sicknessGreekName.setText("Greek Name: \n" + sickness.GetGreekName());
         sicknessDesc.setText("Sickness Description: \n" + sickness.GetSicknessDesc());
+
+        //setting alert dialog to show more information
+        final Context context = this;
+        final MM_Sickness sicknessInfo = sickness;
+
+        sicknessDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("Sickness Information");
+                alertDialog.setMessage(sicknessInfo.GetSicknessDesc());
+                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
+            }
+        });
 
         ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("sicknessID", Integer.toString(sickness.GetSicknessID())));
