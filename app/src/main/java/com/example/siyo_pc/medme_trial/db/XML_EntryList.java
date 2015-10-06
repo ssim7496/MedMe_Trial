@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Siyo-PC on 2015/09/22.
@@ -31,15 +32,16 @@ public class XML_EntryList {
         return  entryList;
     }
 
-    public void showNow() {
+    public ArrayList<XML_Entry> showNow() {
         String xmlWithNoNode = removeRootNode();
 
         boolean end = false;
+        ArrayList<XML_Entry> xmlEntries = new ArrayList<>();
 
-        /*while (!end) {
-            int entryStartNode = xmlWithNoNode.indexOf("<entry>");
-        }*/
         while (!end) {
+            //new xml entry to add to list
+            XML_Entry xmlEntry = new XML_Entry();
+            String fl = "";
             //getting the current entry that we are working with
             int entryStartNode = xmlWithNoNode.indexOf("<entry ");
             int entryEndNode = xmlWithNoNode.indexOf("</entry>");
@@ -52,19 +54,19 @@ public class XML_EntryList {
                     int entryStartNodeHw = currentXML.indexOf("<hw>");
                     int entryEndNodeHw = currentXML.indexOf("</hw>");
                     String hw = currentXML.substring(entryStartNodeHw + 4, entryEndNodeHw);
+                    xmlEntry.setHw(hw);
                     //assign hw to xml_entry class
                     currentXML = currentXML.substring(entryEndNodeHw + 5, currentXML.length());
-                    //Toast.makeText(context.getApplicationContext(), "hw: " + hw, Toast.LENGTH_LONG).show();
                 }
 
                 //getting the fl in the entry
                 if (currentXML.contains("<fl>")) {
                     int entryStartNodeFl = currentXML.indexOf("<fl>");
                     int entryEndNodeFl = currentXML.indexOf("</fl>");
-                    String fl = currentXML.substring(entryStartNodeFl + 4, entryEndNodeFl);
+                    fl = currentXML.substring(entryStartNodeFl + 4, entryEndNodeFl);
+                    xmlEntry.setFl(fl);
                     //assign fl to xml_entry class
                     currentXML = currentXML.substring(entryEndNodeFl + 5, currentXML.length());
-                    //Toast.makeText(context.getApplicationContext(), "fl: " + fl, Toast.LENGTH_LONG).show();
                 }
 
                 //getting the def in the entry
@@ -73,10 +75,10 @@ public class XML_EntryList {
                     int entryEndNodeDef = currentXML.indexOf("</def>");
                     String def = currentXML.substring(entryStartNodeDef + 5, entryEndNodeDef);
                     //assign def to xml_entry class
-                    //Toast.makeText(context.getApplicationContext(), "def: " + def, Toast.LENGTH_LONG).show();
                     boolean endSensB = false;
                     currentXML = currentXML.substring(entryStartNodeDef + 5, currentXML.length());
 
+                    List<String> defs = new ArrayList<>();
                     //getting the sens' in the entry
                     while (!endSensB) {
                         if (currentXML.contains("<sensb>")) {
@@ -100,17 +102,28 @@ public class XML_EntryList {
                                                     int entryStartNodeSx = sensArray[j].indexOf("<sx>");
                                                     int entryEndNodeSx = sensArray[j].indexOf("</sx>");
                                                     String sx = sensArray[j].substring(entryStartNodeSx + 4, entryEndNodeSx);
+                                                    XML_Entry xml = new XML_Entry();
+                                                    xml.setFl(fl);
+                                                    xml.setSx(sx);
+                                                    xmlEntries.add(xml);
+                                                    //defs.add("sx#" + sx);
                                                     //assign sx to xml_entry class
-                                                    Toast.makeText(context.getApplicationContext(), "sx: " + sx, Toast.LENGTH_LONG).show();
+                                                    //Toast.makeText(context.getApplicationContext(), "sx: " + sx, Toast.LENGTH_LONG).show();
                                                 } else {
                                                     int entryStartNodeDt = sensArray[j].indexOf("<dt>");
                                                     int entryEndNodeDt = sensArray[j].indexOf("</dt>");
                                                     String dt = sensArray[j].substring(entryStartNodeDt + 4, entryEndNodeDt);
+                                                    XML_Entry xml2 = new XML_Entry();
+                                                    xml2.setFl(fl);
+                                                    xml2.setDt(dt);
+                                                    xmlEntries.add(xml2);
+                                                    //defs.add("dt#" + dt);
                                                     //assign dt to xml_entry class
-                                                    Toast.makeText(context.getApplicationContext(), "dt: " + dt, Toast.LENGTH_LONG).show();
+                                                    //Toast.makeText(context.getApplicationContext(), "dt: " + dt, Toast.LENGTH_LONG).show();
                                                 }
 
                                             }
+
                                         }
 
                                         if (j == (sensArray.length - 1)) {
@@ -129,37 +142,14 @@ public class XML_EntryList {
                             endSensB = true;
                         }
                     }
+
                 }
-            /*currentXML = currentXML.substring(entryEndNodeDef + 6, currentXML.length());
-            Toast.makeText(context.getApplicationContext(), "def: " + def, Toast.LENGTH_LONG).show();*/
             } else {
                 end = true;
             }
-
-        /*
-        //getting the dt in the entry
-        if (currentXML.contains("<dt>")) {
-            if (currentXML.contains("<sx>")){
-                int entryStartNodeSx = currentXML.indexOf("<sx>");
-                int entryEndNodeSx = currentXML.indexOf("</sx>");
-                String sx = currentXML.substring(entryStartNodeSx + 4, entryEndNodeSx);
-                //assign sx to xml_entry class
-                int endOfEntry = currentXML.indexOf("</def>");
-                currentXML = currentXML.substring(endOfEntry + 6, currentXML.length());
-                Toast.makeText(context.getApplicationContext(), "sx: " + sx, Toast.LENGTH_LONG).show();
-            } else {
-                int entryStartNodeDt = currentXML.indexOf("<dt>");
-                int entryEndNodeDt = currentXML.indexOf("</dt>");
-                String dt = currentXML.substring(entryStartNodeDt + 4, entryEndNodeDt);
-                //assign dt to xml_entry class
-                int endOfEntry = currentXML.indexOf("</def>");
-                currentXML = currentXML.substring(endOfEntry + 6, currentXML.length());
-                Toast.makeText(context.getApplicationContext(), "dt: " + dt, Toast.LENGTH_LONG).show();
-            }
-
-        }*/
         }
 
+        return xmlEntries;
     }
 
     private String removeRootNode() {

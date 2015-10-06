@@ -10,12 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.siyo_pc.medme_trial.adapters.AdminSearchAdapter;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.db.AsyncAdminSearch;
 import com.example.siyo_pc.medme_trial.db.AsyncSearchResponse;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
+import com.example.siyo_pc.medme_trial.db.XML_Entry;
 import com.example.siyo_pc.medme_trial.db.XML_EntryList;
 
 import org.apache.http.HttpEntity;
@@ -29,13 +32,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminSearch extends AppCompatActivity implements AsyncSearchResponse{
 
     MM_Person userLoggedIn;
 
-    //AsyncAdminSearch search = new AsyncAdminSearch(this, this);
+    private ListView listSearchResults;
 
     Button btnAdminSearch;
     EditText edtAdminSearchText;
@@ -59,6 +63,7 @@ public class AdminSearch extends AppCompatActivity implements AsyncSearchRespons
         } else {
             btnAdminSearch = (Button)findViewById(R.id.btnAdminSearch);
             edtAdminSearchText = (EditText)findViewById(R.id.edtAdminSearchText);
+            listSearchResults = (ListView) findViewById(R.id.listViewAdminSearchResults);
 
             addButtonEvents();
         }
@@ -94,7 +99,17 @@ public class AdminSearch extends AppCompatActivity implements AsyncSearchRespons
     @Override
     public void onTaskCompleted(String xmlSearch) {
         XML_EntryList entryList = new XML_EntryList(this, xmlSearch);
-        entryList.showNow();
+        ArrayList<XML_Entry> searchResults = entryList.showNow();
+        fillSearchList(searchResults);
+    }
+
+    private void fillSearchList(ArrayList<XML_Entry> searchResults) {
+        if (searchResults != null) {
+            AdminSearchAdapter adapter = new AdminSearchAdapter(this, searchResults, userLoggedIn);
+            View header = getLayoutInflater().inflate(R.layout.listview_search_header, null);
+            listSearchResults.addHeaderView(header);
+            listSearchResults.setAdapter(adapter);
+        }
     }
 
     @Override
