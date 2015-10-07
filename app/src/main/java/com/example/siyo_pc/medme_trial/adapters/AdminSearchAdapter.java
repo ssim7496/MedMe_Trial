@@ -49,10 +49,15 @@ public class AdminSearchAdapter extends ArrayAdapter<XML_Entry>{
         TextView tvSearchDescription = (TextView)convertView.findViewById(R.id.tvSearchDescription);
         tvSearchType.setText(search.getFl());
 
-        if (!search.getDt().equals(null))
+        if (search.getDt() != null)
             tvSearchDescription.setText(search.getDt());
-        else if (!search.getSx().equals(null))
+        else if (search.getSx() != null)
             tvSearchDescription.setText(search.getSx());
+        else
+            tvSearchDescription.setText("");
+
+        /*else if (!search.getSx().equals(null))
+            tvSearchDescription.setText(search.getSx());*/
 
         /*tvName.setOnClickListener(new TextView.OnClickListener() {
             @Override

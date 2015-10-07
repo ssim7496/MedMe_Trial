@@ -41,7 +41,7 @@ import java.util.concurrent.ExecutionException;
 
 public class AdminHome extends ActionBarActivity{
 
-    Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnTerminology, btnSicknesses;
+    Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnSicknesses;
 
     MM_Person userLoggedIn;
 
@@ -66,14 +66,12 @@ public class AdminHome extends ActionBarActivity{
             btnDiagnose = (Button)findViewById(R.id.btnAdminDiagnose);
             btnDiseases = (Button)findViewById(R.id.btnAdminDiseases);
             btnSymptoms = (Button)findViewById(R.id.btnAdminSymptoms);
-            btnTerminology = (Button)findViewById(R.id.btnAdminTerminology);
             btnSicknesses = (Button)findViewById(R.id.btnAdminSicknesses);
 
             addNextActivityOnClickListener(btnDiseases, AdminDiseasesHome.class);
             addNextActivityOnClickListener(btnSearch, AdminSearch.class);
             //addNextActivityOnClickListener(btnDiagnose, GuestDiagnose.class);
             addNextActivityOnClickListener(btnSymptoms, AdminSymptomsHome.class);
-            //addNextActivityOnClickListener(btnTerminology, GuestTerminology.class);
             addNextActivityOnClickListener(btnSicknesses, AdminSicknessesHome.class);
             //addNextActivityOnClickListener(btnHelp, GuestHelp.class);
 
@@ -81,7 +79,6 @@ public class AdminHome extends ActionBarActivity{
             //underConstruction(btnSearch);
             underConstruction(btnDiagnose);
             //underConstruction(btnSymptoms);
-            underConstruction(btnTerminology);
             //underConstruction(btnSicknesses);
         }
 

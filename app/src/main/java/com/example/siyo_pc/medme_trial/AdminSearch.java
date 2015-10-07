@@ -40,9 +40,8 @@ public class AdminSearch extends AppCompatActivity implements AsyncSearchRespons
     MM_Person userLoggedIn;
 
     private ListView listSearchResults;
-
-    Button btnAdminSearch;
-    EditText edtAdminSearchText;
+    private Button btnAdminSearch;
+    private EditText edtAdminSearchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +62,9 @@ public class AdminSearch extends AppCompatActivity implements AsyncSearchRespons
         } else {
             btnAdminSearch = (Button)findViewById(R.id.btnAdminSearch);
             edtAdminSearchText = (EditText)findViewById(R.id.edtAdminSearchText);
-            listSearchResults = (ListView) findViewById(R.id.listViewAdminSearchResults);
-
+            listSearchResults = (ListView)findViewById(R.id.listViewAdminSearchResults);
+            View header = getLayoutInflater().inflate(R.layout.listview_search_header, null);
+            listSearchResults.addHeaderView(header);
             addButtonEvents();
         }
 
@@ -106,8 +106,7 @@ public class AdminSearch extends AppCompatActivity implements AsyncSearchRespons
     private void fillSearchList(ArrayList<XML_Entry> searchResults) {
         if (searchResults != null) {
             AdminSearchAdapter adapter = new AdminSearchAdapter(this, searchResults, userLoggedIn);
-            View header = getLayoutInflater().inflate(R.layout.listview_search_header, null);
-            listSearchResults.addHeaderView(header);
+
             listSearchResults.setAdapter(adapter);
         }
     }
