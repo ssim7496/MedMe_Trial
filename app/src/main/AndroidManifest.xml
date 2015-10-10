@@ -157,6 +157,8 @@
             android:name=".AdminSearch"
             android:label="@string/title_activity_admin_search" >
         </activity>
+        <activity android:name=".AdminDiagnose" >
+        </activity>
     </application>
 
 </manifest>

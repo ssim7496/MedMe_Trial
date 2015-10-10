@@ -167,4 +167,10 @@
         <item name="popupMenuStyle">@style/PopupMenu.Medmethemeadmin</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Medmethemeadmin</item>
     </style>
+    <style name="Theme.Medmetheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Medmetheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Medmetheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

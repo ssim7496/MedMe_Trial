@@ -70,14 +70,14 @@ public class AdminHome extends ActionBarActivity{
 
             addNextActivityOnClickListener(btnDiseases, AdminDiseasesHome.class);
             addNextActivityOnClickListener(btnSearch, AdminSearch.class);
-            //addNextActivityOnClickListener(btnDiagnose, GuestDiagnose.class);
+            addNextActivityOnClickListener(btnDiagnose, AdminDiagnose.class);
             addNextActivityOnClickListener(btnSymptoms, AdminSymptomsHome.class);
             addNextActivityOnClickListener(btnSicknesses, AdminSicknessesHome.class);
             //addNextActivityOnClickListener(btnHelp, GuestHelp.class);
 
             //underConstruction(btnDiseases);
             //underConstruction(btnSearch);
-            underConstruction(btnDiagnose);
+            //underConstruction(btnDiagnose);
             //underConstruction(btnSymptoms);
             //underConstruction(btnSicknesses);
         }
