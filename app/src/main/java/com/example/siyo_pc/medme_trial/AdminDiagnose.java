@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -55,6 +57,9 @@ public class AdminDiagnose extends AppCompatActivity implements AsyncTaskRespons
             btnDiagnose = (Button)findViewById(R.id.btnAdminDiagnose);
             listSymptoms = (ListView)findViewById(R.id.listViewAdminDiagnoseResults);
 
+            asyncAllSymptoms = new AsyncGetAllSymptoms(this, this);
+            asyncAllSymptoms.execute();
+
             addButtonEvents();
         }
     }
@@ -66,12 +71,17 @@ public class AdminDiagnose extends AppCompatActivity implements AsyncTaskRespons
         btnDiagnose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                asyncAllSymptoms = new AsyncGetAllSymptoms(asyncTaskResponse, context);
-                asyncAllSymptoms.execute();
+                SparseBooleanArray checkedSymptoms = listSymptoms.getCheckedItemPositions();
+                ArrayList<String> symptomsSelected = new ArrayList<String>();
+
+                //getting the checked check boxes in the listview and adding them to an string array
+                for (int i = 0; i < listSymptoms.getAdapter().getCount(); i++) {
+                    if (checkedSymptoms.get(i)){
+                        symptomsSelected.add(symptomList.get(i).GetSymptomName());
+                    }
+                }
             }
         });
-        //underConstruction(btnRegister);
-        //underConstruction(btnLogIn);
     }
 
     @Override
@@ -120,10 +130,6 @@ public class AdminDiagnose extends AppCompatActivity implements AsyncTaskRespons
     private void fillSymptomList(ArrayList<MM_Symptom> symptomList){
 
         if (symptomList != null) {
-            /*AdminSymptomCheckBoxAdapter adapter = new AdminSymptomCheckBoxAdapter(this, symptomList, userLoggedIn);
-            View header = getLayoutInflater().inflate(R.layout.listview_diagnose_header, null);
-            listSymptoms.addHeaderView(header);
-            listSymptoms.setAdapter(adapter);*/
 
             String[] symptomNames = new String[symptomList.size()];
 
@@ -131,15 +137,11 @@ public class AdminDiagnose extends AppCompatActivity implements AsyncTaskRespons
                 symptomNames[i] = symptomList.get(i).GetSymptomName();
             }
 
-            /*listSymptoms.setAdapter(new ArrayAdapter<String>(this, R.layout.listview_diagnose_item, symptomNames));
-            listSymptoms.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);*/
-
             ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
                     android.R.layout.simple_list_item_multiple_choice, symptomNames);
 
-            /*GridView gridView = (GridView) findViewById(R.id.gvSymptoms);
-            gridView.setAdapter(adapter2);*/
             listSymptoms.setAdapter(adapter2);
+            listSymptoms.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         }
     }
