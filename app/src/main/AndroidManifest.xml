@@ -157,7 +157,13 @@
             android:name=".AdminSearch"
             android:label="@string/title_activity_admin_search" >
         </activity>
-        <activity android:name=".AdminDiagnose" >
+        <activity
+            android:name=".AdminDiagnose"
+            android:label="@string/title_activity_admin_diagnose" >
+        </activity>
+        <activity
+            android:name=".AdminDiagnosisSymptomsConfirm"
+            android:label="@string/title_activity_admin_diagnosis_symptoms_confirm" >
         </activity>
     </application>
 
