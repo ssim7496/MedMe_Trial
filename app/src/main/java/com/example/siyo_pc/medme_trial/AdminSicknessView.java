@@ -28,6 +28,7 @@ import com.example.siyo_pc.medme_trial.db.AsyncGetAllSicknesses;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptoms;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptomsForSickness;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
+import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse2;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -37,7 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminSicknessView extends AppCompatActivity implements AsyncTaskResponse {
+public class AdminSicknessView extends AppCompatActivity implements AsyncTaskResponse, AsyncTaskResponse2 {
 
     TextView sicknessTitle, sicknessDesc, sicknessGreekName;
     ListView listDiseases, listSymptoms;
@@ -94,6 +95,24 @@ public class AdminSicknessView extends AppCompatActivity implements AsyncTaskRes
 
     @Override
     public void onTaskCompleted(List<JSONObject> objectList, int passTypeID) {
+        switch (passTypeID){
+            case 1 : {
+                diseaseList = convertToDiseases(objectList);
+                fillDiseaseList(diseaseList);
+            } break;
+            case 2 : {
+                symptomList = convertToSymptoms(objectList);
+                fillSymptomList(symptomList);
+            } break;
+            case 3 : {
+                sicknessList = convertToSickness(objectList);
+                getSicknessInformation(sicknessList);
+            } break;
+        }
+    }
+
+    @Override
+    public void onTaskCompleted2(List<JSONObject> objectList, int passTypeID) {
         switch (passTypeID){
             case 1 : {
                 diseaseList = convertToDiseases(objectList);

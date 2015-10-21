@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -14,7 +13,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AsyncGetAllSymptomsForSickness extends AsyncTask<Void, Void, List<JSONObject>> {
+public class AsyncGetSickSympMatchingDiagSymp extends AsyncTask<Void, Void, List<JSONObject>> {
 
     private Context context;
     private ProgressDialog progressDialog;
@@ -22,12 +21,12 @@ public class AsyncGetAllSymptomsForSickness extends AsyncTask<Void, Void, List<J
     private String url;
     private String message;
     public List<JSONObject> jsonObjectList = new ArrayList<>();
-    public AsyncTaskResponse2 callBack = null;
+    public AsyncTaskResponse callBack = null;
     private ArrayList<NameValuePair> params = new ArrayList<>();
 
-    public AsyncGetAllSymptomsForSickness(AsyncTaskResponse2 callBack, Context context, ArrayList<NameValuePair> params) {
+    public AsyncGetSickSympMatchingDiagSymp(AsyncTaskResponse callBack, Context context, ArrayList<NameValuePair> params) {
         this.callBack = callBack;
-        this.url = "http://ssimayi-medme.co.za/getAllSymptomsForSickness.php";
+        this.url = "http://ssimayi-medme.co.za/getSicknessSymptomsMatchingDiagnosedSymptoms.php";
         this.context = context;
         this.params = params;
     }
@@ -35,7 +34,7 @@ public class AsyncGetAllSymptomsForSickness extends AsyncTask<Void, Void, List<J
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Getting symptoms for the sickness");
+        progressDialog.setMessage("Getting matching symptoms");
         progressDialog.setCancelable(false);
         progressDialog.show();
     }
@@ -44,7 +43,7 @@ public class AsyncGetAllSymptomsForSickness extends AsyncTask<Void, Void, List<J
     protected List<JSONObject> doInBackground(Void... param) {
         try {
 
-            String result = jsonHandler.getJSONFromUrl(url, params);
+            String result = jsonHandler.getJSONFromUrl(url, params );
 
             JSONObject jsonResponse = new JSONObject((result));
             JSONArray jArray = jsonResponse.getJSONArray("finalFetch");
@@ -62,7 +61,7 @@ public class AsyncGetAllSymptomsForSickness extends AsyncTask<Void, Void, List<J
     @Override
     protected void onPostExecute(List<JSONObject> result) {
         progressDialog.dismiss();
-        callBack.onTaskCompleted2(result, 2);
+        callBack.onTaskCompleted(result, 2);
 
     }
 }

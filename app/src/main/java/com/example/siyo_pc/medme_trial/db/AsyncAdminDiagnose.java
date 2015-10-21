@@ -57,7 +57,7 @@ public class AsyncAdminDiagnose extends AsyncTask<Void, Void, List<JSONObject>> 
             }
             nameValuePairs.add(new BasicNameValuePair("symptomsSelected", symptomIDs));
 
-            String result = jsonHandler.getJSONFromUrl(url, nameValuePairs );
+            String result = jsonHandler.getJSONFromUrl(url, nameValuePairs);
             JSONObject jsonResponse = new JSONObject((result));
             JSONArray jArray = jsonResponse.getJSONArray("finalFetch");
 
@@ -68,13 +68,15 @@ public class AsyncAdminDiagnose extends AsyncTask<Void, Void, List<JSONObject>> 
         } catch (Exception e) {
             Log.e("log_tag", "Error in parsing data ");
         }
+
         return jsonObjectList;
+
     }
 
     @Override
     protected void onPostExecute(List<JSONObject> result) {
         progressDialog.dismiss();
-        callBack.onTaskCompleted(result, 1);
+        callBack.onTaskCompleted(result, 10);
         //Toast.makeText(context, Integer.toString(result.size()) + " sicknesses", Toast.LENGTH_LONG).show();
     }
 

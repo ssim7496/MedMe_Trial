@@ -30,7 +30,7 @@ public class AsyncGetAllDiseases extends AsyncTask<Void, Void, List<JSONObject>>
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Refreshing information");
+        progressDialog.setMessage("Refreshing diseases");
         progressDialog.setCancelable(false);
         progressDialog.show();
     }
