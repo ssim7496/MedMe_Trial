@@ -1,18 +1,15 @@
 package com.example.siyo_pc.medme_trial;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 
-
-public class AdminSicknessesHome extends ActionBarActivity {
+public class HCWSymptomsHome extends AppCompatActivity {
 
     Button btnAdd, btnViewAll;
 
@@ -21,7 +18,7 @@ public class AdminSicknessesHome extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_sicknesses_home);
+        setContentView(R.layout.activity_hcwsymptoms_home);
 
         try {
             Intent intent = getIntent();
@@ -35,18 +32,16 @@ public class AdminSicknessesHome extends ActionBarActivity {
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
         } else {
-            btnAdd = (Button)findViewById(R.id.btnAdminAddSickness);
-            btnViewAll = (Button)findViewById(R.id.btnAdminViewAllSickness);
+            btnAdd = (Button) findViewById(R.id.btnHCWAddSymptom);
+            btnViewAll = (Button) findViewById(R.id.btnHCWViewAllSymptom);
 
             addButtonEvents();
         }
-
-
     }
 
-    private void addButtonEvents() {
-        addNextActivityOnClickListener(btnAdd, AdminSicknessesAdd.class);
-        addNextActivityOnClickListener(btnViewAll, AdminSicknessesViewAll.class);
+    private void addButtonEvents(){
+        addNextActivityOnClickListener(btnAdd, HCWSymptomsAdd.class);
+        addNextActivityOnClickListener(btnViewAll, HCWSymptomsViewAll.class);
     }
 
     public void addNextActivityOnClickListener(View view, final Class nextClass) {
@@ -62,30 +57,8 @@ public class AdminSicknessesHome extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, AdminHome.class);
+        Intent intent = new Intent(this, HCWHome.class);
         intent.putExtra("userCred", userLoggedIn);
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_admin_sicknesses_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

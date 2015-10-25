@@ -85,10 +85,6 @@
             android:label="@string/title_activity_admin_sicknesses_add" >
         </activity>
         <activity
-            android:name=".AdminSicknessesUpdate"
-            android:label="@string/title_activity_admin_sicknesses_update" >
-        </activity>
-        <activity
             android:name=".AdminSicknessesViewAll"
             android:label="@string/title_activity_admin_sicknesses_view_all" >
         </activity>
@@ -170,14 +166,86 @@
         </activity>
         <activity
             android:name=".GuestDiagnose"
-            android:label="@string/title_activity_admin_diagnose">
+            android:label="@string/title_activity_admin_diagnose" >
         </activity>
         <activity
             android:name=".GuestDiagnosisSymptomsConfirm"
-            android:label="@string/title_activity_admin_diagnosis_symptoms_confirm">
+            android:label="@string/title_activity_admin_diagnosis_symptoms_confirm" >
         </activity>
         <activity
             android:name=".GuestDiagnosedSicknesses"
+            android:label="Diagnosed Sicknesses" >
+        </activity>
+        <activity
+            android:name=".HCWHome"
+            android:label="Health Care Worker Home" >
+        </activity>
+        <activity
+            android:name=".HCWDiseasesHome"
+            android:label="@string/title_activity_admin_diseases_home" >
+        </activity>
+        <activity
+            android:name=".HCWDiseasesAdd"
+            android:label="@string/title_activity_admin_diseases_add" >
+        </activity>
+        <activity
+            android:name=".HCWDiseasesViewAll"
+            android:label="@string/title_activity_admin_diseases_view_all" >
+        </activity>
+        <activity
+            android:name=".HCWDiseaseView"
+            android:label="@string/title_activity_admin_disease_view" >
+        </activity>
+        <activity
+            android:name=".HCWSymptomsHome"
+            android:label="@string/title_activity_admin_symptoms_home" >
+        </activity>
+        <activity
+            android:name=".HCWSymptomsAdd"
+            android:label="@string/title_activity_admin_symptoms_add" >
+        </activity>
+        <activity
+            android:name=".HCWSymptomsViewAll"
+            android:label="@string/title_activity_admin_symptoms_view_all" >
+        </activity>
+        <activity
+            android:name=".HCWSymptomView"
+            android:label="@string/title_activity_admin_symptom_view" >
+        </activity>
+        <activity
+            android:name=".HCWSicknessesHome"
+            android:label="@string/title_activity_admin_sicknesses_home" >
+        </activity>
+        <activity
+            android:name=".HCWSicknessesAdd"
+            android:label="@string/title_activity_admin_sicknesses_add" >
+        </activity>
+        <activity
+            android:name=".HCWSicknessesAddSymptoms"
+            android:label="@string/title_activity_admin_sicknesses_add_symptoms" >
+        </activity>
+        <activity
+            android:name=".HCWSicknessesViewAll"
+            android:label="@string/title_activity_admin_sicknesses_view_all" >
+        </activity>
+        <activity
+            android:name=".HCWSicknessView"
+            android:label="@string/title_activity_admin_sickness_view" >
+        </activity>
+        <activity
+            android:name=".HCWSearch"
+            android:label="@string/title_activity_admin_search">
+        </activity>
+        <activity
+            android:name=".HCWDiagnose"
+            android:label="@string/title_activity_admin_diagnose">
+        </activity>
+        <activity
+            android:name=".HCWDiagnosisSymptomsConfirm"
+            android:label="@string/title_activity_admin_diagnosis_symptoms_confirm">
+        </activity>
+        <activity
+            android:name=".HCWDiagnosedSicknesses"
             android:label="Diagnosed Sicknesses">
         </activity>
     </application>

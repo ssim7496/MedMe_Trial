@@ -163,6 +163,9 @@ public class LogIn extends AppCompatActivity{
 
             case 2: {
                 //Health Care Taker activity
+                Intent intent = new Intent(this, HCWHome.class);
+                intent.putExtra("userCred", user);
+                startActivity(intent);
             } break;
 
             case 3: {

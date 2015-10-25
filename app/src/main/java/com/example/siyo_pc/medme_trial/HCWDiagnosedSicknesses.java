@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.adapters.AdminDiagnosedSicknessAdapter;
-import com.example.siyo_pc.medme_trial.adapters.GuestDiagnosedSicknessAdapter;
+import com.example.siyo_pc.medme_trial.adapters.HCWDiagnosedSicknessAdapter;
 import com.example.siyo_pc.medme_trial.classes.MM_DiagnosedSymptoms;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class GuestDiagnosedSicknesses extends AppCompatActivity implements AsyncTaskResponse, AsyncTaskResponse2 {
+public class HCWDiagnosedSicknesses extends AppCompatActivity implements AsyncTaskResponse, AsyncTaskResponse2 {
 
     MM_Person userLoggedIn;
 
@@ -44,7 +44,7 @@ public class GuestDiagnosedSicknesses extends AppCompatActivity implements Async
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest_diagnosed_sicknesses);
+        setContentView(R.layout.activity_hcwdiagnosed_sicknesses);
 
         try {
             Intent intent = getIntent();
@@ -60,7 +60,7 @@ public class GuestDiagnosedSicknesses extends AppCompatActivity implements Async
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
         } else {
-            listSicknesses = (ListView)findViewById(R.id.listViewGuestDiagnosedSicknesses);
+            listSicknesses = (ListView)findViewById(R.id.listViewHCWDiagnosedSicknesses);
 
             diagnose(symptomsSelected);
 
@@ -71,7 +71,7 @@ public class GuestDiagnosedSicknesses extends AppCompatActivity implements Async
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, GuestDiagnose.class);
+        Intent intent = new Intent(this, HCWDiagnose.class);
         intent.putExtra("userCred", userLoggedIn);
         startActivity(intent);
     }
@@ -134,7 +134,7 @@ public class GuestDiagnosedSicknesses extends AppCompatActivity implements Async
 
                 if (totalSicknessForListViewCount == (convertedSicknessListByID.size() - 1)) {
                     //adding sickness to listview
-                    GuestDiagnosedSicknessAdapter adapter = new GuestDiagnosedSicknessAdapter(this, convertedSicknessListByID, userLoggedIn, diagnosisSymptomsList);
+                    HCWDiagnosedSicknessAdapter adapter = new HCWDiagnosedSicknessAdapter(this, convertedSicknessListByID, userLoggedIn, diagnosisSymptomsList);
                     listSicknesses.setAdapter(adapter);
                 } else {
                     totalSicknessForListViewCount++;

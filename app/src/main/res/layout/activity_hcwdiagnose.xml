@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_background"
+    tools:context="com.example.siyo_pc.medme_trial.HCWDiagnose">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="0dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:textColor="@color/default_text_colour"
+            style="@style/paragraph_text"
+            android:text="@string/defaultDiagnose"
+            android:id="@+id/tvHCWDiagnose"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="0dp">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/grid_button"
+                style="@style/button_text"
+                android:text="@string/Diagnose"
+                android:layout_gravity="center"
+                android:id="@+id/btnHCWDiagnose" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_weight="3">
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewHCWDiagnoseResults">
+        </ListView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -6,35 +6,35 @@
     android:background="@color/default_background"
     tools:context="com.example.siyo_pc.medme_trial.AdminSymptomsViewAllFragment">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/default_text_colour"
-                    android:text="@string/symptomBeginDesc"
-                    style="@style/paragraph_text"
-                    android:paddingLeft="10dp"
-                    android:textStyle="italic"
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"/>
-            </LinearLayout>
-            <LinearLayout
+                android:textColor="@color/default_text_colour"
+                android:text="@string/symptomBeginDesc"
+                style="@style/paragraph_text"
+                android:paddingLeft="10dp"
+                android:textStyle="italic"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+            <ListView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="horizontal" >
-                <ListView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/listViewAdminSymptoms"></ListView>
-            </LinearLayout>
+                android:id="@+id/listViewAdminSymptoms"></ListView>
         </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

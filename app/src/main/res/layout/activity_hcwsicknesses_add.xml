@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/default_background"
-    tools:context="com.example.siyo_pc.medme_trial.AdminSicknessesUpdateFragment">
+    tools:context="com.example.siyo_pc.medme_trial.HCWSicknessesAdd">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -21,25 +22,6 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/row7"
-                    android:layout_margin="10dp">
-
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/SelectSickness"
-                        style="@style/text_view_text"
-                        android:id="@+id/tvAdminUpdateSelectSickness" />
-
-                    <Spinner
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/spinnerAdminUpdateSickness"
-                        android:layout_weight="1" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/row1"
                     android:layout_margin="10dp">
 
@@ -48,14 +30,15 @@
                         android:layout_height="55dp"
                         android:text="@string/lblSicknessName"
                         style="@style/text_view_text"
-                        android:id="@+id/tvAdminUpdateSicknessName" />
+                        android:id="@+id/tvHCWAddSicknessName" />
 
                     <EditText
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/edtAdminUpdateSicknessNameUpdate"
+                        android:id="@+id/edtHCWSicknessNameAdd"
                         android:text=""
-                        style="@style/edit_text"/>
+                        style="@style/edit_text"
+                        android:singleLine="true" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -68,16 +51,17 @@
                         android:layout_height="50dp"
                         android:text="@string/lblSicknessGreekName"
                         style="@style/text_view_text"
-                        android:id="@+id/tvAdminUpdateSicknessGreekName" />
+                        android:id="@+id/tvHCWAddSicknessGreekName" />
 
                     <EditText
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:id="@+id/edtAdminUpdateSicknessGreekNameUpdate"
+                        android:id="@+id/edtHCWSicknessGreekNameAdd"
                         android:textStyle="italic"
                         android:text=""
-                        style="@style/edit_text"/>
+                        style="@style/edit_text"
+                        android:singleLine="true" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -92,13 +76,13 @@
                         android:inputType="textMultiLine"
                         android:ems="10"
                         style="@style/text_view_text"
-                        android:id="@+id/tvAdminUpdateSicknessDesc" />
+                        android:id="@+id/tvHCWAddSicknessDesc" />
 
                     <EditText
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:id="@+id/edtAdminUpdateSicknessDescUpdate"
+                        android:id="@+id/edtHCWSicknessDescAdd"
                         android:text=""
                         style="@style/edit_text"/>
                 </LinearLayout>
@@ -114,52 +98,29 @@
                     android:layout_height="wrap_content"
                     android:text="@string/SelectSicknessDisease"
                     style="@style/text_view_text"
-                    android:id="@+id/tvAdminUpdateSicknessSelectDisease" />
+                    android:id="@+id/tvHCWAddSelectDisease" />
 
-                <LinearLayout
+                <Spinner
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/row11"
-                    android:gravity="right">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        style="@style/text_view_text"
-                        android:layout_marginRight="20dp"
-                        android:id="@+id/tvAdminSlaveSelectedDiseaseUpdate" />
-                </LinearLayout>
+                    android:id="@+id/spinnerHCWAddDisease"
+                    android:layout_weight="1" />
 
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/row6"
-                android:layout_margin="10dp">
+                android:id="@+id/row10"
+                android:gravity="right">
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/SelectSicknessSymptom"
+                    android:text=""
                     style="@style/text_view_text"
-                    android:id="@+id/tvAdminUpdateSicknessSelectSymptom" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/row12"
-                    android:gravity="right">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        style="@style/text_view_text"
-                        android:layout_marginRight="20dp"
-                        android:id="@+id/tvAdminSlaveSelectedSymptomUpdate" />
-                </LinearLayout>
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/tvHCWSlaveSelectedDisease" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -173,7 +134,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/grid_button"
                     style="@style/button_text"
-                    android:id="@+id/btnAdminConfirmCancelSicknessUpdate"
+                    android:id="@+id/btnHCWConfirmCancelSickness"
                     android:text="@string/Cancel"
                     />
                 <Button
@@ -182,8 +143,8 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/grid_button"
                     style="@style/button_text"
-                    android:id="@+id/btnAdminConfirmUpdateSicknessUpdate"
-                    android:text="@string/Update"
+                    android:id="@+id/btnHCWAddSicknessNext1"
+                    android:text="@string/next"
                     />
             </LinearLayout>
         </LinearLayout>

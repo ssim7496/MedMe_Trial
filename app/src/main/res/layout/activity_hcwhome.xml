@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_background"
+    tools:context="com.example.siyo_pc.medme_trial.HCWHome">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/row1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.45"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button_admin"
+                    style="@style/button_text"
+                    android:id="@+id/btnHCWDiagnose"
+                    android:text="@string/Diagnose"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/row2"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.45"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button_admin"
+                    style="@style/button_text"
+                    android:id="@+id/btnHCWSearch"
+                    android:text="@string/Search"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/row3"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.45"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button_admin"
+                    style="@style/button_text"
+                    android:id="@+id/btnHCWDiseases"
+                    android:text="@string/Diseases"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/row4"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.45"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button_admin"
+                    style="@style/button_text"
+                    android:id="@+id/btnHCWSicknesses"
+                    android:text="@string/Sicknesses"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/row5"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="0.45"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grid_button_admin"
+                    style="@style/button_text"
+                    android:id="@+id/btnHCWSymptoms"
+                    android:text="@string/Symptoms"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

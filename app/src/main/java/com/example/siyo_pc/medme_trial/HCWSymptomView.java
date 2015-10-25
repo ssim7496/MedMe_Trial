@@ -6,21 +6,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.siyo_pc.medme_trial.adapters.AdminDiseaseAdapter;
 import com.example.siyo_pc.medme_trial.adapters.AdminSicknessAdapter;
-import com.example.siyo_pc.medme_trial.classes.MM_Disease;
+import com.example.siyo_pc.medme_trial.adapters.HCWSicknessAdapter;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
-import com.example.siyo_pc.medme_trial.db.AsyncGetAllDiseases;
-import com.example.siyo_pc.medme_trial.db.AsyncGetAllSicknessesForDisease;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSicknessesForSymptom;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptoms;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
@@ -33,7 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResponse{
+public class HCWSymptomView extends AppCompatActivity implements AsyncTaskResponse {
 
     ListView listSickness;
     TextView symptomTitle, symptomDesc, symptomGreekName;
@@ -44,10 +39,11 @@ public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResp
     private ArrayList<MM_Symptom> symptomList = null;
     private ArrayList<MM_Sickness> sicknessList = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_symptom_view);
+        setContentView(R.layout.activity_hcwsymptom_view);
 
         try {
             Intent intent = getIntent();
@@ -61,9 +57,9 @@ public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResp
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
         } else {
-            symptomTitle = (TextView) findViewById(R.id.tvAdminSymptomTitle);
-            symptomDesc = (TextView) findViewById(R.id.tvAdminSymptomDescription);
-            symptomGreekName = (TextView) findViewById(R.id.tvAdminSymptomGreekName);
+            symptomTitle = (TextView) findViewById(R.id.tvHCWSymptomTitle);
+            symptomDesc = (TextView) findViewById(R.id.tvHCWSymptomDescription);
+            symptomGreekName = (TextView) findViewById(R.id.tvHCWSymptomGreekName);
 
             try {
                 asyncAllSymptoms.execute();
@@ -198,33 +194,11 @@ public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResp
 
     private void getSicknessInformation(ArrayList<MM_Sickness> sicknessList) {
         if (sicknessList != null) {
-            AdminSicknessAdapter adapter = new AdminSicknessAdapter(this, sicknessList, userLoggedIn);
-            listSickness = (ListView) findViewById(R.id.listViewAdminSicknessSymptomLink);
+            HCWSicknessAdapter adapter = new HCWSicknessAdapter(this, sicknessList, userLoggedIn);
+            listSickness = (ListView) findViewById(R.id.listViewHCWSicknessSymptomLink);
             View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
             listSickness.addHeaderView(header);
             listSickness.setAdapter(adapter);
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_admin_symptom_view, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

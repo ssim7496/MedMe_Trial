@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/default_background"
-    tools:context="com.example.siyo_pc.medme_trial.AdminSicknessesHomeFragment">
+    tools:context="com.example.siyo_pc.medme_trial.HCWSicknessesHome">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -27,14 +28,14 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/grid_button_admin"
                     style="@style/button_text"
-                    android:id="@+id/btnAdminAddSickness"
+                    android:id="@+id/btnHCWAddSickness"
                     android:text="@string/Add"
                     />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:id="@+id/row3"
+                android:id="@+id/row4"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="8dp">
@@ -44,7 +45,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/grid_button_admin"
                     style="@style/button_text"
-                    android:id="@+id/btnAdminViewAllSickness"
+                    android:id="@+id/btnHCWViewAllSickness"
                     android:text="@string/ViewAll"
                     />
             </LinearLayout>

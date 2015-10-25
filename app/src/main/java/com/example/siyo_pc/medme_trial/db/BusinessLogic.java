@@ -10,6 +10,9 @@ import android.widget.Toast;
 import com.example.siyo_pc.medme_trial.AdminDiseasesHome;
 import com.example.siyo_pc.medme_trial.AdminSicknessesHome;
 import com.example.siyo_pc.medme_trial.AdminSymptomsHome;
+import com.example.siyo_pc.medme_trial.HCWDiseasesHome;
+import com.example.siyo_pc.medme_trial.HCWSicknessesHome;
+import com.example.siyo_pc.medme_trial.HCWSymptomsHome;
 import com.example.siyo_pc.medme_trial.Start;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
@@ -32,6 +35,7 @@ public class BusinessLogic{
     private String urlGetAllPeople = "http://ssimayi-medme.co.za/test.php";
 
     private String urlAddPerson = "http://www.ssimayi-medme.co.za/insertPerson.php";
+
     private String urlAddDiseaseAdmin = "http://www.ssimayi-medme.co.za/insertDiseaseAdmin.php";
     private String urlAddSymptomAdmin = "http://www.ssimayi-medme.co.za/insertSymptomAdmin.php";
     private String urlAddSicknessAdmin = "http://www.ssimayi-medme.co.za/insertSicknessAdmin.php";
@@ -39,6 +43,11 @@ public class BusinessLogic{
 
     private String urlUpdateDiseaseAdmin = "http://www.ssimayi-medme.co.za/updateDiseaseAdmin.php";
     private String urlUpdateSymptomAdmin = "http://www.ssimayi-medme.co.za/updateSymptomAdmin.php";
+
+    private String urlAddDiseaseHCW = "http://www.ssimayi-medme.co.za/insertDiseaseAdminHCW.php";
+    private String urlAddSymptomHCW = "http://www.ssimayi-medme.co.za/insertSymptomAdminHCW.php";
+    private String urlAddSicknessHCW = "http://www.ssimayi-medme.co.za/insertSicknessAdminHCW.php";
+    private String urlAddSicknessSymptomsHCW = "http://www.ssimayi-medme.co.za/insertSicknessSymptomsAdminHCW.php";
 
     public List<MM_Disease> diseaseList;
     private MM_Person userLoggedIn;
@@ -138,6 +147,48 @@ public class BusinessLogic{
 
         try {
             DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSicknessAdmin, nameValuePairs, AdminSicknessesHome.class, sickness, disease, symptomToAddList);
+            dataAccess.execute();
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void addDiseaseHCW(MM_Disease disease) {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+        nameValuePairs.add(new BasicNameValuePair("diseaseName", disease.GetDiseaseName()));
+        nameValuePairs.add(new BasicNameValuePair("diseaseDesc", disease.GetDiseaseDesc()));
+        nameValuePairs.add(new BasicNameValuePair("greekName", disease.GetGreekName()));
+
+        try {
+            DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDiseaseHCW, nameValuePairs, HCWDiseasesHome.class);
+            dataAccess.execute();
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void addSymptomHCW(MM_Symptom symptom) {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+        nameValuePairs.add(new BasicNameValuePair("symptomName", symptom.GetSymptomName()));
+        nameValuePairs.add(new BasicNameValuePair("symptomDesc", symptom.GetSymptomDesc()));
+        nameValuePairs.add(new BasicNameValuePair("greekName", symptom.GetGreekName()));
+
+        try {
+            DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSymptomHCW, nameValuePairs, HCWSymptomsHome.class);
+            dataAccess.execute();
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void addSicknessHCW(MM_Sickness sickness, MM_Disease disease, ArrayList<MM_Symptom> symptomToAddList) {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+        nameValuePairs.add(new BasicNameValuePair("sicknessName", sickness.GetSicknessName()));
+        nameValuePairs.add(new BasicNameValuePair("sicknessDesc", sickness.GetSicknessDesc()));
+        nameValuePairs.add(new BasicNameValuePair("greekName", sickness.GetGreekName()));
+
+        try {
+            DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSicknessHCW, nameValuePairs, HCWSicknessesHome.class, sickness, disease, symptomToAddList);
             dataAccess.execute();
         } catch (Exception e) {
             Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
