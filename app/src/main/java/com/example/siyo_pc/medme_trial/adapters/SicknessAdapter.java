@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.siyo_pc.medme_trial.GuestSicknessView;
 import com.example.siyo_pc.medme_trial.R;
+import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 
 import java.util.ArrayList;
@@ -18,11 +20,13 @@ public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
 
     private Context context;
     ArrayList<MM_Sickness> data = null;
+    MM_Person userLoggedIn = null;
 
-    public SicknessAdapter(Context context, ArrayList<MM_Sickness> data) {
+    public SicknessAdapter(Context context, ArrayList<MM_Sickness> data, MM_Person userLoggedIn) {
         super(context, 0, data);
         this.context = context;
         this.data = data;
+        this.userLoggedIn = userLoggedIn;
     }
 
     @Override
@@ -39,9 +43,10 @@ public class SicknessAdapter extends ArrayAdapter<MM_Sickness>{
         tvName.setOnClickListener(new TextView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(/*context, GuestSicknessView.class*/);
+                Intent intent = new Intent(context, GuestSicknessView.class);
                 Bundle bundle = intent.getExtras();
                 intent.putExtra("sickness", Integer.toString(sickness.GetSicknessID()));
+                intent.putExtra("userCred", userLoggedIn);
                 Intent i = new Intent("com.example.siyo_pc.medme_trial.adapters").putExtra("diseaseItem", Integer.toString(sickness.GetSicknessID()));
                 context.sendBroadcast(i);
                 context.startActivity(intent);

@@ -167,9 +167,9 @@ public class LogIn extends AppCompatActivity{
 
             case 3: {
                 //Guest activity
-                /*Intent intent = new Intent(this, GuestHome.class);
+                Intent intent = new Intent(this, GuestHome.class);
                 intent.putExtra("userCred", user);
-                startActivity(intent);*/
+                startActivity(intent);
             } break;
         }
     }

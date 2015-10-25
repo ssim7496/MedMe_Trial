@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -6,8 +7,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:background="@color/default_background"
-    tools:context="com.example.siyo_pc.medme_trial.AdminSicknessViewFragment">
-
+    tools:context="com.example.siyo_pc.medme_trial.GuestSicknessView">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
             <TextView
-                android:id="@+id/tvAdminSicknessTitle"
+                android:id="@+id/tvGuestSicknessTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
                 <TextView
-                    android:id="@+id/tvAdminSicknessGreekName"
+                    android:id="@+id/tvGuestSicknessGreekName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/tvAdminSicknessDescription"
+                    android:id="@+id/tvGuestSicknessDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
                     <TextView
-                        android:id="@+id/tvAdminDiseasesTitle"
+                        android:id="@+id/tvGuestDiseasesTitle"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="Related Diseases"
@@ -118,7 +118,7 @@
                     <ListView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/listAdminViewRelatedDiseases"></ListView>
+                        android:id="@+id/listGuestViewRelatedDiseases"></ListView>
                 </LinearLayout>
             </LinearLayout>
 
@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
                     <TextView
-                        android:id="@+id/tvAdminSymptomsTitle"
+                        android:id="@+id/tvGuestSymptomsTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Related Symptoms"
@@ -162,10 +162,9 @@
                     <ListView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/listAdminViewRelatedSymptoms"></ListView>
+                        android:id="@+id/listGuestViewRelatedSymptoms"></ListView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
-

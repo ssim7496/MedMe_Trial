@@ -132,7 +132,52 @@
             android:name=".AdminDiagnosisSymptomsConfirm"
             android:label="@string/title_activity_admin_diagnosis_symptoms_confirm" >
         </activity>
-        <activity android:name=".AdminDiagnosedSicknesses"
+        <activity
+            android:name=".AdminDiagnosedSicknesses"
+            android:label="Diagnosed Sicknesses" >
+        </activity>
+        <activity
+            android:name=".GuestHome"
+            android:label="Guest Home" >
+        </activity>
+        <activity
+            android:name=".GuestSymptomsViewAll"
+            android:label="@string/title_activity_admin_symptoms_view_all" >
+        </activity>
+        <activity
+            android:name=".GuestSymptomView"
+            android:label="@string/title_activity_admin_symptom_view" >
+        </activity>
+        <activity
+            android:name=".GuestDiseasesViewAll"
+            android:label="@string/title_activity_admin_diseases_view_all" >
+        </activity>
+        <activity
+            android:name=".GuestDiseaseView"
+            android:label="@string/title_activity_admin_disease_view" >
+        </activity>
+        <activity
+            android:name=".GuestSicknessesViewAll"
+            android:label="@string/title_activity_admin_sicknesses_view_all" >
+        </activity>
+        <activity
+            android:name=".GuestSicknessView"
+            android:label="@string/title_activity_admin_sickness_view" >
+        </activity>
+        <activity
+            android:name=".GuestSearch"
+            android:label="@string/title_activity_admin_search" >
+        </activity>
+        <activity
+            android:name=".GuestDiagnose"
+            android:label="@string/title_activity_admin_diagnose">
+        </activity>
+        <activity
+            android:name=".GuestDiagnosisSymptomsConfirm"
+            android:label="@string/title_activity_admin_diagnosis_symptoms_confirm">
+        </activity>
+        <activity
+            android:name=".GuestDiagnosedSicknesses"
             android:label="Diagnosed Sicknesses">
         </activity>
     </application>

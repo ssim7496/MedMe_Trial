@@ -1,15 +1,12 @@
 package com.example.siyo_pc.medme_trial;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.siyo_pc.medme_trial.adapters.AdminDiagnoseSymptomsAdapter;
 import com.example.siyo_pc.medme_trial.adapters.AdminDiagnosedSicknessAdapter;
 import com.example.siyo_pc.medme_trial.classes.MM_DiagnosedSymptoms;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
@@ -17,7 +14,6 @@ import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import com.example.siyo_pc.medme_trial.db.AsyncAdminDiagnose;
 import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptomsForSickness;
-import com.example.siyo_pc.medme_trial.db.AsyncGetSickSympMatchingDiagSymp;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
 import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse2;
 
@@ -30,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AdminDiagnosedSicknesses extends AppCompatActivity implements AsyncTaskResponse, AsyncTaskResponse2 {
+public class GuestDiagnosedSicknesses extends AppCompatActivity implements AsyncTaskResponse, AsyncTaskResponse2 {
 
     MM_Person userLoggedIn;
 
@@ -47,7 +43,7 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_diagnosed_sicknesses);
+        setContentView(R.layout.activity_guest_diagnosed_sicknesses);
 
         try {
             Intent intent = getIntent();
@@ -63,7 +59,7 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
         } else {
-            listSicknesses = (ListView)findViewById(R.id.listViewAdminDiagnosedSicknesses);
+            listSicknesses = (ListView)findViewById(R.id.listViewGuestDiagnosedSicknesses);
 
             diagnose(symptomsSelected);
 
@@ -74,7 +70,7 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, AdminDiagnose.class);
+        Intent intent = new Intent(this, GuestDiagnose.class);
         intent.putExtra("userCred", userLoggedIn);
         startActivity(intent);
     }

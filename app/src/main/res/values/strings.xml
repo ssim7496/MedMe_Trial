@@ -58,7 +58,7 @@
     <string name="lblSicknessDesc">Sickness Description:</string>
     <string name="lblSicknessGreekName">Sickness Greek Name:</string>
 
-    <string name="title_activity_admin_home">Home</string>
+    <string name="title_activity_admin_home">Admin Home</string>
     <string name="title_activity_admin_diseases_home">Diseases</string>
     <string name="Add">Add</string>
     <string name="Update">Update</string>
