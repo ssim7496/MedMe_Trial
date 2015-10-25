@@ -1,6 +1,5 @@
 package com.example.siyo_pc.medme_trial.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,20 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.AdminSymptomView;
-import com.example.siyo_pc.medme_trial.GuestSicknessView;
-import com.example.siyo_pc.medme_trial.GuestSymptomView;
 import com.example.siyo_pc.medme_trial.R;
-import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
-import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

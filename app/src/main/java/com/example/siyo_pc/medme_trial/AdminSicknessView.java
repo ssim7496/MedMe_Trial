@@ -73,7 +73,11 @@ public class AdminSicknessView extends AppCompatActivity implements AsyncTaskRes
             listDiseases = (ListView) findViewById(R.id.listAdminViewRelatedDiseases);
             listSymptoms = (ListView) findViewById(R.id.listAdminViewRelatedSymptoms);
 
-            asyncAllSicknessess.execute();
+            try {
+                asyncAllSicknessess.execute();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -276,10 +280,14 @@ public class AdminSicknessView extends AppCompatActivity implements AsyncTaskRes
         ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("sicknessID", Integer.toString(sickness.GetSicknessID())));
 
-        AsyncGetAllDiseasesForSickness asyncAllDiseasesForSickness = new AsyncGetAllDiseasesForSickness(this, this, params);
-        AsyncGetAllSymptomsForSickness asyncAllSymptomsForSickness = new AsyncGetAllSymptomsForSickness(this, this, params);
-        asyncAllDiseasesForSickness.execute();
-        asyncAllSymptomsForSickness.execute();
+        try {
+            AsyncGetAllDiseasesForSickness asyncAllDiseasesForSickness = new AsyncGetAllDiseasesForSickness(this, this, params);
+            AsyncGetAllSymptomsForSickness asyncAllSymptomsForSickness = new AsyncGetAllSymptomsForSickness(this, this, params);
+            asyncAllDiseasesForSickness.execute();
+            asyncAllSymptomsForSickness.execute();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

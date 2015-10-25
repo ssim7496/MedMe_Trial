@@ -72,7 +72,11 @@ public class AdminDiseasesUpdate extends ActionBarActivity implements AsyncTaskR
             edtDiseaseGreekName = (EditText)findViewById(R.id.edtAdminDiseaseGreekNameUpdate);
             edtDiseaseDesc = (EditText)findViewById(R.id.edtAdminDiseaseDescUpdate);
 
-            asyncAllDiseases.execute();
+            try {
+                asyncAllDiseases.execute();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            }
 
             addButtonEvents();
             addIntentFiltersAndBroadcastReceivers();

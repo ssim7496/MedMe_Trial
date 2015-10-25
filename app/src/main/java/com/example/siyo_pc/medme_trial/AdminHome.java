@@ -73,7 +73,6 @@ public class AdminHome extends ActionBarActivity{
             addNextActivityOnClickListener(btnDiagnose, AdminDiagnose.class);
             addNextActivityOnClickListener(btnSymptoms, AdminSymptomsHome.class);
             addNextActivityOnClickListener(btnSicknesses, AdminSicknessesHome.class);
-            //addNextActivityOnClickListener(btnHelp, GuestHelp.class);
 
             //underConstruction(btnDiseases);
             //underConstruction(btnSearch);
@@ -112,7 +111,6 @@ public class AdminHome extends ActionBarActivity{
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                /*finish();*/
                 finishAffinity();
             }
         });

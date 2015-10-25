@@ -72,7 +72,11 @@ public class AdminSymptomsUpdate extends ActionBarActivity implements AsyncTaskR
             edtSymptomGreekName = (EditText)findViewById(R.id.edtAdminSymptomGreekNameUpdate);
             edtSymptomDesc = (EditText)findViewById(R.id.edtAdminSymptomDescUpdate);
 
-            asyncAllSymptoms.execute();
+            try {
+                asyncAllSymptoms.execute();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            }
 
             addButtonEvents();
             addIntentFiltersAndBroadcastReceivers();

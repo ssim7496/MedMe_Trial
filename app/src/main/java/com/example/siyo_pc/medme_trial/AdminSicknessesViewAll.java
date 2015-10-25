@@ -59,7 +59,11 @@ public class AdminSicknessesViewAll extends ActionBarActivity implements AsyncTa
         } else {
             listSickness = (ListView) findViewById(R.id.listViewAdminSicknessList);
 
-            asyncAllSickness.execute();
+            try {
+                asyncAllSickness.execute();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

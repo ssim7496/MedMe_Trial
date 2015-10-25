@@ -69,7 +69,11 @@ public class AdminSicknessesAddSymptoms extends AppCompatActivity implements Asy
             btnAdd = (Button) findViewById(R.id.btnAdminSicknessSymptomAdd);
             btnBack = (Button) findViewById(R.id.btnAdminSicknessSymptomBack);
 
-            asyncAllSymptoms.execute();
+            try {
+                asyncAllSymptoms.execute();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            }
 
             addButtonEvents();
         }

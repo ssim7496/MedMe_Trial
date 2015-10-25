@@ -1,6 +1,5 @@
 package com.example.siyo_pc.medme_trial.db;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 import com.example.siyo_pc.medme_trial.AdminDiseasesHome;
 import com.example.siyo_pc.medme_trial.AdminSicknessesHome;
 import com.example.siyo_pc.medme_trial.AdminSymptomsHome;
-import com.example.siyo_pc.medme_trial.GuestHome;
 import com.example.siyo_pc.medme_trial.Start;
 import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
@@ -21,13 +19,10 @@ import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
 
 public class BusinessLogic{
     Context context;
@@ -69,8 +64,12 @@ public class BusinessLogic{
         nameValuePairs.add(new BasicNameValuePair("personRecoveryQuestion", person.GetPersonRecoveryQuestion()));
         nameValuePairs.add(new BasicNameValuePair("personRecoveryAnswer", person.GetPersonRecoveryAnswer()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddPerson, nameValuePairs, Start.class);
-        dataAccess.execute();
+        try {
+            DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddPerson, nameValuePairs, Start.class);
+            dataAccess.execute();
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void addDiseaseAdmin(MM_Disease disease) {
@@ -79,8 +78,12 @@ public class BusinessLogic{
         nameValuePairs.add(new BasicNameValuePair("diseaseDesc", disease.GetDiseaseDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", disease.GetGreekName()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDiseaseAdmin, nameValuePairs, AdminDiseasesHome.class);
-        dataAccess.execute();
+        try {
+            DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddDiseaseAdmin, nameValuePairs, AdminDiseasesHome.class);
+            dataAccess.execute();
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void updateDiseaseAdmin(MM_Disease disease) {
@@ -90,8 +93,12 @@ public class BusinessLogic{
         nameValuePairs.add(new BasicNameValuePair("diseaseDesc", disease.GetDiseaseDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", disease.GetGreekName()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlUpdateDiseaseAdmin, nameValuePairs, AdminDiseasesHome.class);
-        dataAccess.execute();
+        try {
+            DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlUpdateDiseaseAdmin, nameValuePairs, AdminDiseasesHome.class);
+            dataAccess.execute();
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void addSymptomAdmin(MM_Symptom symptom) {
@@ -100,8 +107,12 @@ public class BusinessLogic{
         nameValuePairs.add(new BasicNameValuePair("symptomDesc", symptom.GetSymptomDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", symptom.GetGreekName()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSymptomAdmin, nameValuePairs, AdminSymptomsHome.class);
-        dataAccess.execute();
+        try {
+            DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSymptomAdmin, nameValuePairs, AdminSymptomsHome.class);
+            dataAccess.execute();
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void updateSymptomAdmin(MM_Symptom symptom) {
@@ -111,8 +122,12 @@ public class BusinessLogic{
         nameValuePairs.add(new BasicNameValuePair("symptomDesc", symptom.GetSymptomDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", symptom.GetGreekName()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlUpdateSymptomAdmin, nameValuePairs, AdminSymptomsHome.class);
-        dataAccess.execute();
+        try {
+            DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlUpdateSymptomAdmin, nameValuePairs, AdminSymptomsHome.class);
+            dataAccess.execute();
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void addSicknessAdmin(MM_Sickness sickness, MM_Disease disease, ArrayList<MM_Symptom> symptomToAddList) {
@@ -121,8 +136,12 @@ public class BusinessLogic{
         nameValuePairs.add(new BasicNameValuePair("sicknessDesc", sickness.GetSicknessDesc()));
         nameValuePairs.add(new BasicNameValuePair("greekName", sickness.GetGreekName()));
 
-        DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSicknessAdmin, nameValuePairs, AdminSicknessesHome.class, sickness, disease, symptomToAddList);
-        dataAccess.execute();
+        try {
+            DataAccessLayerOperational dataAccess = new DataAccessLayerOperational(urlAddSicknessAdmin, nameValuePairs, AdminSicknessesHome.class, sickness, disease, symptomToAddList);
+            dataAccess.execute();
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public class DataAccessLayerOperational extends AsyncTask<String, Void, String> {

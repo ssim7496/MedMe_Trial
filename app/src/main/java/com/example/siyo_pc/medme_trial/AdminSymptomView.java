@@ -66,7 +66,11 @@ public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResp
             symptomDesc = (TextView) findViewById(R.id.tvAdminSymptomDescription);
             symptomGreekName = (TextView) findViewById(R.id.tvAdminSymptomGreekName);
 
-            asyncAllSymptoms.execute();
+            try {
+                asyncAllSymptoms.execute();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            }
 
         }
     }
@@ -185,8 +189,12 @@ public class AdminSymptomView extends AppCompatActivity implements AsyncTaskResp
         ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("symptomID", Integer.toString(symptom.GetSymptomID())));
 
-        AsyncGetAllSicknessesForSymptom asyncGetAllSicknessesForSymptom = new AsyncGetAllSicknessesForSymptom(this, this, params);
-        asyncGetAllSicknessesForSymptom.execute();
+        try {
+            AsyncGetAllSicknessesForSymptom asyncGetAllSicknessesForSymptom = new AsyncGetAllSicknessesForSymptom(this, this, params);
+            asyncGetAllSicknessesForSymptom.execute();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void getSicknessInformation(ArrayList<MM_Sickness> sicknessList) {

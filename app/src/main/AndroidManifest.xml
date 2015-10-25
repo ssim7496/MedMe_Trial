@@ -45,39 +45,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GuestHome"
-            android:configChanges="orientation"
-            android:label="@string/title_activity_guest_home"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".GuestSickness"
-            android:configChanges="orientation"
-            android:label="@string/title_activity_guest_sickness"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".GuestSicknessView"
-            android:label="@string/title_activity_guest_sickness_view"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".GuestDisease"
-            android:label="@string/title_activity_guest_disease" >
-        </activity>
-        <activity
-            android:name=".GuestDiseaseView"
-            android:label="@string/title_activity_guest_disease_view" >
-        </activity>
-        <activity
-            android:name=".GuestSymptom"
-            android:label="@string/title_activity_guest_symptom" >
-        </activity>
-        <activity
-            android:name=".GuestSymptomView"
-            android:label="@string/title_activity_guest_symptom_view" >
-        </activity>
-        <activity
             android:name=".AdminHome"
             android:label="@string/title_activity_admin_home" >
         </activity>

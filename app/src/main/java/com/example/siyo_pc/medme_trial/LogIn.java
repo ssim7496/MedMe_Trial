@@ -15,12 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.siyo_pc.medme_trial.classes.MM_Disease;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
-import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
-import com.example.siyo_pc.medme_trial.db.AsyncGetAllDiseases;
-import com.example.siyo_pc.medme_trial.db.AsyncGetAllSymptoms;
-import com.example.siyo_pc.medme_trial.db.AsyncTaskResponse;
 import com.example.siyo_pc.medme_trial.db.JSON_Handler;
 
 import org.apache.http.NameValuePair;
@@ -141,6 +136,7 @@ public class LogIn extends AppCompatActivity{
                 nameValuePairs.add(new BasicNameValuePair("personEmailAddress", edtEmail.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("personPassword", edtPassword.getText().toString()));
 
+
                 try {
                     DataAccessLogIn taskLogIn = new DataAccessLogIn(this, "http://www.ssimayi-medme.co.za/login.php", nameValuePairs);
                     taskLogIn.execute();
@@ -150,7 +146,7 @@ public class LogIn extends AppCompatActivity{
                 }
             }
         } catch (Exception e) {
-            //Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -166,17 +162,14 @@ public class LogIn extends AppCompatActivity{
             } break;
 
             case 2: {
-                //Doctor activity
+                //Health Care Taker activity
             } break;
 
             case 3: {
-                //Nurse activity
-            } break;
-
-            case 4: {
-                Intent intent = new Intent(this, GuestHome.class);
+                //Guest activity
+                /*Intent intent = new Intent(this, GuestHome.class);
                 intent.putExtra("userCred", user);
-                startActivity(intent);
+                startActivity(intent);*/
             } break;
         }
     }

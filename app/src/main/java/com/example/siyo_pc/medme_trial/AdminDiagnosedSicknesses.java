@@ -40,7 +40,6 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
     private HashMap<Integer, String> symptomList = new HashMap<>();
     private ArrayList<MM_Sickness> convertedSicknessList = null;
     private ArrayList<MM_Sickness> convertedSicknessListByID = null;
-    //private ArrayList<Integer> symptomsForSicknessCount = new ArrayList<>();
     private ArrayList<MM_Symptom> allSymptomsForSickness = null;
     private ArrayList<MM_DiagnosedSymptoms> diagnosisSymptomsList = new ArrayList<>();
     private int totalSicknessForListViewCount = 0;
@@ -95,7 +94,11 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
             }
         }
 
-        new AsyncAdminDiagnose(this, this, selectedSymptomList).execute();
+        try {
+            new AsyncAdminDiagnose(this, this, selectedSymptomList).execute();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -211,7 +214,11 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
                 ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("sicknessID", Integer.toString(sicknessList.get(i).GetSicknessID())));
 
-                new AsyncGetAllSymptomsForSickness(this, this, params).execute();
+                try {
+                    new AsyncGetAllSymptomsForSickness(this, this, params).execute();
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+                }
             }
         }
     }

@@ -55,7 +55,11 @@ public class AdminSymptomsViewAll extends ActionBarActivity implements AsyncTask
         } else {
             listSymptoms = (ListView) findViewById(R.id.listViewAdminSymptoms);
 
-            asyncAllSymptoms.execute();
+            try {
+                asyncAllSymptoms.execute();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

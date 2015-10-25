@@ -42,7 +42,6 @@ public class AdminDiseaseView extends AppCompatActivity implements AsyncTaskResp
     private AsyncGetAllDiseases asyncAllDiseases = new AsyncGetAllDiseases(this, this);
     private ArrayList<MM_Disease> diseaseList = null;
     private ArrayList<MM_Sickness> sicknessList = null;
-    //private MM_Disease disease;
 
 
     @Override
@@ -66,7 +65,11 @@ public class AdminDiseaseView extends AppCompatActivity implements AsyncTaskResp
             diseaseGreekName = (TextView)findViewById(R.id.tvAdminDiseaseGreekName);
             diseaseDesc = (TextView)findViewById(R.id.tvAdminDiseaseDescription);
 
-            asyncAllDiseases.execute();
+            try {
+                asyncAllDiseases.execute();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            }
 
         }
     }
@@ -185,8 +188,12 @@ public class AdminDiseaseView extends AppCompatActivity implements AsyncTaskResp
         ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("diseaseID", Integer.toString(disease.GetDiseaseID())));
 
-        AsyncGetAllSicknessesForDisease asyncGetAllSicknessesForDisease = new AsyncGetAllSicknessesForDisease(this, this, params);
-        asyncGetAllSicknessesForDisease.execute();
+        try {
+            AsyncGetAllSicknessesForDisease asyncGetAllSicknessesForDisease = new AsyncGetAllSicknessesForDisease(this, this, params);
+            asyncGetAllSicknessesForDisease.execute();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void getSicknessInformation(ArrayList<MM_Sickness> sicknessList) {

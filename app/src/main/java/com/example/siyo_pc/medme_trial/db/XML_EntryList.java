@@ -106,9 +106,6 @@ public class XML_EntryList {
                                                     xml.setFl(fl);
                                                     xml.setSx(sx);
                                                     xmlEntries.add(xml);
-                                                    //defs.add("sx#" + sx);
-                                                    //assign sx to xml_entry class
-                                                    //Toast.makeText(context.getApplicationContext(), "sx: " + sx, Toast.LENGTH_LONG).show();
                                                 } else {
                                                     int entryStartNodeDt = sensArray[j].indexOf("<dt>");
                                                     int entryEndNodeDt = sensArray[j].indexOf("</dt>");
@@ -117,27 +114,20 @@ public class XML_EntryList {
                                                     xml2.setFl(fl);
                                                     xml2.setDt(dt);
                                                     xmlEntries.add(xml2);
-                                                    //defs.add("dt#" + dt);
-                                                    //assign dt to xml_entry class
-                                                    //Toast.makeText(context.getApplicationContext(), "dt: " + dt, Toast.LENGTH_LONG).show();
                                                 }
-
                                             }
-
                                         }
 
                                         if (j == (sensArray.length - 1)) {
                                             endSensB = true;
                                         }
                                     }
-
                                 }
 
                                 if (i == (sensBArray.length - 1)) {
                                     endSensB = true;
                                 }
                             }
-
                         } else {
                             endSensB = true;
                         }

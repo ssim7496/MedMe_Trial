@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AdminDiagnosisSymptomsConfirm extends AppCompatActivity implements AsyncTaskResponse {
+public class AdminDiagnosisSymptomsConfirm extends AppCompatActivity {
 
     private Button btnBack, btnConfirm;
     private ListView listSymptoms;
@@ -38,9 +38,6 @@ public class AdminDiagnosisSymptomsConfirm extends AppCompatActivity implements 
 
     ArrayList<String> symptomsSelected = new ArrayList<String>();
     private HashMap<Integer, String> symptomList = new HashMap<>();
-    private ArrayList<MM_Sickness> convertedSicknessList = null;
-    private ArrayList<MM_Sickness> convertedSicknessListByID = null;
-    private ArrayList<Integer> symptomsForSicknessCount = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,107 +99,4 @@ public class AdminDiagnosisSymptomsConfirm extends AppCompatActivity implements 
             }
         });
     }
-
-    private void diagnose(ArrayList<String> symptomsSelected) {
-        //making an object list of the selected symptoms based on the previous activity's symptom list which contains the proper objects
-        ArrayList<MM_Symptom> selectedSymptomList = new ArrayList<>();
-
-        for (int i = 0; i < symptomsSelected.size(); i++) {
-            for (Integer sympID : symptomList.keySet()) {
-                //gets the row on each line of hashmap
-                String sympName = symptomList.get(sympID);
-
-                if (symptomsSelected.get(i).equals(sympName)) {
-                    selectedSymptomList.add(new MM_Symptom(sympID, sympName));
-                }
-            }
-        }
-
-        new AsyncAdminDiagnose(this, this, selectedSymptomList).execute();
-    }
-
-    @Override
-    public void onTaskCompleted(List<JSONObject> objectList, int passTypeID) {
-        //diagnose
-        /*if (passTypeID == 10) {
-            convertedSicknessList = convertToSickness(objectList);
-            fillSymptomList(convertedSicknessList);
-        }
-        //sicknesses by ID
-        if (passTypeID == 11) {
-            convertedSicknessListByID = convertToSickness(objectList);
-        }
-
-        if (passTypeID == 2) {
-            getSymptomsForSickness(objectList);
-        }*/
-    }
-
-   /* private ArrayList<MM_Sickness> convertToSickness(List<JSONObject> objectList) {
-        if (objectList.size() > 0) {
-
-            convertedSicknessList = new ArrayList<>();
-
-            try {
-                for (int i = 0; i < objectList.size(); i++) {
-                    JSONObject jObject = objectList.get(i);
-                    int sicknessID = jObject.getInt("SicknessID");
-                    String greekName = jObject.getString("GreekName");
-                    String sicknessName = jObject.getString("SicknessName");
-                    String sicknessDesc = jObject.getString("SicknessDesc");
-
-                    MM_Sickness sickness = new MM_Sickness();
-                    sickness.SetSicknessID(sicknessID);
-                    sickness.SetGreekName(greekName);
-                    sickness.SetSicknessName(sicknessName);
-                    sickness.SetSicknessDesc(sicknessDesc);
-
-                    convertedSicknessList.add(sickness);
-                }
-            } catch ( JSONException e) {
-
-            }
-        }
-
-        return convertedSicknessList;
-    }
-
-    private void fillSymptomList(ArrayList<MM_Sickness> sicknessList){
-
-        if (sicknessList != null) {
-            String output = "";
-
-            for (int i = 0; i < sicknessList.size(); i++) {
-                output += "\n" + sicknessList.get(i).GetSicknessName();
-            }
-
-            Toast.makeText(this, output, Toast.LENGTH_LONG).show();
-
-            //getting all symptoms for each sickness
-            for (int i = 0; i < sicknessList.size(); i++) {
-                ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("sicknessID", Integer.toString(sicknessList.get(i).GetSicknessID())));
-
-                new AsyncGetAllSymptomsForSickness(this, this, params).execute();
-            }
-
-            //getting how many of the selected symptoms are a symptom of the sickness
-            ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("sicknessID", Integer.toString(sicknessList.get(0).GetSicknessID())));
-            //making a list of symptom names to be used in finding out how many of the symptoms in the sickness match the selected symptoms
-            String symptomNames = "";
-
-            for (int j = 0; j < symptomsSelected.size(); j++) {
-                symptomNames += symptomsSelected.get(j) + "#";
-            }
-            params.add(new BasicNameValuePair("symptomNames", symptomNames));
-
-            new AsyncGetSickSympMatchingDiagSymp(this, this, params).execute();
-        }
-    }
-
-    private void getSymptomsForSickness(List<JSONObject> objectList) {
-        //adding symptoms per sickness into array in identical index where it lies in the sickness list
-        symptomsForSicknessCount.add(objectList.size());
-    }*/
 }

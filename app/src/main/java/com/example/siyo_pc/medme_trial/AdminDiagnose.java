@@ -54,8 +54,12 @@ public class AdminDiagnose extends AppCompatActivity implements AsyncTaskRespons
             btnDiagnose = (Button)findViewById(R.id.btnAdminDiagnose);
             listSymptoms = (ListView)findViewById(R.id.listViewAdminDiagnoseResults);
 
-            asyncAllSymptoms = new AsyncGetAllSymptoms(this, this);
-            asyncAllSymptoms.execute();
+            try {
+                asyncAllSymptoms = new AsyncGetAllSymptoms(this, this);
+                asyncAllSymptoms.execute();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Oops. Something went wrong and we will get to it very soon.", Toast.LENGTH_LONG).show();
+            }
 
             addButtonEvents();
         }
