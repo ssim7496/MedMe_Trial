@@ -165,7 +165,8 @@
             android:name=".AdminDiagnosisSymptomsConfirm"
             android:label="@string/title_activity_admin_diagnosis_symptoms_confirm" >
         </activity>
-        <activity android:name=".AdminDiagnosedSicknesses" >
+        <activity android:name=".AdminDiagnosedSicknesses"
+            android:label="Diagnosed Sicknesses">
         </activity>
     </application>
 

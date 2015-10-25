@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.siyo_pc.medme_trial.AdminSicknessView;
 import com.example.siyo_pc.medme_trial.GuestSicknessView;
 import com.example.siyo_pc.medme_trial.R;
+import com.example.siyo_pc.medme_trial.classes.MM_DiagnosedSymptoms;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 
@@ -26,22 +27,21 @@ public class AdminDiagnosedSicknessAdapter extends ArrayAdapter<MM_Sickness> {
 
     private Context context;
     ArrayList<MM_Sickness> data = null;
+    ArrayList<MM_DiagnosedSymptoms> symptomData = null;
     MM_Person userLoggedIn = null;
-    private int diagnosedSymptoms;
-    private int totalSymptoms;
 
-    public AdminDiagnosedSicknessAdapter(Context context, ArrayList<MM_Sickness> data, MM_Person userLogged, int diagnosedSymptoms, int totalSymptoms) {
+    public AdminDiagnosedSicknessAdapter(Context context, ArrayList<MM_Sickness> data, MM_Person userLogged, ArrayList<MM_DiagnosedSymptoms> symptomData) {
         super(context, 0, data);
         this.context = context;
         this.data = data;
         this.userLoggedIn = userLogged;
-        this.diagnosedSymptoms = diagnosedSymptoms;
-        this.totalSymptoms = totalSymptoms;
+        this.symptomData = symptomData;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final MM_Sickness sickness = getItem(position);
+        MM_DiagnosedSymptoms symptom = symptomData.get(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_diagnosed_sickness, parent, false);
@@ -50,9 +50,9 @@ public class AdminDiagnosedSicknessAdapter extends ArrayAdapter<MM_Sickness> {
         TextView tvSicknessNameName = (TextView)convertView.findViewById(R.id.txtDiagnosedSicknessName);
         tvSicknessNameName.setText(sickness.GetSicknessName());
         TextView tvDiagnosedSymptoms = (TextView)convertView.findViewById(R.id.txtSymptomsCountSelected);
-        tvDiagnosedSymptoms.setText(Integer.toString(diagnosedSymptoms));
+        tvDiagnosedSymptoms.setText(Integer.toString(symptom.GetDiagnosedSymptoms()));
         TextView tvTotalSymptoms = (TextView)convertView.findViewById(R.id.txtSymptomsCountTotal);
-        tvTotalSymptoms.setText(Integer.toString(totalSymptoms));
+        tvTotalSymptoms.setText(Integer.toString(symptom.GetAllSymptoms()));
 
         tvSicknessNameName.setOnClickListener(new TextView.OnClickListener() {
             @Override

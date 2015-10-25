@@ -1,5 +1,6 @@
 package com.example.siyo_pc.medme_trial;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.siyo_pc.medme_trial.adapters.AdminDiagnoseSymptomsAdapter;
 import com.example.siyo_pc.medme_trial.adapters.AdminDiagnosedSicknessAdapter;
+import com.example.siyo_pc.medme_trial.classes.MM_DiagnosedSymptoms;
 import com.example.siyo_pc.medme_trial.classes.MM_Person;
 import com.example.siyo_pc.medme_trial.classes.MM_Sickness;
 import com.example.siyo_pc.medme_trial.classes.MM_Symptom;
@@ -40,6 +42,8 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
     private ArrayList<MM_Sickness> convertedSicknessListByID = null;
     //private ArrayList<Integer> symptomsForSicknessCount = new ArrayList<>();
     private ArrayList<MM_Symptom> allSymptomsForSickness = null;
+    private ArrayList<MM_DiagnosedSymptoms> diagnosisSymptomsList = new ArrayList<>();
+    private int totalSicknessForListViewCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,11 +130,15 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
                     }
                 }
 
-                AdminDiagnosedSicknessAdapter adapter = new AdminDiagnosedSicknessAdapter(this, convertedSicknessListByID, userLoggedIn, symptomsForSicknessCount,
-                        allSymptomsForSickness.size());
+                diagnosisSymptomsList.add(new MM_DiagnosedSymptoms(symptomsForSicknessCount, allSymptomsForSickness.size()));
 
-                listSicknesses.setAdapter(adapter);
-                //adding sickness to listview
+                if (totalSicknessForListViewCount == (convertedSicknessListByID.size() - 1)) {
+                    //adding sickness to listview
+                    AdminDiagnosedSicknessAdapter adapter = new AdminDiagnosedSicknessAdapter(this, convertedSicknessListByID, userLoggedIn, diagnosisSymptomsList);
+                    listSicknesses.setAdapter(adapter);
+                } else {
+                    totalSicknessForListViewCount++;
+                }
 
             }
         }
@@ -204,46 +212,7 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
                 params.add(new BasicNameValuePair("sicknessID", Integer.toString(sicknessList.get(i).GetSicknessID())));
 
                 new AsyncGetAllSymptomsForSickness(this, this, params).execute();
-
-                /*try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException ie) {
-
-                }*/
-
-                String x = "x";
-                /*if (allSymptomsForSickness != null) {
-                    //getting how many of the selected symptoms are a symptom of the sickness
-                    ArrayList<NameValuePair> params2 = new ArrayList<NameValuePair>();
-                    params2.add(new BasicNameValuePair("sicknessID", Integer.toString(sicknessList.get(i).GetSicknessID())));
-
-                    //making a list of symptom names to be used in finding out how many of the symptoms in the sickness match the selected symptoms
-                    Integer symptomsForSicknessCount = 0;
-
-                    for (int j = 0; j < symptomsSelected.size(); j++) {
-                        for (int k = 0; k < allSymptomsForSickness.size(); k++) {
-                            if (symptomsSelected.get(j).equals(allSymptomsForSickness.get(k).GetSymptomName())) {
-                                symptomsForSicknessCount++;
-                            }
-                        }
-                    }
-
-                    String x = Integer.toString(symptomsForSicknessCount);
-                    *//*String symptomNames = "";
-
-                    for (int j = 0; j < symptomsSelected.size(); j++) {
-                        symptomNames += symptomsSelected.get(j) + "#";
-                    }
-                    params2.add(new BasicNameValuePair("symptomNames", symptomNames));
-
-                    new AsyncGetSickSympMatchingDiagSymp(this, this, params2).execute();*//*
-                }*/
             }
         }
     }
-
-    /*private void getSymptomsForSickness(List<JSONObject> objectList) {
-        //adding symptoms per sickness into array in identical index where it lies in the sickness list
-        symptomsForSicknessCount.add(objectList.size());
-    }*/
 }
