@@ -19,7 +19,7 @@ public class MedMeSplash extends ActionBarActivity{
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    Intent intent = new Intent(MedMeSplash.this, Start.class);
+                    Intent intent = new Intent(MedMeSplash.this, Disclaimer.class);
                     startActivity(intent);
                 }
             }

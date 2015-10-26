@@ -234,19 +234,23 @@
         </activity>
         <activity
             android:name=".HCWSearch"
-            android:label="@string/title_activity_admin_search">
+            android:label="@string/title_activity_admin_search" >
         </activity>
         <activity
             android:name=".HCWDiagnose"
-            android:label="@string/title_activity_admin_diagnose">
+            android:label="@string/title_activity_admin_diagnose" >
         </activity>
         <activity
             android:name=".HCWDiagnosisSymptomsConfirm"
-            android:label="@string/title_activity_admin_diagnosis_symptoms_confirm">
+            android:label="@string/title_activity_admin_diagnosis_symptoms_confirm" >
         </activity>
         <activity
             android:name=".HCWDiagnosedSicknesses"
-            android:label="Diagnosed Sicknesses">
+            android:label="Diagnosed Sicknesses" >
+        </activity>
+        <activity
+            android:name=".Disclaimer"
+            android:label="Disclaimer">
         </activity>
     </application>
 

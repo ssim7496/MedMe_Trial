@@ -12,6 +12,9 @@
     <string name="Sicknesses">Sicknesses</string>
     <string name="title_activity_med_me_disease">MedMeDisease</string>
     <string name="title_activity_start">Start</string>
+    <string name="Settings">Settings</string>
+    <string name="chngPass">Change Password</string>
+    <string name="deactivate">Deactivate Account</string>
 
     <string name="startGuest">Guest</string>
     <string name="title_activity_guest_home">Home</string>
