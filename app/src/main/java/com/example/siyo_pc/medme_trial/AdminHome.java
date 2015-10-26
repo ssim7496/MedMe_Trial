@@ -41,7 +41,7 @@ import java.util.concurrent.ExecutionException;
 
 public class AdminHome extends ActionBarActivity{
 
-    Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnSicknesses;
+    Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnSicknesses, btnHelp;
 
     MM_Person userLoggedIn;
 
@@ -67,12 +67,14 @@ public class AdminHome extends ActionBarActivity{
             btnDiseases = (Button)findViewById(R.id.btnAdminDiseases);
             btnSymptoms = (Button)findViewById(R.id.btnAdminSymptoms);
             btnSicknesses = (Button)findViewById(R.id.btnAdminSicknesses);
+            btnHelp = (Button)findViewById(R.id.btnAdminHelp);
 
             addNextActivityOnClickListener(btnDiseases, AdminDiseasesHome.class);
             addNextActivityOnClickListener(btnSearch, AdminSearch.class);
             addNextActivityOnClickListener(btnDiagnose, AdminDiagnose.class);
             addNextActivityOnClickListener(btnSymptoms, AdminSymptomsHome.class);
             addNextActivityOnClickListener(btnSicknesses, AdminSicknessesHome.class);
+            addNextActivityOnClickListener(btnHelp, Help.class);
 
             //underConstruction(btnDiseases);
             //underConstruction(btnSearch);

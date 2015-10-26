@@ -250,7 +250,31 @@
         </activity>
         <activity
             android:name=".Disclaimer"
-            android:label="Disclaimer">
+            android:label="Disclaimer" >
+        </activity>
+        <activity
+            android:name=".Help"
+            android:label="Help">
+        </activity>
+        <activity
+            android:name=".HelpAdding"
+            android:label="Help - Adding">
+        </activity>
+        <activity
+            android:name=".HelpUpdating"
+            android:label="Help - Updating">
+        </activity>
+        <activity
+            android:name=".HelpViewing"
+            android:label="Help - Viewing">
+        </activity>
+        <activity
+            android:name=".HelpDiagnosing"
+            android:label="Help - Diagnosing">
+        </activity>
+        <activity
+            android:name=".HelpSearching"
+            android:label="Help - Searching">
         </activity>
     </application>
 

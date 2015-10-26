@@ -13,7 +13,7 @@ import com.example.siyo_pc.medme_trial.classes.MM_Person;
 
 public class HCWHome extends AppCompatActivity {
 
-    Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnSicknesses;
+    Button btnSearch, btnDiagnose, btnDiseases, btnSymptoms, btnSicknesses, btnHelp;
 
     MM_Person userLoggedIn;
 
@@ -39,12 +39,14 @@ public class HCWHome extends AppCompatActivity {
             btnDiseases = (Button)findViewById(R.id.btnHCWDiseases);
             btnSymptoms = (Button)findViewById(R.id.btnHCWSymptoms);
             btnSicknesses = (Button)findViewById(R.id.btnHCWSicknesses);
+            btnHelp = (Button)findViewById(R.id.btnHCWHelp);
 
             addNextActivityOnClickListener(btnDiseases, HCWDiseasesHome.class);
             addNextActivityOnClickListener(btnSearch, HCWSearch.class);
             addNextActivityOnClickListener(btnDiagnose, HCWDiagnose.class);
             addNextActivityOnClickListener(btnSymptoms, HCWSymptomsHome.class);
             addNextActivityOnClickListener(btnSicknesses, HCWSicknessesHome.class);
+            addNextActivityOnClickListener(btnHelp, Help.class);
 
             //underConstruction(btnDiseases);
             //underConstruction(btnSearch);

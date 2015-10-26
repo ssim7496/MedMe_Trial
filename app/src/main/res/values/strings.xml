@@ -15,6 +15,9 @@
     <string name="Settings">Settings</string>
     <string name="chngPass">Change Password</string>
     <string name="deactivate">Deactivate Account</string>
+    <string name="view">Viewing</string>
+    <string name="diagnosing">Diagnosing</string>
+    <string name="searching">Searching</string>
 
     <string name="startGuest">Guest</string>
     <string name="title_activity_guest_home">Home</string>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_background"
+    tools:context="com.example.siyo_pc.medme_trial.HelpViewing">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1. Viewing of information can be done by selecting a disease, sickness or symptom from the list and then clicking on the name of the disease, sickness or symptom."
+                    style="@style/text_view_text"/>
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="450dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/helpview1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2. You will then see the disease, sickness or symptom information that you selected and the related diseases, sicknesses or symptoms associated with them."
+                    style="@style/text_view_text"/>
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="450dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/helpview2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3. You will then see the disease, sickness or symptom description if you click on anywhere underneath the heading and a pop up dialog will appear showing the full information."
+                    style="@style/text_view_text"/>
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="450dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/helpview3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4. You can then choose one of the related diseases, sicknesses or symptoms and it will jump to the relevant information."
+                    style="@style/text_view_text"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

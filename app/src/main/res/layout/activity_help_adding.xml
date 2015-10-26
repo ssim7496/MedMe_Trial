@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_background"
+    tools:context="com.example.siyo_pc.medme_trial.HelpAdding">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Adding of information to the system can only be performed by the Administrator or the Health Care Workers."
+                    style="@style/text_view_text"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1. You fill in all of the required fields on the current screen that you are on and you can choose to whether Cancel or Add the information to the system."
+                    style="@style/text_view_text"/>
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="450dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/helpadd1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2. Adding of sicknesses will then require you to choose symptoms for a sickness after you have filled in the sickness details."
+                    style="@style/text_view_text"/>
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="450dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/helpadd2" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

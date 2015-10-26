@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_background"
+    tools:context="com.example.siyo_pc.medme_trial.HelpDiagnosing">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1. Diagnosing of sicknesses is done by first selecting the symptoms that you are feeling."
+                    style="@style/text_view_text"/>
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="450dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/helpdiagnose1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2. You will then be brought to a Confirm Symptoms screen where you will confirm the symptoms that you have chosen."
+                    style="@style/text_view_text"/>
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="450dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/helpdiagnose2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3. A list of sicknesses will be shown with the following information:\n- A count of how many of the selected symptoms are symptoms of the sickness\n- A count of the total symptoms for the sickness\n- A percentage likelihood that you may be experiencing the sickness based on a calculation between the symptoms experienced and the total symptoms of the sicness."
+                    style="@style/text_view_text"/>
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="450dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/helpdiagnose3" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
