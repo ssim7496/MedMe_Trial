@@ -133,7 +133,9 @@ public class AdminDiagnosedSicknesses extends AppCompatActivity implements Async
                     }
                 }
 
-                diagnosisSymptomsList.add(new MM_DiagnosedSymptoms(symptomsForSicknessCount, allSymptomsForSickness.size()));
+                Double percentage = ((double)symptomsForSicknessCount / allSymptomsForSickness.size()) * 100;
+
+                diagnosisSymptomsList.add(new MM_DiagnosedSymptoms(symptomsForSicknessCount, symptomsSelected.size(), percentage, allSymptomsForSickness.size()));
 
                 if (totalSicknessForListViewCount == (convertedSicknessListByID.size() - 1)) {
                     //adding sickness to listview

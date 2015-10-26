@@ -32,7 +32,6 @@ public class BusinessLogic{
     private List<NameValuePair> params = new ArrayList<NameValuePair>();
     public JSON_Handler jsonHandler = new JSON_Handler();
     public List<JSONObject> currentList;
-    private String urlGetAllPeople = "http://ssimayi-medme.co.za/test.php";
 
     private String urlAddPerson = "http://www.ssimayi-medme.co.za/insertPerson.php";
 
@@ -44,10 +43,9 @@ public class BusinessLogic{
     private String urlUpdateDiseaseAdmin = "http://www.ssimayi-medme.co.za/updateDiseaseAdmin.php";
     private String urlUpdateSymptomAdmin = "http://www.ssimayi-medme.co.za/updateSymptomAdmin.php";
 
-    private String urlAddDiseaseHCW = "http://www.ssimayi-medme.co.za/insertDiseaseAdminHCW.php";
-    private String urlAddSymptomHCW = "http://www.ssimayi-medme.co.za/insertSymptomAdminHCW.php";
-    private String urlAddSicknessHCW = "http://www.ssimayi-medme.co.za/insertSicknessAdminHCW.php";
-    private String urlAddSicknessSymptomsHCW = "http://www.ssimayi-medme.co.za/insertSicknessSymptomsAdminHCW.php";
+    private String urlAddDiseaseHCW = "http://www.ssimayi-medme.co.za/insertDiseaseHCW.php";
+    private String urlAddSymptomHCW = "http://www.ssimayi-medme.co.za/insertSymptomHCW.php";
+    private String urlAddSicknessHCW = "http://www.ssimayi-medme.co.za/insertSicknessHCW.php";
 
     public List<MM_Disease> diseaseList;
     private MM_Person userLoggedIn;
@@ -279,36 +277,49 @@ public class BusinessLogic{
                 case "You have been successfully registered." : {
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     context.startActivity(intent);
+                    Toast.makeText(context, retrievedMessage, Toast.LENGTH_SHORT).show();
                 } break;
                 case "Disease has been added." : {
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     intent.putExtra("userCred", userLoggedIn);
                     context.startActivity(intent);
+                    Toast.makeText(context, retrievedMessage, Toast.LENGTH_SHORT).show();
                 } break;
                 case "Disease has been updated." : {
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     intent.putExtra("userCred", userLoggedIn);
                     context.startActivity(intent);
+                    Toast.makeText(context, retrievedMessage, Toast.LENGTH_SHORT).show();
                 } break;
                 case "Symptom has been added." : {
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     intent.putExtra("userCred", userLoggedIn);
                     context.startActivity(intent);
+                    Toast.makeText(context, retrievedMessage, Toast.LENGTH_SHORT).show();
                 } break;
                 case "Symptom has been updated." : {
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     intent.putExtra("userCred", userLoggedIn);
                     context.startActivity(intent);
+                    Toast.makeText(context, retrievedMessage, Toast.LENGTH_SHORT).show();
                 } break;
                 case "Sickness has been added." : {
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     intent.putExtra("userCred", userLoggedIn);
                     context.startActivity(intent);
+                    Toast.makeText(context, retrievedMessage, Toast.LENGTH_SHORT).show();
+                } break;
+                case "Sickness has been added" : {
+                    Intent intent = new Intent(context.getApplicationContext(), nextActivity);
+                    intent.putExtra("userCred", userLoggedIn);
+                    context.startActivity(intent);
+                    Toast.makeText(context, retrievedMessage, Toast.LENGTH_SHORT).show();
                 } break;
                 case "Sickness has been updated." : {
                     Intent intent = new Intent(context.getApplicationContext(), nextActivity);
                     intent.putExtra("userCred", userLoggedIn);
                     context.startActivity(intent);
+                    Toast.makeText(context, retrievedMessage, Toast.LENGTH_SHORT).show();
                 } break;
             }
         }
