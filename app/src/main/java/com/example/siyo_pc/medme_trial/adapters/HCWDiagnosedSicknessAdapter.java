@@ -48,6 +48,10 @@ public class HCWDiagnosedSicknessAdapter extends ArrayAdapter<MM_Sickness> {
         tvDiagnosedSymptoms.setText(Integer.toString(symptom.GetDiagnosedSymptoms()));
         TextView tvTotalSymptoms = (TextView)convertView.findViewById(R.id.txtSymptomsCountTotal);
         tvTotalSymptoms.setText(Integer.toString(symptom.GetAllSymptoms()));
+        TextView tvAllSymptoms = (TextView)convertView.findViewById(R.id.txtTotalSymptoms);
+        tvAllSymptoms.setText(Integer.toString(symptom.GetTotalSymptomsForSickness()));
+        TextView tvPercentage = (TextView)convertView.findViewById(R.id.txtPercentage);
+        tvPercentage.setText(Double.toString(symptom.GetPercentage()) + "% likely");
 
         tvSicknessNameName.setOnClickListener(new TextView.OnClickListener() {
             @Override
