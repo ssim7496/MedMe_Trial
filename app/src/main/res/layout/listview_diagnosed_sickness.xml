@@ -111,9 +111,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
-            android:text="total symptoms ("/>
+            android:text="total symptoms "/>
 
-        <TextView android:id="@+id/txtPercentage"
+        <!--<TextView android:id="@+id/txtPercentage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -138,7 +138,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
-            android:text=")"/>
+            android:text=")"/>-->
     </LinearLayout>
 
 </LinearLayout>

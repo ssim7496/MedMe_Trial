@@ -49,8 +49,8 @@ public class AdminDiagnosedSicknessAdapter extends ArrayAdapter<MM_Sickness> {
         tvTotalSymptoms.setText(Integer.toString(symptom.GetAllSymptoms()));
         TextView tvAllSymptoms = (TextView)convertView.findViewById(R.id.txtTotalSymptoms);
         tvAllSymptoms.setText(Integer.toString(symptom.GetTotalSymptomsForSickness()));
-        TextView tvPercentage = (TextView)convertView.findViewById(R.id.txtPercentage);
-        tvPercentage.setText(Double.toString(symptom.GetPercentage()) + "% likely");
+        /*TextView tvPercentage = (TextView)convertView.findViewById(R.id.txtPercentage);
+        tvPercentage.setText(Double.toString(symptom.GetPercentage()) + "% likely");*/
 
         tvSicknessNameName.setOnClickListener(new TextView.OnClickListener() {
             @Override
